@@ -1,0 +1,172 @@
+"use client";
+import { useState } from "react";
+
+const STORIES = [
+  {
+    id: 1,
+    tag: "Feature",
+    tagColor: "text-violet-400 bg-violet-400/10 border-violet-400/20",
+    source: "OpenAI",
+    time: "2h ago",
+    title: "ChatGPT Now Remembers Everything About You",
+    summary:
+      "OpenAI has rolled out persistent memory to ChatGPT. It now remembers your name, preferences, past topics, and personal context — automatically, across every future conversation. You can view, edit, or delete what it knows at any time.",
+    why: "AI just stopped being a search engine and started being a real personal assistant. Every conversation from now builds on the last. The more you use it, the more genuinely useful it becomes — for anyone, no technical knowledge required.",
+    dot: "bg-violet-500",
+    url: "https://openai.com/blog",
+  },
+  {
+    id: 2,
+    tag: "Health",
+    tagColor: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+    source: "The Lancet",
+    time: "5h ago",
+    title: "AI Matches Specialist Doctors in Diagnosing Rare Diseases",
+    summary:
+      "A peer-reviewed study finds AI can diagnose rare conditions with accuracy matching specialist physicians. Tested across 50,000 patient cases in 12 countries, the system performed at or above specialist level in 94% of scenarios.",
+    why: "This isn't science fiction — it's a published clinical study. Specialist-level medical knowledge is becoming universally accessible. For anyone who has waited months for a specialist appointment, this represents a fundamental change in how healthcare works.",
+    dot: "bg-emerald-500",
+    url: "https://www.thelancet.com",
+  },
+  {
+    id: 3,
+    tag: "Product",
+    tagColor: "text-cyan-400 bg-cyan-400/10 border-cyan-400/20",
+    source: "Google",
+    time: "8h ago",
+    title: "Google's AI Can Now See Your Screen and Help in Real Time",
+    summary:
+      "Google unveiled Project Astra — an AI that watches what's on your screen or phone camera and responds naturally to what it sees. Ask it to explain, fix, or guide you through anything, in plain conversation, no special commands needed.",
+    why: "AI just became a co-pilot for everyday life. Whether you're cooking, navigating unfamiliar software, filling out a form, or trying to understand a confusing document — immediate, intelligent help is now one spoken sentence away.",
+    dot: "bg-cyan-500",
+    url: "https://deepmind.google",
+  },
+  {
+    id: 4,
+    tag: "Work",
+    tagColor: "text-amber-400 bg-amber-400/10 border-amber-400/20",
+    source: "Reuters",
+    time: "11h ago",
+    title: "Half of All Companies Now Use AI for Daily Decisions",
+    summary:
+      "A global survey of 10,000 businesses across 40 countries finds 51% now rely on AI tools every day for writing, analysis, customer service, hiring, and financial decisions. Two years ago, that number was 12%.",
+    why: "AI literacy is becoming the new basic workplace skill — like email was in 2000. Companies using AI effectively are pulling ahead. Whether you're an employee, a manager, or run your own business, this shift is already affecting you.",
+    dot: "bg-amber-500",
+    url: "https://reuters.com",
+  },
+];
+
+export default function InteractiveBriefing() {
+  const [expanded, setExpanded] = useState<number | null>(1);
+
+  return (
+    <div className="w-full max-w-2xl mx-auto">
+      {/* Email chrome header */}
+      <div className="rounded-t-2xl border border-[#221e19] bg-[#0a0805] px-5 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+            <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+            <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+          </div>
+          <span className="text-xs text-[#52473a] font-mono ml-2">
+            Xanthra Horizon — Today
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+          <span className="text-[10px] text-[#52473a]">LIVE PREVIEW</span>
+        </div>
+      </div>
+
+      {/* Executive brief */}
+      <div className="border-x border-[#221e19] bg-[#0d0b09] px-5 py-4">
+        <p className="text-[10px] font-semibold text-amber-600 tracking-[0.12em] uppercase mb-2">
+          Today&apos;s Overview
+        </p>
+        <p className="text-sm text-[#b4a990] leading-relaxed italic">
+          AI is moving from capability to daily reality — memory, healthcare, screen awareness,
+          and the workplace are all crossing a threshold at once. Today&apos;s briefing covers
+          four developments every person should know about.
+        </p>
+      </div>
+
+      {/* Story cards */}
+      <div className="border border-[#221e19] border-t-0 rounded-b-2xl overflow-hidden bg-[#080706] divide-y divide-[#1a1712]">
+        {STORIES.map((story, i) => {
+          const isOpen = expanded === story.id;
+          return (
+            <div key={story.id} className="group">
+              <button
+                onClick={() => setExpanded(isOpen ? null : story.id)}
+                className="w-full text-left px-5 py-4 hover:bg-white/[0.02] transition-colors"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-3 min-w-0">
+                    <span className="font-mono text-[11px] text-[#2d2d50] pt-0.5 flex-shrink-0 w-5">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded border tracking-wide ${story.tagColor}`}>
+                          {story.tag}
+                        </span>
+                        <span className="text-[11px] text-[#52527a]">{story.source}</span>
+                        <span className="text-[11px] text-[#2d2d50]">{story.time}</span>
+                      </div>
+                      <h3 className="text-sm font-semibold text-[#eeeef8] leading-snug group-hover:text-white transition-colors">
+                        {story.title}
+                      </h3>
+                    </div>
+                  </div>
+                  <div
+                    className="flex-shrink-0 mt-0.5 transition-transform duration-300"
+                    style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                  >
+                    <svg className="w-4 h-4 text-[#2d2d50]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+              </button>
+
+              {/* Expandable content */}
+              <div
+                className="overflow-hidden transition-all duration-300 ease-in-out"
+                style={{ maxHeight: isOpen ? "500px" : "0px", opacity: isOpen ? 1 : 0 }}
+              >
+                <div className="px-5 pb-5 ml-8">
+                  <p className="text-[13px] text-[#9898b8] leading-relaxed mb-3">
+                    {story.summary}
+                  </p>
+                  <div className="flex items-start gap-2 p-3 bg-amber-500/5 border border-amber-500/15 rounded-lg mb-3">
+                    <div className="mt-1 flex-shrink-0">
+                      <div className={`w-1.5 h-1.5 rounded-full ${story.dot}`} />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold text-amber-600 uppercase tracking-[0.1em] mb-1">
+                        Why It Matters
+                      </p>
+                      <p className="text-[12px] text-[#9898b8] leading-relaxed">{story.why}</p>
+                    </div>
+                  </div>
+                  <a
+                    href={story.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[12px] text-[#52473a] hover:text-amber-500 transition-colors"
+                  >
+                    <span>Read original</span>
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

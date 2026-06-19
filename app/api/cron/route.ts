@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 // This route is called by Vercel Cron every hour
 // Vercel Cron config is in vercel.json
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
   const cronSecret = process.env.CRON_SECRET ?? "";
 

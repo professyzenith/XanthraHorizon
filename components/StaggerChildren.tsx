@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, ReactNode, Children } from "react";
+import { useEffect, useRef, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -18,7 +18,7 @@ export default function StaggerChildren({
     if (!el) return;
 
     const kids = Array.from(el.children) as HTMLElement[];
-    kids.forEach((child, i) => {
+    kids.forEach((child, _i) => {
       child.style.opacity = "0";
       child.style.transform = "translateY(28px)";
     });

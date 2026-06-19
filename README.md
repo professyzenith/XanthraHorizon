@@ -1,82 +1,121 @@
-# Xanthra Horizon
+<div align="center">
 
-> **Know What Matters Next.**
+<!-- Animated Banner -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24&height=200&section=header&text=Xanthra%20Horizon&fontSize=60&fontColor=fff&animation=twinkling&fontAlignY=38&desc=Know%20What%20Matters%20Next&descAlignY=58&descSize=18" width="100%"/>
 
-A premium AI intelligence platform that delivers a concise daily edition of the most important AI developments — explained in plain English and delivered to your inbox at the time you choose.
+<!-- Animated Typing -->
+<a href="https://github.com/professyzenith/XanthraHorizon">
+  <img src="https://readme-typing-svg.demolab.com?font=Geist+Mono&size=14&duration=3000&pause=1000&color=C9A853&center=true&vCenter=true&multiline=true&width=600&height=50&lines=Daily+AI+Intelligence+%E2%80%94+Delivered+to+your+inbox.;8+sources+%C2%B7+Auto-deduped+%C2%B7+Gemini-summarized+%C2%B7+Timezone-aware." alt="Typing SVG" />
+</a>
 
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
-[![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?style=flat-square&logo=supabase)](https://supabase.com)
-[![Resend](https://img.shields.io/badge/Resend-Email-000000?style=flat-square)](https://resend.com)
-[![Gemini](https://img.shields.io/badge/Gemini-Flash-4285F4?style=flat-square&logo=google)](https://aistudio.google.com)
-[![Deploy](https://img.shields.io/badge/Deploy-Vercel-000?style=flat-square&logo=vercel)](https://vercel.com)
-[![Cost](https://img.shields.io/badge/Cost-₹0-brightgreen?style=flat-square)](https://github.com)
+<br/>
+
+<!-- Core Badges -->
+<p>
+  <a href="https://nextjs.org"><img alt="Next.js" src="https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=next.js&logoColor=white"/></a>
+  <a href="https://www.typescriptlang.org"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/></a>
+  <a href="https://supabase.com"><img alt="Supabase" src="https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white"/></a>
+  <a href="https://resend.com"><img alt="Resend" src="https://img.shields.io/badge/Resend-Email-000000?style=for-the-badge&logoColor=white"/></a>
+  <a href="https://aistudio.google.com"><img alt="Gemini" src="https://img.shields.io/badge/Gemini-Flash-4285F4?style=for-the-badge&logo=google&logoColor=white"/></a>
+  <a href="https://vercel.com"><img alt="Vercel" src="https://img.shields.io/badge/Vercel-Deploy-000000?style=for-the-badge&logo=vercel&logoColor=white"/></a>
+</p>
+
+<!-- Status Badges -->
+<p>
+  <img alt="Cost" src="https://img.shields.io/badge/Cost-₹0%2Fmonth-brightgreen?style=flat-square"/>
+  <img alt="License" src="https://img.shields.io/badge/License-MIT-amber?style=flat-square"/>
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-Strict-blue?style=flat-square&logo=typescript"/>
+  <img alt="PRs" src="https://img.shields.io/badge/PRs-Welcome-orange?style=flat-square"/>
+</p>
+
+<br/>
+
+> **A premium daily AI intelligence platform.**  
+> Fetches, deduplicates, ranks, and summarizes the most important AI developments — then delivers a beautiful briefing to your subscribers' inboxes at exactly the time they choose.
+
+<br/>
+
+</div>
 
 ---
 
 ## What It Does
 
-Every day, Xanthra Horizon:
+Every day, Xanthra Horizon runs a fully automated intelligence pipeline:
 
-1. **Fetches** articles from 8 AI news sources (official lab blogs + quality tech media)
-2. **Deduplicates** stories using URL hashing + Jaccard title similarity
-3. **Ranks** stories by recency, source credibility, and keyword relevance
-4. **Summarizes** the top 7 with Google Gemini Flash — generating a plain-English summary and "Why It Matters" insight for each
-5. **Delivers** a beautiful HTML email to every subscriber at their personally chosen local time
+```
+Fetch (8 sources) → Deduplicate → Rank → AI Summarize → Email Delivery
+```
+
+No noise. No irrelevant articles. Just the top AI developments that actually matter — explained clearly, delivered on time.
 
 ---
 
 ## Features
 
-- 🗞️ **8 live news sources** — OpenAI Blog, Anthropic, Google DeepMind, VentureBeat, TechCrunch, MIT Tech Review, Google News AI/LLM feeds
-- 🧠 **AI summarization** — Gemini Flash generates concise summaries + business insight for each story
-- 📬 **Timezone-aware delivery** — subscribers choose their delivery time; the cron job matches it globally
-- 🔁 **Smart deduplication** — Jaccard similarity + URL hash dedup prevents the same story appearing twice
-- 🏆 **Relevance ranking** — scores by recency (decay), source tier, and AI keyword density
-- 🔒 **Secure** — Row Level Security on Supabase, CRON_SECRET on pipeline endpoint
-- 📤 **One-click unsubscribe** — compliant email footer with confirmation page
-- 🆓 **Zero cost** — runs entirely on free tiers
-
----
-
-## Tech Stack
-
-| Layer | Tool | Free Tier |
+| | Feature | Detail |
 |---|---|---|
-| Framework | Next.js 14 App Router | ✅ |
-| Language | TypeScript 5 | ✅ |
-| Styling | Tailwind CSS | ✅ |
-| Database | Supabase (PostgreSQL) | 500 MB, 50k rows |
-| Email | Resend | 3,000 emails/month |
-| AI | Google Gemini Flash | 1,500 requests/day |
-| Hosting | Vercel Hobby | ✅ |
-| Cron | Vercel Cron / GitHub Actions | ✅ |
+| 🗞️ | **8 Live Sources** | OpenAI Blog, Anthropic, DeepMind, VentureBeat, TechCrunch, MIT Tech Review, Google News |
+| 🧠 | **AI Summarization** | Gemini Flash generates concise summaries + "Why It Matters" for each story |
+| ⏰ | **Timezone-Aware Delivery** | Each subscriber picks their own delivery time — matched globally via cron |
+| 🔁 | **Smart Deduplication** | Jaccard similarity + URL hash dedup — same story never appears twice |
+| 🏆 | **Relevance Ranking** | Scores by source tier, recency decay, and AI keyword density |
+| 🔒 | **Production Secure** | Row Level Security on Supabase · CRON_SECRET on pipeline endpoint |
+| 📤 | **One-Click Unsubscribe** | CAN-SPAM compliant — confirmation page included |
+| 🆓 | **Zero Cost** | Runs entirely on free tiers — ₹0/month |
 
 ---
 
 ## Architecture
 
+```mermaid
+flowchart TD
+    CRON([🕐 Vercel Cron\nhourly]) --> CRONAPI[GET /api/cron]
+    CRONAPI --> PIPELINE[POST /api/send-briefing]
+
+    subgraph FETCH ["📡 Data Collection"]
+        PIPELINE --> T1[Tier 1 — Lab Blogs\nOpenAI · Anthropic · DeepMind\n7-day window]
+        PIPELINE --> T2[Tier 2 — Tech Media\nVentureBeat · TechCrunch · MIT\n48-hour window]
+        PIPELINE --> T3[Tier 3 — Aggregators\nGoogle News AI · LLM\n48-hour window]
+    end
+
+    subgraph PROCESS ["⚙️ Processing Pipeline"]
+        T1 & T2 & T3 --> DEDUP[🔁 Deduplication\nJaccard Similarity + URL Hash]
+        DEDUP --> RANK[🏆 Ranking\nRecency · Source Score · Keywords]
+        RANK --> GEMINI[🧠 Gemini Flash\nSummary + Why It Matters]
+    end
+
+    subgraph DELIVER ["📬 Delivery"]
+        GEMINI --> MATCH[Supabase\nMatch subscriber delivery times ±5min]
+        MATCH --> RESEND[Resend\nHTML Email → Each Subscriber]
+    end
+
+    style FETCH fill:#1a1208,stroke:#c9a853,color:#f0ece3
+    style PROCESS fill:#0a1a12,stroke:#3ecf8e,color:#f0ece3
+    style DELIVER fill:#0a0a1a,stroke:#4285f4,color:#f0ece3
 ```
-Vercel Cron (hourly)
-    │
-    ▼
-GET /api/cron
-    │
-    ▼
-POST /api/send-briefing
-    │
-    ├── fetchAllAINews()      ← 8 RSS sources (Tier 1: 7d window, Tier 2: 48h window)
-    │
-    ├── deduplicateArticles() ← URL hash + Jaccard similarity (threshold: 0.65)
-    │
-    ├── rankArticles()        ← Recency decay + source score + keyword hits
-    │
-    ├── generateBriefing()    ← Gemini Flash: summaries + why it matters
-    │
-    └── sendBriefingEmail()   ← Resend: HTML email to matched subscribers
-            │
-            └── Supabase: filter subscribers whose local time == current time (±5 min)
-```
+
+---
+
+## Tech Stack
+
+<details>
+<summary><b>View full stack breakdown</b></summary>
+
+<br/>
+
+| Layer | Technology | Why |
+|---|---|---|
+| **Framework** | Next.js 14 App Router | API routes + SSR in one project |
+| **Language** | TypeScript 5 (strict) | Type safety across the full pipeline |
+| **Styling** | Tailwind CSS | Utility-first, no runtime cost |
+| **Database** | Supabase (PostgreSQL) | Free tier · RLS · Real-time ready |
+| **Email** | Resend | 3,000 emails/month free · React-friendly |
+| **AI** | Google Gemini Flash | 1,500 req/day free · Fast inference |
+| **Hosting** | Vercel Hobby | Zero-config Next.js · Edge-ready |
+| **Cron** | Vercel Cron / cron-job.org | Hourly scheduling at no cost |
+
+</details>
 
 ---
 
@@ -84,62 +123,54 @@ POST /api/send-briefing
 
 ```
 xanthra-horizon/
+│
 ├── app/
 │   ├── api/
-│   │   ├── cron/route.ts           # GET  /api/cron          — Vercel Cron trigger
-│   │   ├── send-briefing/route.ts  # POST /api/send-briefing — full pipeline
-│   │   ├── subscribe/route.ts      # POST /api/subscribe     — subscriber signup
-│   │   ├── unsubscribe/route.ts    # GET  /api/unsubscribe   — deactivate subscriber
-│   │   ├── test-pipeline/route.ts  # GET  /api/test-pipeline — dry run (no emails)
-│   │   └── status/route.ts         # GET  /api/status        — env key health check
-│   ├── unsubscribe/
-│   │   ├── page.tsx                # Unsubscribe confirmation page
-│   │   └── UnsubscribeContent.tsx
+│   │   ├── cron/             → GET  /api/cron           Vercel Cron trigger
+│   │   ├── send-briefing/    → POST /api/send-briefing  Full pipeline
+│   │   ├── subscribe/        → POST /api/subscribe      Subscriber signup
+│   │   ├── unsubscribe/      → GET  /api/unsubscribe    Deactivate subscriber
+│   │   ├── test-pipeline/    → GET  /api/test-pipeline  Dry-run (no emails)
+│   │   └── status/           → GET  /api/status         Env key health check
+│   │
+│   ├── unsubscribe/          → Confirmation page
 │   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx                    # Landing page
-├── components/
-│   ├── AnimatedSection.tsx
-│   ├── AnimatedTimeline.tsx
-│   ├── CommandCenter.tsx
-│   ├── FloatingParticles.tsx
-│   ├── InteractiveBriefing.tsx
-│   ├── NetworkOrb.tsx
-│   ├── SignatureSection.tsx
-│   └── SubscribeForm.tsx
+│   ├── layout.tsx            → Metadata + fonts
+│   └── page.tsx              → Landing page
+│
+├── components/               → UI components (all client-side)
+│
 ├── lib/
-│   ├── deduplicator.ts             # Jaccard + hash deduplication
-│   ├── emailSender.ts              # Resend HTML email delivery
-│   ├── newsFetcher.ts              # RSS feed collection (8 sources, 2 tiers)
-│   ├── ranker.ts                   # Article scoring and ranking
-│   ├── supabase.ts                 # Supabase client (anon + admin)
-│   └── summarizer.ts               # Gemini Flash AI summarization
+│   ├── newsFetcher.ts        → 8-source RSS pipeline
+│   ├── deduplicator.ts       → Jaccard + hash deduplication
+│   ├── ranker.ts             → Article scoring engine
+│   ├── summarizer.ts         → Gemini Flash integration
+│   ├── emailSender.ts        → Resend HTML email delivery
+│   └── supabase.ts           → Anon + Admin clients
+│
 ├── supabase/
-│   └── schema.sql                  # Run once in Supabase SQL editor
-├── types/
-│   └── index.ts                    # Shared TypeScript types
-├── .env.example                    # Environment variable template
-├── .gitignore
-├── next.config.js
-├── package.json
-├── tailwind.config.js
-└── vercel.json                     # Hourly cron schedule
+│   └── schema.sql            → Run once to set up tables + RLS
+│
+├── types/index.ts            → Shared TypeScript interfaces
+├── vercel.json               → Hourly cron schedule
+└── .env.example              → Environment variable template
 ```
 
 ---
 
-## Setup Guide
+## Getting Started
 
-### Prerequisites
+<details>
+<summary><b>Prerequisites</b></summary>
 
 - Node.js 18+
-- A [Supabase](https://supabase.com) account (free)
-- A [Resend](https://resend.com) account (free)
-- A [Google AI Studio](https://aistudio.google.com) account (free)
+- [Supabase](https://supabase.com) account (free)
+- [Resend](https://resend.com) account (free)
+- [Google AI Studio](https://aistudio.google.com) API key (free)
 
----
+</details>
 
-### Step 1 — Clone the Repository
+### 1 — Clone
 
 ```bash
 git clone https://github.com/professyzenith/XanthraHorizon.git
@@ -147,43 +178,16 @@ cd XanthraHorizon
 npm install
 ```
 
----
+### 2 — Set Up Supabase
 
-### Step 2 — Set Up Supabase
+1. Create a project → **Settings → API** → copy your keys
+2. Open **SQL Editor** → paste `supabase/schema.sql` → **Run**
 
-1. Create a project at [supabase.com](https://supabase.com)
-2. Go to **SQL Editor** → paste the contents of `supabase/schema.sql` → **Run**
-3. Go to **Settings → API** and copy:
-   - **Project URL** → `NEXT_PUBLIC_SUPABASE_URL`
-   - **anon public key** → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - **service_role secret** → `SUPABASE_SERVICE_ROLE_KEY`
-
----
-
-### Step 3 — Set Up Resend
-
-1. Sign up at [resend.com](https://resend.com)
-2. Go to **API Keys → Create Key**
-3. Add and verify your sending domain (or use `onboarding@resend.dev` for testing)
-4. Copy key → `RESEND_API_KEY` and set `RESEND_FROM_EMAIL`
-
----
-
-### Step 4 — Get a Gemini API Key
-
-1. Visit [aistudio.google.com](https://aistudio.google.com)
-2. Click **Get API Key** → Create new key
-3. Copy → `GEMINI_API_KEY`
-
----
-
-### Step 5 — Configure Environment Variables
+### 3 — Configure Environment
 
 ```bash
 cp .env.example .env.local
 ```
-
-Edit `.env.local`:
 
 ```env
 # Supabase
@@ -191,157 +195,154 @@ NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
-# Resend
+# Resend (resend.com)
 RESEND_API_KEY=re_your_key
 RESEND_FROM_EMAIL=hello@yourdomain.com
 
-# Gemini
+# Gemini (aistudio.google.com)
 GEMINI_API_KEY=your-gemini-key
 
 # Security
-CRON_SECRET=any-random-string-32-chars
+CRON_SECRET=your-random-32-char-string
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
----
-
-### Step 6 — Run Locally
+### 4 — Run
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
-
-Check which keys are configured:
-
-```
-http://localhost:3000/api/status
-```
+Check your setup: [`http://localhost:3000/api/status`](http://localhost:3000/api/status)
 
 ---
 
-### Step 7 — Test the Pipeline
+## API Reference
 
-**Dry run (no emails sent):**
+<details>
+<summary><b>View all endpoints</b></summary>
 
-```bash
-curl http://localhost:3000/api/test-pipeline?skip_ai=1 \
-  -H "Authorization: Bearer YOUR_CRON_SECRET"
-```
-
-**Full pipeline with AI + email:**
-
-```bash
-curl -X POST http://localhost:3000/api/send-briefing \
-  -H "Authorization: Bearer YOUR_CRON_SECRET" \
-  -H "Content-Type: application/json"
-```
-
----
-
-## Deployment to Vercel
-
-### Step 1 — Push to GitHub
-
-```bash
-git add .
-git commit -m "Initial release"
-git push origin main
-```
-
-### Step 2 — Deploy on Vercel
-
-1. Go to [vercel.com](https://vercel.com) → **Add New Project** → Import this repository
-2. Go to **Settings → Environment Variables** → add all variables from `.env.local`
-3. Change `NEXT_PUBLIC_APP_URL` to your Vercel production URL
-4. Deploy
-
-### Step 3 — Cron Job
-
-The `vercel.json` configures a cron job that runs every hour:
-
-```json
-{
-  "crons": [{ "path": "/api/cron", "schedule": "0 * * * *" }]
-}
-```
-
-> **Note:** Vercel Hobby plan supports once-daily cron. For hourly runs, use [cron-job.org](https://cron-job.org) (free) to call your endpoint every hour with the `Authorization` header.
-
----
-
-## Environment Variables Reference
-
-| Variable | Required | Description |
-|---|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | ✅ | Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅ | Supabase anon/public key |
-| `SUPABASE_SERVICE_ROLE_KEY` | ✅ | Supabase service role key (server-only) |
-| `RESEND_API_KEY` | ✅ | Resend API key for email delivery |
-| `RESEND_FROM_EMAIL` | ✅ | Verified sender email address |
-| `GEMINI_API_KEY` | ✅ | Google Gemini Flash API key |
-| `CRON_SECRET` | ✅ | Random string to protect pipeline endpoint |
-| `NEXT_PUBLIC_APP_URL` | ✅ | Your app's public URL |
-
----
-
-## API Endpoints
+<br/>
 
 | Endpoint | Method | Auth | Description |
 |---|---|---|---|
-| `/api/subscribe` | POST | None | Subscribe a new email address |
-| `/api/unsubscribe` | GET | None | Deactivate a subscriber (via email link) |
-| `/api/send-briefing` | POST | CRON_SECRET | Run full pipeline + send emails |
-| `/api/cron` | GET | Vercel | Called by Vercel Cron every hour |
-| `/api/test-pipeline` | GET | CRON_SECRET | Dry-run pipeline (no emails) |
-| `/api/status` | GET | None | Check which env keys are configured |
+| `/api/subscribe` | `POST` | None | Subscribe a new email address |
+| `/api/unsubscribe` | `GET` | None | Deactivate subscriber (via email link) |
+| `/api/send-briefing` | `POST` | `CRON_SECRET` | Run full pipeline + send emails |
+| `/api/cron` | `GET` | Vercel | Called hourly by Vercel Cron |
+| `/api/test-pipeline` | `GET` | `CRON_SECRET` | Dry-run pipeline (no emails sent) |
+| `/api/status` | `GET` | None | Check which env keys are configured |
+
+**Test the pipeline without sending emails:**
+```bash
+curl "http://localhost:3000/api/test-pipeline?skip_ai=1" \
+  -H "Authorization: Bearer YOUR_CRON_SECRET"
+```
+
+</details>
+
+---
+
+## Deployment
+
+<details>
+<summary><b>Deploy to Vercel (recommended)</b></summary>
+
+<br/>
+
+1. Push to GitHub
+2. Import project at [vercel.com](https://vercel.com/new)
+3. Add all environment variables from `.env.local`
+4. Change `NEXT_PUBLIC_APP_URL` to your Vercel URL
+5. Deploy
+
+The `vercel.json` cron runs automatically on Vercel Pro. For Hobby plan, use [cron-job.org](https://cron-job.org) (free) to POST to `/api/send-briefing` every hour with your `Authorization` header.
+
+</details>
 
 ---
 
 ## News Sources
 
-| Source | Tier | Time Window | Notes |
+<details>
+<summary><b>View all 8 sources</b></summary>
+
+<br/>
+
+| Source | Tier | Window | Type |
 |---|---|---|---|
-| OpenAI Blog | 1 (Primary) | 7 days | Official announcements |
-| Anthropic Blog | 1 (Primary) | 7 days | Via feedburner |
-| Google DeepMind | 1 (Primary) | 7 days | Research + releases |
-| VentureBeat AI | 2 (Media) | 48 hours | Daily AI news |
-| TechCrunch AI | 2 (Media) | 48 hours | Startup + product news |
-| MIT Tech Review | 2 (Media) | 48 hours | Research coverage |
-| Google News — AI | 2 (Aggregator) | 48 hours | Broad AI news |
-| Google News — LLM | 2 (Aggregator) | 48 hours | LLM-specific news |
+| OpenAI Blog | Primary | 7 days | Official announcements |
+| Anthropic Blog | Primary | 7 days | Research + safety |
+| Google DeepMind | Primary | 7 days | Research + releases |
+| VentureBeat AI | Media | 48h | Startup + business news |
+| TechCrunch AI | Media | 48h | Product + funding news |
+| MIT Tech Review | Media | 48h | Research coverage |
+| Google News — AI | Aggregator | 48h | Broad AI landscape |
+| Google News — LLM | Aggregator | 48h | LLM-specific coverage |
+
+Tier 1 (official lab blogs) use a 7-day window because they post weekly. Tier 2 uses 48h for freshness.
+
+</details>
 
 ---
 
 ## Roadmap
 
-- [ ] Web-based subscriber dashboard (manage delivery time/timezone)
-- [ ] Weekly digest mode (in addition to daily)
+- [ ] Web subscriber dashboard (manage delivery time + timezone)
+- [ ] Weekly digest mode
 - [ ] Topic filtering (subscribe to specific AI categories)
-- [ ] RSS feed output for Xanthra Horizon content
-- [ ] Open Graph preview cards for each edition
-- [ ] GitHub Actions alternative to Vercel Cron (for Hobby plan users)
+- [ ] RSS output of Xanthra Horizon editions
+- [ ] GitHub Actions alternative cron (for Vercel Hobby users)
+- [ ] Open Graph preview cards per edition
 - [ ] Multi-language support
-
----
-
-## License
-
-MIT — free to use, fork, and deploy.
 
 ---
 
 ## Contributing
 
-PRs welcome for:
-- Additional high-quality news sources
-- Improved ranking algorithms
-- Better deduplication heuristics
+Contributions are welcome for:
+
+- Additional high-quality RSS sources
+- Improved ranking or deduplication algorithms  
 - Internationalization
+- Bug fixes
+
+```bash
+git checkout -b feature/your-feature
+git commit -m "feat: description"
+git push origin feature/your-feature
+# Open a Pull Request
+```
 
 ---
 
-*Built with Next.js · Supabase · Resend · Google Gemini · Vercel*
+## Environment Variables
+
+| Variable | Required | Description |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | ✅ | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅ | Supabase anon/public key |
+| `SUPABASE_SERVICE_ROLE_KEY` | ✅ | Supabase service role key *(server-only)* |
+| `RESEND_API_KEY` | ✅ | Resend API key |
+| `RESEND_FROM_EMAIL` | ✅ | Verified sender address |
+| `GEMINI_API_KEY` | ✅ | Google Gemini Flash key |
+| `CRON_SECRET` | ✅ | Protects the pipeline endpoint |
+| `NEXT_PUBLIC_APP_URL` | ✅ | Your public URL |
+
+---
+
+## License
+
+[MIT](./LICENSE) — free to use, fork, and deploy.
+
+---
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24&height=100&section=footer" width="100%"/>
+
+<sub>Built with Next.js · Supabase · Resend · Google Gemini · Vercel</sub>
+
+</div>

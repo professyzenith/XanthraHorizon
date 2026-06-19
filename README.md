@@ -339,6 +339,25 @@ git push origin feature/your-feature
 
 ---
 
+## 👥 Crew
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/professyzenith">
+        <img src="https://avatars.githubusercontent.com/professyzenith?v=4" width="80" height="80" style="border-radius:50%" alt="professyzenith"/><br/>
+        <sub><b>professyzenith</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+---
+
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=24&height=100&section=footer" width="100%"/>

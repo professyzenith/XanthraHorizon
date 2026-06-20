@@ -27,15 +27,19 @@ export async function GET() {
     },
   };
 
-  const allReady =
+  // Required for core functionality
+  const requiredReady =
     Object.values(checks.supabase).every(Boolean) &&
-    Object.values(checks.resend).every(Boolean)   &&
     Object.values(checks.gemini).every(Boolean)   &&
     Object.values(checks.app).every(Boolean);
 
+  // Resend is optional — missing keys become warnings, not failures
+  const warnings = Object.entries(checks.resend)
+    .filter(([, v]) => !v)
+    .map(([k]) => `${k} not set — email delivery will be disabled`);
+
   const missing = Object.entries({
     ...checks.supabase,
-    ...checks.resend,
     ...checks.gemini,
     ...checks.app,
   })
@@ -43,11 +47,12 @@ export async function GET() {
     .map(([k]) => k);
 
   return NextResponse.json({
-    ready: allReady,
+    ready: requiredReady,
     missing,
+    warnings,
     checks,
-    instructions: allReady
-      ? "All keys configured. Run /api/test-pipeline to verify the pipeline."
+    instructions: requiredReady
+      ? "Core keys configured. Run /api/test-pipeline to verify the pipeline."
       : `Add the missing keys to .env.local, then restart the dev server.`,
   });
 }

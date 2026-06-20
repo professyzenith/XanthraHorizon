@@ -1,5 +1,24 @@
 import { RankedStory, BriefingData, NewsArticle } from "@/types";
 
+/**
+ * Strip residual HTML tags and common HTML entities from a string.
+ * Needed because some RSS feeds encode HTML inside CDATA, which survives
+ * the newsFetcher's entity-decode step with tags intact.
+ */
+function stripHtml(s: string): string {
+  return s
+    .replace(/<[^>]+>/g, " ")      // remove any remaining tags
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#\d+;/g, "")
+    .replace(/&[a-z]+;/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 const GEMINI_API_URL =
   "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
 
@@ -43,14 +62,16 @@ export async function generateBriefing(
 ): Promise<BriefingData> {
   const top = stories.slice(0, topN);
 
-  // Build a single prompt for all stories to minimize API calls
+  // Build a single prompt for all stories to minimize API calls.
+  // Strip HTML from descriptions before sending to Gemini — some RSS sources
+  // (e.g. Google News) include encoded HTML tags in their description fields.
   const storiesText = top
     .map(
       (s, i) =>
         `STORY ${i + 1}:
 Title: ${s.title}
 Source: ${s.source}
-Description: ${s.description || "No description available."}`
+Description: ${stripHtml(s.description) || "No description available."}`
     )
     .join("\n\n");
 
@@ -80,7 +101,10 @@ Rules:
 - Use confident, direct language — no hedging`;
 
   let executive_brief = "Today's AI landscape shows continued rapid development across models, tools, and research.";
-  const summaryMap: Record<number, { summary: string; why_it_matters: string }> = {};
+  // Use a positional array instead of an index-keyed map so that Gemini
+  // returning 0-based indices, reordered items, or omitting "index" entirely
+  // never causes every lookup to miss and fall through to the HTML fallback.
+  const summaries: Array<{ summary: string; why_it_matters: string }> = [];
 
   try {
     const raw = await callGemini(prompt);
@@ -90,11 +114,12 @@ Rules:
 
     executive_brief = parsed.executive_brief ?? executive_brief;
 
+    // Collect summaries by array position — ignore whatever Gemini puts in "index"
     for (const s of parsed.stories ?? []) {
-      summaryMap[s.index] = {
-        summary: s.summary ?? "",
+      summaries.push({
+        summary:        s.summary        ?? "",
         why_it_matters: s.why_it_matters ?? "",
-      };
+      });
     }
   } catch (error) {
     console.error("Gemini summarization failed, using fallback:", error);
@@ -106,11 +131,13 @@ Rules:
     source: s.source,
     published_at: s.published_at,
     description: s.description,
+    // Use positional lookup; fall back to a clean-text excerpt (HTML stripped)
+    // so raw RSS markup never appears in the email even when Gemini fails.
     summary:
-      summaryMap[i + 1]?.summary ||
-      s.description.slice(0, 200) + "...",
+      summaries[i]?.summary ||
+      stripHtml(s.description).slice(0, 200) + "…",
     why_it_matters:
-      summaryMap[i + 1]?.why_it_matters ||
+      summaries[i]?.why_it_matters ||
       "This development contributes to the rapidly evolving AI ecosystem.",
     score: s.score,
   }));

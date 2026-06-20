@@ -1,13 +1,20 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function UnsubscribeContent() {
   const params = useSearchParams();
+  const router = useRouter();
+
   const status = params.get("status");
   const id     = params.get("id");
+  const token  = params.get("token");
 
-  // If ?status=success — show confirmation (user was redirected here after unsubscribe)
+  const [state, setState] = useState<"idle" | "loading" | "error">("idle");
+  const [errMsg, setErrMsg] = useState("");
+
+  // ── Already unsubscribed (redirected here after successful POST) ────────────
   if (status === "success") {
     return (
       <div className="text-center max-w-md">
@@ -32,8 +39,30 @@ export default function UnsubscribeContent() {
     );
   }
 
-  // If ?id= — show confirmation prompt before unsubscribing
-  if (id) {
+  // ── Valid signed link: id + token both present ──────────────────────────────
+  if (id && token) {
+    async function handleUnsubscribe() {
+      setState("loading");
+      setErrMsg("");
+      try {
+        const res = await fetch("/api/unsubscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id, token }),
+        });
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          setState("error");
+          setErrMsg(data.error ?? "Something went wrong. Please try again.");
+          return;
+        }
+        router.replace("/unsubscribe?status=success");
+      } catch {
+        setState("error");
+        setErrMsg("Network error. Please check your connection and try again.");
+      }
+    }
+
     return (
       <div className="text-center max-w-md">
         <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-amber-500/10 border border-amber-500/20 mb-6">
@@ -48,11 +77,19 @@ export default function UnsubscribeContent() {
           You&apos;ll stop receiving your daily AI intelligence edition.
           You can re-subscribe anytime.
         </p>
+
+        {state === "error" && (
+          <p className="text-rose-400 text-sm mb-4">{errMsg}</p>
+        )}
+
         <div className="flex items-center justify-center gap-4">
-          <Link href={`/api/unsubscribe?id=${id}`}
-            className="px-6 py-3 rounded-xl text-sm font-semibold text-rose-400 border border-rose-500/20 bg-rose-500/5 hover:bg-rose-500/10 transition-colors">
-            Yes, unsubscribe me
-          </Link>
+          <button
+            onClick={handleUnsubscribe}
+            disabled={state === "loading"}
+            className="px-6 py-3 rounded-xl text-sm font-semibold text-rose-400 border border-rose-500/20 bg-rose-500/5 hover:bg-rose-500/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {state === "loading" ? "Unsubscribing…" : "Yes, unsubscribe me"}
+          </button>
           <Link href="/"
             className="px-6 py-3 rounded-xl text-sm font-semibold text-[#1a1208]"
             style={{ background: "linear-gradient(135deg, #c9a853, #d4875a)" }}>
@@ -63,7 +100,7 @@ export default function UnsubscribeContent() {
     );
   }
 
-  // Fallback — no id or status
+  // ── Fallback: missing id, token, or old-format link ─────────────────────────
   return (
     <div className="text-center max-w-md">
       <h1 className="text-2xl font-bold text-[#f0ece3] mb-3 tracking-tight">

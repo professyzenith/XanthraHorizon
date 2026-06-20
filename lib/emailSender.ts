@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { BriefingData } from "@/types";
+import { signUnsubscribeToken } from "@/lib/unsubscribeToken";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -96,7 +97,8 @@ export async function sendBriefingEmail(
   subscriberId: string
 ): Promise<{ success: boolean; error?: string }> {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
-  const unsubscribeUrl = `${appUrl}/unsubscribe?id=${subscriberId}`;
+  const token = signUnsubscribeToken(subscriberId);
+  const unsubscribeUrl = `${appUrl}/unsubscribe?id=${subscriberId}&token=${token}`;
   const fromEmail = process.env.RESEND_FROM_EMAIL ?? "briefing@example.com";
 
   try {

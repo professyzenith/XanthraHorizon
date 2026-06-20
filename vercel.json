@@ -4,5 +4,13 @@
       "path": "/api/cron",
       "schedule": "0 * * * *"
     }
-  ]
+  ],
+  "functions": {
+    "app/api/send-briefing/route.ts": {
+      "maxDuration": 60
+    },
+    "app/api/test-pipeline/route.ts": {
+      "maxDuration": 60
+    }
+  }
 }

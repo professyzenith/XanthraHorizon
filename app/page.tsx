@@ -477,8 +477,8 @@ export default function HomePage() {
             Powered by Next.js · Supabase · Resend · Gemini AI
           </p>
           <div className="flex gap-6 text-xs text-[#3a3020]">
-            <a href="#" className="hover:text-[#8a8070] transition-colors">Privacy</a>
-            <a href="#" className="hover:text-[#8a8070] transition-colors">Unsubscribe</a>
+            <a href="/privacy" className="hover:text-[#8a8070] transition-colors">Privacy</a>
+            <a href="/unsubscribe" className="hover:text-[#8a8070] transition-colors">Unsubscribe</a>
           </div>
         </div>
       </footer>

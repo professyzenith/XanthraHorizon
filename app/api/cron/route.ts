@@ -1,10 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// This route is called by Vercel Cron every hour
-// Vercel Cron config is in vercel.json
-export async function GET(_req: NextRequest) {
+// This route is called by Vercel Cron every hour.
+// Vercel Cron config is in vercel.json.
+//
+// In production, Vercel invokes this via its internal scheduler and passes
+// the CRON_SECRET in the Authorization header automatically (when configured
+// in the Vercel dashboard). The check below also lets you trigger the cron
+// manually with: curl -H "Authorization: Bearer <CRON_SECRET>" /api/cron
+export async function GET(req: NextRequest) {
+  const cronSecret = process.env.CRON_SECRET;
+  const authHeader = req.headers.get("authorization");
+
+  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
-  const cronSecret = process.env.CRON_SECRET ?? "";
 
   try {
     const response = await fetch(`${appUrl}/api/send-briefing`, {

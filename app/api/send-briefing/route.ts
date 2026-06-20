@@ -108,8 +108,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-
-// Also allow GET for easy testing
-export async function GET(req: NextRequest) {
-  return POST(req);
-}

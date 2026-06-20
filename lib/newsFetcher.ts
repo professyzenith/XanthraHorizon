@@ -17,7 +17,7 @@ const TIER_1_SOURCES = [
   },
   {
     name: "Anthropic Blog",
-    url:  "https://feeds.feedburner.com/anthropic", // feedburner — verified working
+    url:  "https://www.anthropic.com/rss.xml",
   },
   {
     name: "Google DeepMind",

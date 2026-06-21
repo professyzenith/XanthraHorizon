@@ -99,24 +99,48 @@ export async function sendBriefingEmail(
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
   const token = signUnsubscribeToken(subscriberId);
   const unsubscribeUrl = `${appUrl}/unsubscribe?id=${subscriberId}&token=${token}`;
-  const fromEmail = process.env.RESEND_FROM_EMAIL ?? "briefing@example.com";
+  const fromEmail = process.env.RESEND_FROM_EMAIL ?? "hello@xanthrahorizon.com";
+
+  // ⚠️  IMPORTANT: onboarding@resend.dev is a Resend sandbox address.
+  // It can ONLY send to the email address registered on your Resend account.
+  // Sending to any other recipient returns HTTP 403 ("You can only send testing
+  // emails to your own email address").  To fix:
+  //   1. Verify your own domain at resend.com/domains
+  //   2. Set RESEND_FROM_EMAIL=hello@xanthrahorizon.com in .env.local
+  if (fromEmail === "onboarding@resend.dev") {
+    console.warn(
+      "[emailSender] RESEND_FROM_EMAIL is set to onboarding@resend.dev. " +
+      "This sandbox address can only deliver to the Resend account owner email. " +
+      "All other recipients will receive HTTP 403. " +
+      "Set RESEND_FROM_EMAIL to an address on a verified domain."
+    );
+  }
 
   try {
-    const { error } = await resend.emails.send({
+    const result = await resend.emails.send({
       from: `Xanthra Horizon <${fromEmail}>`,
       to: email,
       subject: `Xanthra Horizon: ${briefing.date} — ${briefing.stories[0]?.title?.slice(0, 60) ?? "Know What Matters Next"}`,
       html: buildEmailHTML(briefing, unsubscribeUrl),
     });
 
-    if (error) {
-      console.error("Resend error:", error);
-      return { success: false, error: error.message };
+    if (result.error) {
+      // Log full details — statusCode, name, and message — so future failures
+      // are immediately diagnosable without needing to reproduce the request.
+      console.error(
+        `[emailSender] Resend rejected email to=${email} from=${fromEmail}.`,
+        `Error name: ${result.error.name}.`,
+        `Message: ${result.error.message}.`,
+        `Full error object: ${JSON.stringify(result.error)}`
+      );
+      return { success: false, error: `${result.error.name}: ${result.error.message}` };
     }
 
+    console.log(`[emailSender] Email sent successfully to=${email} id=${result.data?.id}`);
     return { success: true };
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Unknown error";
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`[emailSender] Unexpected error sending to=${email}:`, message);
     return { success: false, error: message };
   }
 }

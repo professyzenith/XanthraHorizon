@@ -5,14 +5,14 @@
 
 <!-- Animated Typing -->
 <a href="https://github.com/professyzenith/XanthraHorizon">
-  <img src="https://readme-typing-svg.demolab.com?font=Geist+Mono&size=14&duration=3000&pause=1000&color=C9A853&center=true&vCenter=true&multiline=true&width=600&height=50&lines=Daily+AI+Intelligence+%E2%80%94+Delivered+to+your+inbox.;8+sources+%C2%B7+Auto-deduped+%C2%B7+Gemini-summarized+%C2%B7+Timezone-aware." alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Geist+Mono&size=14&duration=3000&pause=1000&color=C9A853&center=true&vCenter=true&multiline=true&width=600&height=50&lines=Daily+Intelligence+Brief+%E2%80%94+AI+Research+%26+Intelligence+Digest.;8+sources+%C2%B7+Auto-deduped+%C2%B7+Gemini-powered+%C2%B7+Timezone-aware." alt="Typing SVG" />
 </a>
 
 <br/>
 
 <!-- Core Badges -->
 <p>
-  <a href="https://nextjs.org"><img alt="Next.js" src="https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=next.js&logoColor=white"/></a>
+  <a href="https://nextjs.org"><img alt="Next.js" src="https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=next.js&logoColor=white"/></a>
   <a href="https://www.typescriptlang.org"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/></a>
   <a href="https://supabase.com"><img alt="Supabase" src="https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white"/></a>
   <a href="https://resend.com"><img alt="Resend" src="https://img.shields.io/badge/Resend-Email-000000?style=for-the-badge&logoColor=white"/></a>
@@ -30,8 +30,8 @@
 
 <br/>
 
-> **A premium daily AI intelligence platform.**  
-> Fetches, deduplicates, ranks, and summarizes the most important AI developments — then delivers a beautiful briefing to your subscribers' inboxes at exactly the time they choose.
+> **Xanthra Horizon — Daily Intelligence Brief.**  
+> Fetches, deduplicates, ranks, and summarizes the most important AI developments — then delivers a beautifully formatted AI Research & Intelligence Digest to your subscribers' inboxes at exactly the time they choose.
 
 <br/>
 
@@ -106,7 +106,7 @@ flowchart TD
 
 | Layer | Technology | Why |
 |---|---|---|
-| **Framework** | Next.js 14 App Router | API routes + SSR in one project |
+| **Framework** | Next.js 16 App Router | API routes + SSR in one project |
 | **Language** | TypeScript 5 (strict) | Type safety across the full pipeline |
 | **Styling** | Tailwind CSS | Utility-first, no runtime cost |
 | **Database** | Supabase (PostgreSQL) | Free tier · RLS · Real-time ready |

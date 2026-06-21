@@ -50,7 +50,7 @@ export default function PrivacyPage() {
               When you subscribe to Xanthra Horizon, we collect:
             </p>
             <ul className="mt-3 space-y-1.5 list-disc list-inside text-[#6b5f4a]">
-              <li>Your <strong className="text-[#8a8070]">email address</strong> — used only to send your daily briefing.</li>
+              <li>Your <strong className="text-[#8a8070]">email address</strong> — used only to deliver your Daily Intelligence Brief.</li>
               <li>Your <strong className="text-[#8a8070]">preferred delivery time</strong> (e.g. 10:00 AM) and <strong className="text-[#8a8070]">timezone</strong>.</li>
               <li>Your <strong className="text-[#8a8070]">subscription status</strong> (active or unsubscribed).</li>
             </ul>
@@ -65,7 +65,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-base font-semibold text-[#c4b89a] mb-3">2. How We Use Your Data</h2>
             <ul className="space-y-1.5 list-disc list-inside text-[#6b5f4a]">
-              <li>To send you your daily AI intelligence edition at your chosen time.</li>
+              <li>To deliver your Daily Intelligence Brief at your chosen time.</li>
               <li>To include a one-click unsubscribe link in every email.</li>
             </ul>
             <p className="mt-3 text-[#52473a]">
@@ -108,7 +108,7 @@ export default function PrivacyPage() {
               >
                 Resend
               </a>
-              . Your email address is passed to Resend solely to deliver your briefing. Resend does
+              . Your email address is passed to Resend solely to deliver your Daily Intelligence Brief. Resend does
               not receive your delivery time, timezone, or any other data. Resend&apos;s privacy
               policy applies to their processing of your email address in transit.
             </p>

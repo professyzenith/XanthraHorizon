@@ -19,8 +19,12 @@ function stripHtml(s: string): string {
     .trim();
 }
 
-const GEMINI_API_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+// ── Gemini model configuration ───────────────────────────────────────────────
+// gemini-1.5-flash was retired June 2026 (returns 404 on v1beta).
+// gemini-2.0-flash is the current recommended stable model.
+// Update this constant when Google releases a newer stable model.
+const GEMINI_MODEL = "gemini-2.0-flash";
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 interface GeminiResponse {
   candidates: Array<{
@@ -50,8 +54,10 @@ async function callGemini(prompt: string): Promise<string> {
   });
 
   if (!response.ok) {
-    const err = await response.text();
-    throw new Error(`Gemini API error: ${err}`);
+    const errBody = await response.text();
+    throw new Error(
+      `Gemini API error [HTTP ${response.status} ${response.statusText}] model=${GEMINI_MODEL}: ${errBody}`
+    );
   }
 
   const data: GeminiResponse = await response.json();
@@ -127,7 +133,11 @@ Rules:
       });
     }
   } catch (error) {
-    console.error("Gemini summarization failed, using fallback:", error);
+    // Log the full error — includes HTTP status, model name, and API response body
+    console.error(
+      "Gemini summarization failed, using fallback summaries. Full error:",
+      error instanceof Error ? error.message : String(error)
+    );
   }
 
   const rankedStories: RankedStory[] = top.map((s, i) => ({

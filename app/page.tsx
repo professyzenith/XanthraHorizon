@@ -7,6 +7,7 @@ import SignatureSection    from "@/components/SignatureSection";
 import SubscribeForm       from "@/components/SubscribeForm";
 import AnimatedSection     from "@/components/AnimatedSection";
 import InteractiveBriefing from "@/components/InteractiveBriefing";
+import HorizonReveal       from "@/components/HorizonReveal";
 
 // ─── Marquee ticker ─────────────────────────────────────────────────────────────
 const TICKER = [
@@ -61,10 +62,13 @@ export default function HomePage() {
       <FloatingParticles />
       <CustomCursor />
 
+      {/* ── Cinematic intro — renders above the page, fades away after 4-5 s ── */}
+      <HorizonReveal />
+
       {/* ════════════════════════════════════════
           ANNOUNCEMENT BAR
       ════════════════════════════════════════ */}
-      <div className="announce-bar relative z-20 w-full py-2.5 px-6 flex items-center justify-center gap-6">
+      <div className="announce-bar hero-entrance hero-entrance-d1 relative z-20 w-full py-2.5 px-6 flex items-center justify-center gap-6">
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 glow-pulse" />
           <span className="text-[11px] font-mono text-[#52473a] tracking-widest">
@@ -80,7 +84,7 @@ export default function HomePage() {
       {/* ════════════════════════════════════════
           NAV
       ════════════════════════════════════════ */}
-      <nav className="relative z-20 flex items-center justify-between px-6 sm:px-12 py-6 max-w-[1400px] mx-auto">
+      <nav className="hero-entrance hero-entrance-d2 relative z-20 flex items-center justify-between px-6 sm:px-12 py-6 max-w-[1400px] mx-auto">
         <div className="flex items-center gap-3">
           <div className="relative w-8 h-8 rounded-lg overflow-hidden"
             style={{ background: "linear-gradient(135deg,#c9a853,#d4875a)", boxShadow: "0 0 24px rgba(201,168,83,0.45)" }}>
@@ -111,7 +115,7 @@ export default function HomePage() {
           {/* Left */}
           <div className="flex flex-col">
             <AnimatedSection delay={0}>
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-amber-500/15 bg-amber-500/5 w-fit mb-10 badge-glow">
+              <div className="hero-entrance hero-entrance-d3 inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-amber-500/15 bg-amber-500/5 w-fit mb-10 badge-glow">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse-soft" />
                 <span className="text-[11px] font-medium tracking-widest text-amber-300/70 uppercase">
                   Free · Daily · For Everyone
@@ -120,6 +124,7 @@ export default function HomePage() {
             </AnimatedSection>
 
             <AnimatedSection delay={60}>
+              <div className="hero-entrance hero-entrance-d4">
               <h1 className="text-[52px] sm:text-[68px] xl:text-[80px] font-bold leading-[0.95] tracking-[-0.04em] text-[#f0ece3] mb-4">
                 Xanthra<br />
                 Horizon
@@ -127,12 +132,13 @@ export default function HomePage() {
               <p className="text-2xl sm:text-3xl font-semibold tracking-[-0.02em] mb-8">
                 <span className="gradient-text">Know What Matters Next.</span>
               </p>
+              </div>
             </AnimatedSection>
 
             <AnimatedSection delay={140}>
               <p className="text-[17px] text-[#6b5f4a] leading-[1.7] max-w-[480px] mb-12 font-light">
                 Stay ahead of the world&apos;s most important AI developments.
-                Get a concise daily edition with the news, breakthroughs,
+                Receive your free Daily Intelligence Brief — the news, breakthroughs,
                 and trends that actually matter.
               </p>
             </AnimatedSection>
@@ -153,6 +159,7 @@ export default function HomePage() {
             </AnimatedSection>
 
             <AnimatedSection delay={240}>
+              <div className="hero-entrance hero-entrance-d5">
               <a href="#subscribe" data-hover="true"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-semibold text-[15px] text-[#1a1208] mb-10 transition-all duration-200 hover:scale-[1.02]"
                 style={{
@@ -164,6 +171,7 @@ export default function HomePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </a>
+              </div>
             </AnimatedSection>
 
             <AnimatedSection delay={290}>
@@ -447,7 +455,7 @@ export default function HomePage() {
 
               <p className="text-[#6b5f4a] text-lg font-light mb-12 max-w-md mx-auto leading-relaxed">
                 Stay informed without the overwhelm. Configure once.
-                Your AI intelligence arrives every morning without you
+                Your Daily Intelligence Brief arrives every morning without you
                 lifting a finger.
               </p>
 

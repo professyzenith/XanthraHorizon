@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    console.log("Starting daily briefing pipeline...");
+    console.log("[Xanthra Horizon] Starting Daily Intelligence Brief pipeline...");
 
     // Step 1: Fetch news from all sources
     const rawArticles = await fetchAllAINews();
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
 
     // Step 4: Generate AI briefing (summaries + why it matters)
     const briefing = await generateBriefing(ranked, 7);
-    console.log("Briefing generated successfully");
+    console.log("[Xanthra Horizon] Daily Intelligence Brief generated successfully");
 
     // Step 5: Find subscribers whose local delivery time matches now (within 5 min window)
     const now = new Date();
@@ -91,6 +91,18 @@ export async function POST(req: NextRequest) {
     ).length;
     const failed = results.length - sent;
 
+    // Collect per-failure details so the response is immediately actionable
+    const failures = results
+      .map((r, i) => ({
+        subscriber: targetSubscribers[i].email.replace(/(.{3}).*(@.*)/, "$1***$2"), // redact most of email
+        error: r.status === "rejected"
+          ? String(r.reason)
+          : r.status === "fulfilled" && !r.value.success
+            ? r.value.error
+            : null,
+      }))
+      .filter((f) => f.error !== null);
+
     return NextResponse.json({
       success: true,
       articles_fetched: rawArticles.length,
@@ -99,9 +111,10 @@ export async function POST(req: NextRequest) {
       subscribers_targeted: targetSubscribers.length,
       emails_sent: sent,
       emails_failed: failed,
+      ...(failures.length > 0 && { failures }),
     });
   } catch (err) {
-    console.error("Briefing pipeline error:", err);
+    console.error("[Xanthra Horizon] Pipeline error:", err);
     return NextResponse.json(
       { error: "Pipeline failed", details: String(err) },
       { status: 500 }

@@ -81,7 +81,7 @@ export async function GET(req: NextRequest) {
     // Step 4 — Summarize
     log.push("Calling Gemini for summaries…");
     const briefing = await generateBriefing(ranked, topN);
-    log.push("✓ Briefing generated");
+    log.push("✓ Daily Intelligence Brief generated");
 
     return NextResponse.json({
       ok: true,

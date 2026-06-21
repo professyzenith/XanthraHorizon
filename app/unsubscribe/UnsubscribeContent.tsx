@@ -74,7 +74,7 @@ export default function UnsubscribeContent() {
           Unsubscribe from Xanthra Horizon?
         </h1>
         <p className="text-[#6b5f4a] text-sm leading-relaxed mb-8">
-          You&apos;ll stop receiving your daily AI intelligence edition.
+          You&apos;ll stop receiving your Daily Intelligence Brief.
           You can re-subscribe anytime.
         </p>
 

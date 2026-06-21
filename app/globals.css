@@ -250,17 +250,16 @@ body {
    display:none, revealing the homepage beneath.
    ══════════════════════════════════════════════════════════════════════════ */
 
-/* Overlay wrapper */
+/* ── Overlay wrapper ──────────────────────────────────────────────────────── */
 .xh-overlay {
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: #060504;         /* same as --void, seamless transition */
+  background: #060504;
   will-change: opacity;
-  /* pointer-events auto so click-to-skip works after arm-delay */
 }
 
-/* Canvas fills the overlay exactly */
+/* ── Canvas — fills the overlay, all visual rendering goes here ────────────── */
 .xh-canvas {
   position: absolute;
   inset: 0;
@@ -269,7 +268,9 @@ body {
   display: block;
 }
 
-/* Brand text container — centred, above the canvas horizon line */
+/* ── Brand container ──────────────────────────────────────────────────────── */
+/* Sits in the centre of the overlay, shifted up ~13 vh toward the horizon.
+   `perspective` is set by GSAP at runtime for 3-D letter flip effect.       */
 .xh-brand {
   position: absolute;
   inset: 0;
@@ -277,79 +278,137 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 12vh;   /* shift slightly above true centre toward horizon */
+  padding-bottom: 13vh;
   pointer-events: none;
   user-select: none;
   -webkit-user-select: none;
+  /* transform-style required so GSAP 3-D perspective propagates to children */
+  transform-style: preserve-3d;
 }
 
-/* overflow:hidden parent — clips the y-translated inner text during reveal */
+/* ── Word-wrap clip box ────────────────────────────────────────────────────
+   overflow:hidden clips characters that start at yPercent:130 (below the
+   box boundary). As GSAP animates them to yPercent:0 they "rise" into view.  */
 .xh-word-wrap {
   overflow: hidden;
-  /* height is set by the child's natural size; transforms are clipped */
-  line-height: 0.95;
-}
-
-/* Common title style */
-.xh-title {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: clamp(52px, 10.5vw, 122px);
+  /* Height must match the rendered font-size so the clip is tight */
+  height: 1.12em;
+  line-height: 1.12;
+  font-size: clamp(50px, 10.5vw, 120px);
   font-weight: 800;
-  letter-spacing: 0.17em;
+  letter-spacing: 0.13em;
+  white-space: nowrap;
+  /* small visual separation between the two word rows */
+  margin-bottom: 0.04em;
+}
+
+/* Second word-wrap slightly larger for HORIZON */
+.xh-word-wrap--h {
+  font-size: clamp(52px, 11vw, 124px);
+}
+
+/* ── Individual character spans ────────────────────────────────────────────
+   Each letter is independently animated by GSAP:
+     - yPercent: 130 → 0   (rises into clip box)
+     - rotationX: 32 → 0   (tips toward viewer)
+     - filter: blur → clear (sharpens in)
+     - opacity: 0 → 1      (fades in)                                         */
+.xh-char {
+  display: inline-block;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: inherit;
+  font-weight: 800;
+  letter-spacing: inherit;
   line-height: 1;
+  transform-origin: 50% 100%;  /* pivot at baseline for the flip effect */
+  will-change: transform, opacity, filter;
+  /* prevent any initial flash — GSAP sets yPercent:130 at start */
+  transform: translateY(130%);
+  opacity: 0;
+}
+
+/* XANTHRA characters — cream white */
+.xh-char--x { color: #f0ece3; }
+
+/* HORIZON characters — colour is applied via inline style */
+.xh-char--h { /* colour applied inline */ }
+
+/* ── Decorative rule under brand text ────────────────────────────────────── */
+.xh-deco-line {
+  width: clamp(200px, 42vw, 520px);
+  height: 1px;
+  margin-top: 0.55em;
+  background: linear-gradient(90deg,
+    rgba(201,168,83,0)   0%,
+    rgba(201,168,83,0.7) 30%,
+    rgba(15,147,136,0.8) 60%,
+    rgba(201,168,83,0)   100%);
+  transform-origin: left center;  /* GSAP scaleX: 0 → 1 from left */
   will-change: transform;
-  /* GSAP sets initial translateY(112%) via yPercent — prevents flash */
-  transform: translateY(112%);
 }
 
-/* "XANTHRA" — near-white, pure cream */
-.xh-title--xanthra {
-  color: #f0ece3;
-}
-
-/* "HORIZON" — gradient matching the site's gradient-text */
-.xh-title--horizon {
-  background: linear-gradient(135deg, #f5f0e4 0%, #e8c56d 30%, #c9a853 58%, #0f9388 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  padding-bottom: 0.06em;   /* prevent gradient clip on descenders */
-}
-
-/* Tagline — uppercase, wide tracking, muted */
+/* ── Tagline ────────────────────────────────────────────────────────────── */
 .xh-tagline {
-  font-size: clamp(10px, 1.35vw, 16px);
+  font-size: clamp(9px, 1.25vw, 14px);
   font-weight: 400;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.28em;
   color: #52473a;
   text-transform: uppercase;
-  margin-top: 1.8em;
+  margin-top: 1.2em;
   will-change: opacity, transform;
   pointer-events: none;
 }
 
-/* Skip hint — bottom-right, barely visible */
+/* ── Metrics row (600+ Sources · 7 Stories · ∞ Free) ────────────────────── */
+.xh-metrics {
+  display: flex;
+  gap: clamp(24px, 4vw, 56px);
+  margin-top: 2em;
+  will-change: opacity, transform;
+}
+.xh-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.xh-metric-val {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(18px, 2.8vw, 32px);
+  font-weight: 700;
+  color: #c9a853;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.xh-metric-label {
+  font-size: clamp(8px, 0.9vw, 10px);
+  letter-spacing: 0.22em;
+  color: #2a2318;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Skip hint — barely-there, bottom-right ─────────────────────────────── */
 .xh-skip {
   position: absolute;
   bottom: 1.75rem;
   right: 2rem;
-  font-size: 10.5px;
-  letter-spacing: 0.10em;
-  color: #2a2318;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #1e1b17;
   font-family: 'JetBrains Mono', monospace;
   will-change: opacity;
   cursor: default;
-  transition: color 0.2s ease;
+  transition: color 0.25s ease;
 }
 .xh-skip:hover { color: #52473a; }
 
-/* ── Post-intro hero entrance ───────────────────────────────────────────────
-   The hero content is already fully rendered while the overlay is visible.
-   Adding .horizon-revealed to <html> triggers a smooth entrance transition.
-   This is purely additive — pages without the class still work normally.   */
+/* ── Post-intro hero entrance cascade ────────────────────────────────────────
+   Hero content is fully rendered behind the overlay. Adding
+   .horizon-revealed to <html> triggers this CSS-only stagger.                */
 html:not(.horizon-revealed) .hero-entrance {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(20px);
 }
 html.horizon-revealed .hero-entrance {
   opacity: 1;

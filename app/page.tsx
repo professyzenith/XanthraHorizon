@@ -8,6 +8,7 @@ import SubscribeForm       from "@/components/SubscribeForm";
 import AnimatedSection     from "@/components/AnimatedSection";
 import InteractiveBriefing from "@/components/InteractiveBriefing";
 import HorizonReveal       from "@/components/HorizonReveal";
+import GlobalSyncPrelude   from "@/components/GlobalSyncPrelude";
 
 // ─── Marquee ticker ─────────────────────────────────────────────────────────────
 const TICKER = [
@@ -61,6 +62,10 @@ export default function HomePage() {
       <div className="noise-overlay" />
       <FloatingParticles />
       <CustomCursor />
+
+      {/* ── Global sync prelude (2 s) — sits at z-201 above HorizonReveal z-200.
+           Both mount together. Prelude fades; HorizonReveal continues beneath. */}
+      <GlobalSyncPrelude />
 
       {/* ── Cinematic intro — renders above the page, fades away after 4-5 s ── */}
       <HorizonReveal />

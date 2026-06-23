@@ -26,6 +26,7 @@ const TIER_1_SOURCES = [
 ];
 
 const TIER_2_SOURCES = [
+  /* ── North America ─────────────────────────────────────────────────────── */
   {
     name: "Google News - AI",
     url:  "https://news.google.com/rss/search?q=artificial+intelligence+AI+machine+learning&hl=en-US&gl=US&ceid=US:en",
@@ -45,6 +46,31 @@ const TIER_2_SOURCES = [
   {
     name: "MIT Tech Review",
     url:  "https://www.technologyreview.com/feed/",
+  },
+
+  /* ── India ──────────────────────────────────────────────────────────────
+     Backs the INDIA node on the GlobalSyncPrelude map animation.            */
+  {
+    name: "Google News - India AI",
+    url:  "https://news.google.com/rss/search?q=artificial+intelligence+AI+machine+learning+India&hl=en-IN&gl=IN&ceid=IN:en",
+  },
+  {
+    name: "Analytics Vidhya",
+    url:  "https://www.analyticsvidhya.com/blog/feed/",
+  },
+
+  /* ── East Asia + S.E. Asia ──────────────────────────────────────────────
+     Backs the EAST ASIA and S.E. ASIA nodes on the map.                     */
+  {
+    name: "Google News - Asia AI",
+    url:  "https://news.google.com/rss/search?q=artificial+intelligence+AI+China+Japan+Korea+Singapore+tech&hl=en&gl=SG&ceid=SG:en",
+  },
+
+  /* ── Middle East ────────────────────────────────────────────────────────
+     Backs the MIDDLE EAST node on the map (UAE, Saudi, Gulf AI push).       */
+  {
+    name: "Google News - Middle East AI",
+    url:  "https://news.google.com/rss/search?q=artificial+intelligence+AI+UAE+Saudi+Arabia+Middle+East+tech&hl=en&gl=AE&ceid=AE:en",
   },
 ];
 

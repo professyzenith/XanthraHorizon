@@ -245,9 +245,9 @@ body {
 
 /* ════════════════════════════════════════════════════════════════════════════
    HORIZON REVEAL — Cinematic intro sequence
-   The overlay is position:fixed so it sits on top of the already-rendered
-   page. When the timeline completes it fades to opacity:0 and is set to
-   display:none, revealing the homepage beneath.
+   Narrative: intelligence signals from across the world converge at a golden
+   horizon, triggering a controlled dawn burst, before the brand is revealed
+   as a film title card — restrained, inevitable, premium.
    ══════════════════════════════════════════════════════════════════════════ */
 
 /* ── Overlay wrapper ──────────────────────────────────────────────────────── */
@@ -259,7 +259,7 @@ body {
   will-change: opacity;
 }
 
-/* ── Canvas — fills the overlay, all visual rendering goes here ────────────── */
+/* ── Canvas — all signal / horizon / burst rendering happens here ──────────── */
 .xh-canvas {
   position: absolute;
   inset: 0;
@@ -269,8 +269,8 @@ body {
 }
 
 /* ── Brand container ──────────────────────────────────────────────────────── */
-/* Sits in the centre of the overlay, shifted up ~13 vh toward the horizon.
-   `perspective` is set by GSAP at runtime for 3-D letter flip effect.       */
+/* Shifted up from true centre so text sits comfortably above the horizon.
+   No transform-style: preserve-3d — text reveal is purely opacity-based.     */
 .xh-brand {
   position: absolute;
   inset: 0;
@@ -282,84 +282,70 @@ body {
   pointer-events: none;
   user-select: none;
   -webkit-user-select: none;
-  /* transform-style required so GSAP 3-D perspective propagates to children */
-  transform-style: preserve-3d;
 }
 
-/* ── Word-wrap clip box ────────────────────────────────────────────────────
-   overflow:hidden clips characters that start at yPercent:130 (below the
-   box boundary). As GSAP animates them to yPercent:0 they "rise" into view.  */
+/* ── Word row container ───────────────────────────────────────────────────── */
+/* Simple block with centred inline children — no overflow clipping needed
+   because the reveal is opacity + 5 px drift, not a yPercent clip-box.       */
 .xh-word-wrap {
-  overflow: hidden;
-  /* Height must match the rendered font-size so the clip is tight */
-  height: 1.12em;
-  line-height: 1.12;
-  font-size: clamp(50px, 10.5vw, 120px);
-  font-weight: 800;
-  letter-spacing: 0.13em;
+  display: block;
+  text-align: center;
   white-space: nowrap;
-  /* small visual separation between the two word rows */
   margin-bottom: 0.04em;
 }
 
-/* Second word-wrap slightly larger for HORIZON */
-.xh-word-wrap--h {
-  font-size: clamp(52px, 11vw, 124px);
-}
+/* HORIZON row — no size difference, kept for selector specificity */
+.xh-word-wrap--h { /* inherits from .xh-word-wrap */ }
 
-/* ── Individual character spans ────────────────────────────────────────────
-   Each letter is independently animated by GSAP:
-     - yPercent: 130 → 0   (rises into clip box)
-     - rotationX: 32 → 0   (tips toward viewer)
-     - filter: blur → clear (sharpens in)
-     - opacity: 0 → 1      (fades in)                                         */
+/* ── Individual character spans ───────────────────────────────────────────── */
+/* GSAP animates each span: opacity 0→1 + y 5→0.
+   Initial opacity is set via inline style in JSX so GSAP can read it.        */
 .xh-char {
   display: inline-block;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: inherit;
+  font-size: clamp(50px, 10.5vw, 120px);
   font-weight: 800;
-  letter-spacing: inherit;
+  letter-spacing: 0.13em;
   line-height: 1;
-  transform-origin: 50% 100%;  /* pivot at baseline for the flip effect */
-  will-change: transform, opacity, filter;
-  /* prevent any initial flash — GSAP sets yPercent:130 at start */
-  transform: translateY(130%);
-  opacity: 0;
+  will-change: transform, opacity;
 }
 
-/* XANTHRA characters — cream white */
+/* XANTHRA — near-white cream */
 .xh-char--x { color: #f0ece3; }
 
-/* HORIZON characters — colour is applied via inline style */
+/* HORIZON — each letter's colour is set inline from H_COLS array */
 .xh-char--h { /* colour applied inline */ }
 
-/* ── Decorative rule under brand text ────────────────────────────────────── */
+/* ── Decorative rule ──────────────────────────────────────────────────────── */
+/* GSAP scaleX: 0 → 1 from left (transform-origin set inline in JSX).         */
 .xh-deco-line {
-  width: clamp(200px, 42vw, 520px);
+  width: clamp(180px, 38vw, 480px);
   height: 1px;
   margin-top: 0.55em;
-  background: linear-gradient(90deg,
+  background: linear-gradient(
+    90deg,
     rgba(201,168,83,0)   0%,
-    rgba(201,168,83,0.7) 30%,
-    rgba(15,147,136,0.8) 60%,
-    rgba(201,168,83,0)   100%);
-  transform-origin: left center;  /* GSAP scaleX: 0 → 1 from left */
+    rgba(201,168,83,0.65) 28%,
+    rgba(15,147,136,0.75) 60%,
+    rgba(201,168,83,0)   100%
+  );
   will-change: transform;
 }
 
-/* ── Tagline ────────────────────────────────────────────────────────────── */
+/* ── Tagline ──────────────────────────────────────────────────────────────── */
 .xh-tagline {
-  font-size: clamp(9px, 1.25vw, 14px);
+  font-size: clamp(9px, 1.2vw, 13px);
   font-weight: 400;
-  letter-spacing: 0.28em;
-  color: #52473a;
+  letter-spacing: 0.30em;
+  color: #4a4032;
   text-transform: uppercase;
-  margin-top: 1.2em;
+  margin-top: 1.25em;
   will-change: opacity, transform;
   pointer-events: none;
 }
 
-/* ── Metrics row (600+ Sources · 7 Stories · ∞ Free) ────────────────────── */
+/* ── Skip hint — bottom-right, barely perceptible ────────────────
+─ Metrics row (600+ Sources · 7 Stories · ∞ Free) ────────────────────── */
 .xh-metrics {
   display: flex;
   gap: clamp(24px, 4vw, 56px);

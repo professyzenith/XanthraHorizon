@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Pin Turbopack's root to this project directory so it doesn't
+  // pick up the stray package-lock.json in the user home directory.
+  turbopack: {
+    root: __dirname,
+  },
   // Security headers applied to every response
   async headers() {
     return [

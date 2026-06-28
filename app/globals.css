@@ -24,11 +24,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  cursor: none;
 }
 
-/* Hide default cursor everywhere */
-*, *::before, *::after { cursor: none !important; }
+/* Hide default cursor only on devices that have a real pointer (mouse/trackpad).
+   On touch-only devices cursor:none is a no-op anyway, but this prevents
+   iPads with a stylus/Magic Keyboard losing their cursor entirely. */
+@media (pointer: fine) {
+  body { cursor: none; }
+  *, *::before, *::after { cursor: none !important; }
+}
 
 ::selection { background: rgba(201,168,83,0.35); color: #f0ece3; }
 ::-webkit-scrollbar { width: 3px; }

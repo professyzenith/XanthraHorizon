@@ -15,16 +15,21 @@ const HIGH_PRIORITY_KEYWORDS = [
 // Credible sources get a score boost
 const SOURCE_SCORES: Record<string, number> = {
   // Tier 1 — official lab blogs (highest credibility)
-  "OpenAI Blog":       10,
-  "Anthropic Blog":    10,
-  "Google DeepMind":   10,
+  "OpenAI Blog":                  10,
+  "Anthropic Blog":               10,
+  "Google DeepMind":              10,
   // Tier 2 — quality tech media
-  "VentureBeat AI":     6,
-  "TechCrunch AI":      6,
-  "MIT Tech Review":    6,
-  // Tier 2 — news aggregators
-  "Google News - AI":   3,
-  "Google News - LLM":  3,
+  "VentureBeat AI":                6,
+  "TechCrunch AI":                 6,
+  "MIT Tech Review":               6,
+  // Tier 2 — global Google News aggregators
+  "Google News - AI":              3,
+  "Google News - LLM":             3,
+  // Regional sources (added to ensure they score above the baseline default)
+  "Google News - India AI":        3,
+  "Google News - Asia AI":         3,
+  "Google News - Middle East AI":  3,
+  "Analytics Vidhya":              4,
 };
 
 function scoreArticle(article: NewsArticle): number {

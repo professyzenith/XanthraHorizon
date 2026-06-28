@@ -2,6 +2,25 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { SubscribePayload } from "@/types";
 
+// ── In-memory rate limiter ─────────────────────────────────────────────────
+// Max 5 attempts per IP per 10-minute window. Resets automatically.
+// For multi-region deployments consider replacing with Vercel KV or Redis.
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const ipAttempts = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = ipAttempts.get(ip);
+  if (!entry || now > entry.resetAt) {
+    ipAttempts.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_LIMIT_MAX;
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 // Validate IANA timezone using the built-in Intl API (zero-cost, no dependencies)
 function isValidTimezone(tz: string): boolean {
   try {
@@ -13,6 +32,18 @@ function isValidTimezone(tz: string): boolean {
 }
 
 export async function POST(req: NextRequest) {
+  // Rate limit by IP
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
+    req.headers.get("x-real-ip") ??
+    "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many requests. Please wait a few minutes and try again." },
+      { status: 429 }
+    );
+  }
+
   try {
     const body: SubscribePayload = await req.json();
     const { email, delivery_time, timezone } = body;

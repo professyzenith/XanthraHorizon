@@ -3,6 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Privacy Policy — Xanthra Horizon",
   description: "Xanthra Horizon Privacy Policy — what data we collect and how we use it.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {
@@ -143,7 +144,14 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-base font-semibold text-[#c4b89a] mb-3">7. Contact</h2>
             <p className="text-[#6b5f4a]">
-              For any privacy questions or data requests, reply to any Xanthra Horizon email.
+              For any privacy questions or data requests, email us at{" "}
+              <a
+                href="mailto:privacy@xanthrahorizon.com"
+                className="text-[#8a8070] hover:text-[#c9a853] transition-colors underline underline-offset-2"
+              >
+                privacy@xanthrahorizon.com
+              </a>
+              {" "}or reply to any Xanthra Horizon email.
               We will respond within 72 hours.
             </p>
           </section>

@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Hide the Next.js "N" development badge — keeps the UI clean
+  devIndicators: false,
   // Pin Turbopack's root to this project directory so it doesn't
   // pick up the stray package-lock.json in the user home directory.
   turbopack: {

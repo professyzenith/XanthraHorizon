@@ -491,6 +491,7 @@ export default function HomePage() {
           </p>
           <div className="flex gap-6 text-xs text-[#3a3020]">
             <a href="/privacy" className="hover:text-[#8a8070] transition-colors">Privacy</a>
+            <a href="/tos" className="hover:text-[#8a8070] transition-colors">Terms</a>
             <a href="/unsubscribe" className="hover:text-[#8a8070] transition-colors">Unsubscribe</a>
           </div>
         </div>

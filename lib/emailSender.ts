@@ -14,6 +14,135 @@ function htmlEscape(str: string): string {
     .replace(/'/g, "&#39;");
 }
 
+// ── Welcome email ──────────────────────────────────────────────────────────────
+function buildWelcomeHTML(
+  deliveryTime: string,
+  timezone: string,
+  unsubscribeUrl: string
+): string {
+  const safeTime = htmlEscape(deliveryTime);
+  const safeTz   = htmlEscape(timezone);
+  const safeUnsub = htmlEscape(unsubscribeUrl);
+
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Xanthra Horizon</title>
+</head>
+<body style="margin:0;padding:0;background:#060504;font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;">
+  <div style="max-width:600px;margin:0 auto;padding:48px 20px 32px;">
+
+    <!-- Badge -->
+    <div style="text-align:center;margin-bottom:32px;">
+      <div style="display:inline-block;padding:5px 16px;background:#0e0c0a;border:1px solid #2a2318;border-radius:24px;">
+        <span style="color:#c9a853;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;font-family:monospace;">XANTHRA HORIZON</span>
+      </div>
+    </div>
+
+    <!-- Logo + Hero -->
+    <div style="text-align:center;margin-bottom:40px;padding:40px 32px;background:linear-gradient(135deg,#0d0b09,#110f0c);border:1px solid #2a2318;border-radius:20px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#c9a853,#0f9388,transparent);"></div>
+      <div style="display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;background:linear-gradient(135deg,#c9a853,#d4875a);border-radius:14px;margin-bottom:20px;">
+        <span style="color:#1a1208;font-size:22px;">&#9889;</span>
+      </div>
+      <h1 style="margin:0 0 10px;font-size:28px;font-weight:800;color:#f0ece3;letter-spacing:-0.03em;">You&apos;re in the Horizon.</h1>
+      <p style="margin:0;color:#8a8070;font-size:15px;line-height:1.7;">Your Daily Intelligence Brief is confirmed.<br>The AI world will come to you — every single day.</p>
+    </div>
+
+    <!-- Delivery details -->
+    <div style="margin-bottom:24px;padding:24px;background:#0e0c0a;border:1px solid #1e1b17;border-radius:14px;">
+      <p style="margin:0 0 16px;color:#52473a;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;font-family:monospace;">YOUR DELIVERY SCHEDULE</p>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="flex:1;padding:16px;background:#080604;border:1px solid #1a1712;border-radius:10px;text-align:center;">
+          <p style="margin:0 0 4px;color:#52473a;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;font-family:monospace;">TIME</p>
+          <p style="margin:0;color:#c9a853;font-size:18px;font-weight:700;">${safeTime}</p>
+        </div>
+        <div style="flex:2;padding:16px;background:#080604;border:1px solid #1a1712;border-radius:10px;text-align:center;">
+          <p style="margin:0 0 4px;color:#52473a;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;font-family:monospace;">TIMEZONE</p>
+          <p style="margin:0;color:#c4b89a;font-size:14px;font-weight:600;">${safeTz}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- What to expect -->
+    <div style="margin-bottom:32px;padding:24px;background:#0e0c0a;border:1px solid #1e1b17;border-radius:14px;">
+      <p style="margin:0 0 16px;color:#52473a;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;font-family:monospace;">WHAT TO EXPECT</p>
+      ${
+        [
+          ["⚡", "7 stories, ranked by importance", "Not a dump of links — real summaries with context."],
+          ["🧠", "Why It Matters, for every story", "We explain the business and technical significance."],
+          ["🌍", "Global AI intelligence", "Sources from OpenAI, Anthropic, DeepMind, Reuters, and more."],
+          ["⏱", "7 minutes to read", "Curated to respect your time. Nothing superfluous."],
+        ].map(([icon, title, desc]) => `
+        <div style="display:flex;gap:14px;margin-bottom:16px;align-items:flex-start;">
+          <div style="width:32px;height:32px;background:#1a1712;border:1px solid #2a2318;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;">${icon}</div>
+          <div>
+            <p style="margin:0 0 3px;color:#c4b89a;font-size:13px;font-weight:600;">${title}</p>
+            <p style="margin:0;color:#52473a;font-size:12px;line-height:1.6;">${desc}</p>
+          </div>
+        </div>`).join("")
+      }
+    </div>
+
+    <!-- Divider -->
+    <div style="height:1px;background:linear-gradient(90deg,transparent,#1e1b17,transparent);margin-bottom:28px;"></div>
+
+    <!-- Footer -->
+    <div style="text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <div style="width:18px;height:18px;background:linear-gradient(135deg,#c9a853,#d4875a);border-radius:4px;display:inline-flex;align-items:center;justify-content:center;">
+          <span style="color:#1a1208;font-size:9px;font-weight:700;">&#9889;</span>
+        </div>
+        <span style="color:#52473a;font-size:12px;font-weight:600;">Xanthra Horizon</span>
+      </div>
+      <p style="margin:0 0 8px;color:#3a3020;font-size:12px;line-height:1.6;">
+        You subscribed at xanthrahorizon.vercel.app<br>Free forever &middot; No ads &middot; No spam.
+      </p>
+      <a href="${safeUnsub}" style="color:#52473a;font-size:12px;text-decoration:underline;text-decoration-color:#2a2318;">Unsubscribe</a>
+    </div>
+
+  </div>
+</body>
+</html>`;
+}
+
+export async function sendWelcomeEmail(
+  email: string,
+  subscriberId: string,
+  deliveryTime: string,
+  timezone: string
+): Promise<{ success: boolean; error?: string }> {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  const token = signUnsubscribeToken(subscriberId);
+  const unsubscribeUrl = `${appUrl}/unsubscribe?id=${subscriberId}&token=${token}`;
+  const fromEmail = process.env.RESEND_FROM_EMAIL ?? "hello@xanthrahorizon.com";
+
+  try {
+    const result = await resend.emails.send({
+      from: `Xanthra Horizon <${fromEmail}>`,
+      to: email,
+      subject: "You're in the Horizon. Welcome. ⚡",
+      html: buildWelcomeHTML(deliveryTime, timezone, unsubscribeUrl),
+    });
+
+    if (result.error) {
+      console.error(`[emailSender] Welcome email failed to=${email}:`, result.error);
+      return { success: false, error: `${result.error.name}: ${result.error.message}` };
+    }
+
+    console.log(`[emailSender] Welcome email sent to=${email} id=${result.data?.id}`);
+    return { success: true };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`[emailSender] Unexpected error sending welcome to=${email}:`, message);
+    return { success: false, error: message };
+  }
+}
+
+// ── Briefing email ──────────────────────────────────────────────────────────────
 function buildEmailHTML(briefing: BriefingData, unsubscribeUrl: string): string {
   const storyCards = briefing.stories
     .map(

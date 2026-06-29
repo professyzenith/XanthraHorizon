@@ -487,7 +487,7 @@ export default function HomePage() {
             <span className="text-xs text-[#3a3020]">Xanthra Horizon</span>
           </div>
           <p className="text-xs text-[#1e1b14]">
-            &copy; {new Date().getFullYear()} Xanthra Horizon. Made with care.
+            © {new Date().getFullYear()} Xanthra Horizon · Next.js · Supabase · Resend · Gemini AI
           </p>
           <div className="flex gap-6 text-xs text-[#3a3020]">
             <a href="/privacy" className="hover:text-[#8a8070] transition-colors">Privacy</a>

@@ -6,16 +6,14 @@ import gsap from "gsap";
 /* ─────────────────────────────────────────────────────────────────────────────
    Constants & helpers
    ──────────────────────────────────────────────────────────────────────────── */
-const _AMBER = "#c9a853";   /* reserved for future use */
+const _AMBER = "#c9a853"; // brand colour — underscore prefix marks it intentionally unused
 
-/* Per-character gradient for "HORIZON" — cream → amber → teal */
 const H_COLS = [
   "#f5f0e4", "#eedfa0", "#e0c868",
   "#c9a853", "#94a055", "#4ba078", "#0f9388",
 ] as const;
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
-const _hex  = (v: number) => clamp(Math.round(v), 0, 255).toString(16).padStart(2, "0");
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Signal source data

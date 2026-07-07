@@ -119,10 +119,14 @@ export async function POST(req: NextRequest) {
       .eq("email", normalizedEmail)
       .single();
 
-    // Fire welcome email (non-fatal — subscription already saved)
+    // Await welcome email so the Vercel function doesn't terminate before Resend processes it
     if (subscriber?.id && isNewSubscriber) {
-      sendWelcomeEmail(normalizedEmail, subscriber.id, delivery_time, timezone)
-        .catch((err) => console.error("[subscribe] Welcome email fire error:", err));
+      const emailResult = await sendWelcomeEmail(normalizedEmail, subscriber.id, delivery_time, timezone)
+        .catch((err) => {
+          console.error("[subscribe] Welcome email error:", err);
+          return { success: false, error: String(err) };
+        });
+      console.log("[subscribe] Welcome email result:", JSON.stringify(emailResult));
     }
 
     return NextResponse.json({

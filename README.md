@@ -6,6 +6,12 @@
 
 <br/>
 
+<a href="https://github.com/professyzenith/XanthraHorizon">
+  <img src="https://readme-typing-svg.demolab.com?font=Geist+Mono&size=13&duration=3000&pause=1000&color=C9A853&center=true&vCenter=true&multiline=true&width=620&height=45&lines=Daily+Intelligence+Brief+%E2%80%94+AI+Research+%26+Technology+Digest.;8+sources+%C2%B7+Auto-deduped+%C2%B7+Gemini-powered+%C2%B7+Timezone-aware+delivery." alt="Xanthra Horizon" />
+</a>
+
+<br/><br/>
+
 <p>
   <a href="https://nextjs.org"><img alt="Next.js" src="https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=next.js&logoColor=white"/></a>
   <a href="https://www.typescriptlang.org"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white"/></a>
@@ -138,17 +144,17 @@ The cron trigger is separated from the pipeline (`/api/cron` → `/api/send-brie
 
 ## Screenshots
 
-> **Homepage — Live Briefing Preview**
+> **Homepage**
 
-![Homepage screenshot placeholder](https://placehold.co/1200x630/0a0805/c9a853?text=Homepage+Screenshot)
+![Xanthra Horizon Homepage](docs/screenshots/homepage.png)
 
-> **Email Digest**
+> **Live Briefing Feed — News Ticker & Story Cards**
 
-![Email screenshot placeholder](https://placehold.co/600x800/080604/f0ece3?text=Email+Digest+Screenshot)
+![Briefing Section](docs/screenshots/briefing-section.png)
 
-> **Subscription Confirmation**
+> **Mobile View**
 
-![Subscription confirmation placeholder](https://placehold.co/600x400/0a0805/3ecf8e?text=Subscription+Confirmation)
+![Mobile View](docs/screenshots/mobile.png)
 
 ---
 
@@ -694,7 +700,7 @@ Yes. Open `lib/newsFetcher.ts` and add a new entry to the relevant tier array. E
 
 ## Contact
 
-**Pratik Jha** — [@professyzenith](https://github.com/professyzenith) — `professy69@gmail.com`
+**GitHub:** [@professyzenith](https://github.com/professyzenith)
 
 **Repository:** [https://github.com/professyzenith/XanthraHorizon](https://github.com/professyzenith/XanthraHorizon)
 

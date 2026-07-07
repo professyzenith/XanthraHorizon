@@ -103,7 +103,9 @@ export async function POST(req: NextRequest) {
       );
 
     if (upsertError) {
-      console.error("Supabase upsert error:", upsertError);
+      console.error("Supabase upsert error:", JSON.stringify(upsertError, null, 2));
+      console.error("Supabase URL configured:", !!process.env.NEXT_PUBLIC_SUPABASE_URL);
+      console.error("Supabase service key configured:", !!process.env.SUPABASE_SERVICE_ROLE_KEY);
       return NextResponse.json(
         { error: "Failed to save subscription. Please try again." },
         { status: 500 }

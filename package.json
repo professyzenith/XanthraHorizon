@@ -21,12 +21,13 @@
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/xml2js": "^0.4.14",
     "autoprefixer": "^10",
-    "eslint": "^8.57.1",
+    "eslint": "^9",
     "eslint-config-next": "^15.0.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
@@ -35,7 +36,6 @@
   "overrides": {
     "rimraf": ">=4.0.0",
     "glob": ">=10.4.6",
-    "minimatch": ">=9.0.7",
     "inflight": "^1.0.6",
     "next": {
       "postcss": ">=8.5.10"

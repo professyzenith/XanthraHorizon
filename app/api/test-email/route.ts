@@ -1,55 +1,44 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
+import { sendWelcomeEmail } from "@/lib/emailSender";
 
 export async function GET(req: NextRequest) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.RESEND_FROM_EMAIL;
-
-  // Return config info (without exposing full key)
   const config = {
-    apiKeySet: !!apiKey,
-    apiKeyPrefix: apiKey ? apiKey.slice(0, 8) + "..." : "NOT SET",
-    apiKeyLength: apiKey?.length ?? 0,
-    fromEmail: fromEmail ?? "NOT SET",
+    apiKeySet: !!process.env.RESEND_API_KEY,
+    apiKeyPrefix: process.env.RESEND_API_KEY?.slice(0, 8) + "...",
+    apiKeyLength: process.env.RESEND_API_KEY?.length ?? 0,
+    fromEmail: process.env.RESEND_FROM_EMAIL ?? "NOT SET",
+    cronSecretSet: !!process.env.CRON_SECRET,
+    unsubscribeSecretSet: !!process.env.UNSUBSCRIBE_SECRET,
+    appUrl: process.env.NEXT_PUBLIC_APP_URL ?? "NOT SET",
   };
 
-  if (!apiKey) {
-    return NextResponse.json({ error: "RESEND_API_KEY not set", config }, { status: 500 });
-  }
-
-  const resend = new Resend(apiKey);
-
+  // Test unsubscribe token signing
+  let tokenTest: { ok: boolean; error?: string } = { ok: false };
   try {
-    const result = await resend.emails.send({
-      from: `Xanthra Horizon <${fromEmail ?? "onboarding@resend.dev"}>`,
-      to: "professy69@gmail.com",
-      subject: "Xanthra Horizon — Test Email ⚡",
-      html: "<p>This is a test email from Xanthra Horizon. If you see this, Resend is working correctly!</p>",
-    });
-
-    if (result.error) {
-      return NextResponse.json({
-        success: false,
-        config,
-        resendError: {
-          name: result.error.name,
-          message: result.error.message,
-          full: result.error,
-        },
-      }, { status: 400 });
-    }
-
-    return NextResponse.json({
-      success: true,
-      config,
-      emailId: result.data?.id,
-      message: "Test email sent! Check professy69@gmail.com inbox.",
-    });
+    const { signUnsubscribeToken } = await import("@/lib/unsubscribeToken");
+    signUnsubscribeToken("00000000-0000-0000-0000-000000000000");
+    tokenTest = { ok: true };
   } catch (err) {
-    return NextResponse.json({
-      success: false,
-      config,
-      thrownError: err instanceof Error ? err.message : String(err),
-    }, { status: 500 });
+    tokenTest = { ok: false, error: err instanceof Error ? err.message : String(err) };
   }
+
+  // Test full sendWelcomeEmail pipeline to Resend account owner email
+  let emailTest: { ok: boolean; error?: string } = { ok: false };
+  try {
+    const result = await sendWelcomeEmail(
+      "professy69@gmail.com",
+      "00000000-0000-0000-0000-000000000000",
+      "10:00",
+      "Asia/Kolkata"
+    );
+    if (result.success) {
+      emailTest = { ok: true };
+    } else {
+      emailTest = { ok: false, error: result.error };
+    }
+  } catch (err) {
+    emailTest = { ok: false, error: err instanceof Error ? err.message : String(err) };
+  }
+
+  return NextResponse.json({ config, tokenTest, emailTest });
 }

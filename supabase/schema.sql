@@ -51,6 +51,13 @@ CREATE TABLE IF NOT EXISTS articles_seen (
 CREATE INDEX IF NOT EXISTS idx_articles_hash ON articles_seen(hash);
 CREATE INDEX IF NOT EXISTS idx_articles_seen_at ON articles_seen(seen_at);
 
+-- Row Level Security: only service role can read/write articles_seen
+ALTER TABLE articles_seen ENABLE ROW LEVEL SECURITY;
+
+-- Policy: service role has full access (used by backend deduplicator)
+CREATE POLICY "Service role full access" ON articles_seen
+  FOR ALL USING (auth.role() = 'service_role');
+
 -- Auto-clean articles older than 7 days (keeps table small)
 -- Run this periodically via Supabase scheduled functions or pg_cron
 -- DELETE FROM articles_seen WHERE seen_at < NOW() - INTERVAL '7 days';

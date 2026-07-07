@@ -88,6 +88,20 @@ export async function POST(req: NextRequest) {
         });
     }
 
+    // Step 4c: Persist the briefing itself so the website can display it
+    await supabaseAdmin
+      .from("briefings")
+      .insert({
+        date:            briefing.date,
+        executive_brief: briefing.executive_brief,
+        stories:         briefing.stories,
+      })
+      .then(({ error }) => {
+        if (error) console.warn("[send-briefing] briefings insert error:", error.message);
+        else       console.log("[send-briefing] Briefing persisted to DB");
+      });
+
+
     // Step 5: Find subscribers whose local delivery time matches now (within 5 min window)
     const now = new Date();
 

@@ -31,11 +31,15 @@
 
 **[Live Demo](https://xanthrahorizon.vercel.app)** · **[Report a Bug](https://github.com/professyzenith/XanthraHorizon/issues)** · **[CHANGELOG](./CHANGELOG.md)** · **[Contributing](./CONTRIBUTING.md)**
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fprofessyzenith%2FXanthraHorizon&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,RESEND_API_KEY,RESEND_FROM_EMAIL,GEMINI_API_KEY,CRON_SECRET,NEXT_PUBLIC_APP_URL&envDescription=See%20README%20%E2%86%92%20Environment%20Variables%20for%20details&project-name=xanthra-horizon&repository-name=XanthraHorizon)
+
 </div>
 
 ---
 
 ## Why This Exists
+
+> **Stop reading 12 tabs of AI news. Get one email.**
 
 The AI landscape produces dozens of significant developments every day across research labs, product releases, and policy decisions. Following it requires constant monitoring of multiple sources — and without curation, the signal drowns in noise.
 
@@ -47,6 +51,7 @@ Everything runs on free-tier infrastructure. There is no paid service requiremen
 
 ## Table of Contents
 
+- [Quick Start](#quick-start)
 - [Why This Exists](#why-this-exists)
 - [Features](#features)
 - [Architecture](#architecture)
@@ -72,6 +77,37 @@ Everything runs on free-tier infrastructure. There is no paid service requiremen
 - [Acknowledgements](#acknowledgements)
 - [FAQ](#faq)
 - [Contact](#contact)
+
+---
+
+## Quick Start
+
+> Requires Node.js 18+, a Supabase project, a Resend account, and a Google Gemini API key. All free.
+
+```bash
+# 1. Clone and install
+git clone https://github.com/professyzenith/XanthraHorizon.git
+cd XanthraHorizon && npm install
+
+# 2. Configure environment
+cp .env.example .env.local
+# Edit .env.local with your keys (see Environment Variables below)
+
+# 3. Initialize the database
+# Open Supabase SQL Editor and run supabase/schema.sql
+
+# 4. Verify your setup
+curl http://localhost:3000/api/status \
+  -H "Authorization: Bearer YOUR_CRON_SECRET"
+
+# 5. Trigger your first briefing
+curl -X POST http://localhost:3000/api/send-briefing \
+  -H "Authorization: Bearer YOUR_CRON_SECRET"
+```
+
+Or deploy to Vercel in one click (all env vars pre-populated in the form):
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fprofessyzenith%2FXanthraHorizon&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,RESEND_API_KEY,RESEND_FROM_EMAIL,GEMINI_API_KEY,CRON_SECRET,NEXT_PUBLIC_APP_URL&envDescription=See%20README%20%E2%86%92%20Environment%20Variables%20for%20details&project-name=xanthra-horizon&repository-name=XanthraHorizon)
 
 ---
 
@@ -143,7 +179,7 @@ The cron trigger is separated from the pipeline (`/api/cron` → `/api/send-brie
 
 ## Screenshots
 
-> **Homepage**
+> **Homepage — Hero Section**
 
 ![Xanthra Horizon Homepage](docs/screenshots/homepage.png)
 
@@ -154,6 +190,9 @@ The cron trigger is separated from the pipeline (`/api/cron` → `/api/send-brie
 > **Mobile View**
 
 ![Mobile View](docs/screenshots/mobile.png)
+
+> **Email Digest**
+> The daily HTML email sent via Resend. Format: executive brief at top, 7 story cards each with title, source, summary, and a "Why It Matters" callout. See `lib/emailSender.ts` for the full template.
 
 ---
 
@@ -194,6 +233,17 @@ npm install
 
 This creates the `subscribers`, `articles_seen`, and `briefings` tables with Row Level Security policies applied.
 
+### Zero Infrastructure Cost
+
+| Service | Free Tier Limit | Usage in This Project |
+|---|---|---|
+| **Supabase** | 500 MB database, 50,000 rows, 2 GB bandwidth | 3 small tables, grows at ~1 row/day |
+| **Resend** | 3,000 emails/month, 100/day | 1 email per subscriber per day |
+| **Google Gemini** | 1,500 requests/day (Flash) | 1 request per pipeline run |
+| **Vercel Hobby** | 100 GB bandwidth, unlimited deployments | Static site + API routes |
+
+At 100 subscribers sending 1 email/day: **100 emails/day → 3,000/month** — exactly at the Resend free ceiling. Beyond that, upgrade Resend ($20/month for 50,000 emails).
+
 ---
 
 ## Environment Variables
@@ -213,7 +263,7 @@ cp .env.example .env.local
 | `RESEND_FROM_EMAIL` | Yes | Verified sender address in your Resend account |
 | `GEMINI_API_KEY` | Yes | Google Gemini API key from AI Studio |
 | `CRON_SECRET` | Yes | Random 32-character string protecting the pipeline endpoint |
-| `NEXT_PUBLIC_APP_URL` | Yes | Full URL of your deployment (e.g. `https://xanthrahorizon.vercel.app`) |
+| `NEXT_PUBLIC_APP_URL` | Yes | Full URL of your deployment — **must match exactly**, used to generate unsubscribe links. Use `http://localhost:3000` locally. |
 
 ```env
 # Supabase
@@ -419,19 +469,68 @@ All require `Authorization: Bearer <CRON_SECRET>`.
 | `GET /api/test-pipeline` | `GET` | Dry-run pipeline with optional `?skip_ai=1`. No emails sent, no DB writes. |
 | `GET /api/status` | `GET` | Reports which environment variables are configured and subscriber count. |
 
-**Subscribe example:**
+### Request & Response Examples
 
+**Subscribe:**
 ```bash
 curl -X POST https://xanthrahorizon.vercel.app/api/subscribe \
   -H "Content-Type: application/json" \
   -d '{"email":"you@example.com","delivery_time":"08:00","timezone":"Asia/Kolkata"}'
 ```
+```json
+{ "success": true }
+```
 
 **Trigger pipeline manually:**
-
 ```bash
 curl -X POST https://xanthrahorizon.vercel.app/api/send-briefing \
   -H "Authorization: Bearer YOUR_CRON_SECRET"
+```
+```json
+{
+  "success": true,
+  "articlesProcessed": 43,
+  "storiesSelected": 7,
+  "emailsSent": 2,
+  "briefingSaved": true
+}
+```
+
+**Fetch latest briefing:**
+```bash
+curl https://xanthrahorizon.vercel.app/api/latest-briefing
+```
+```json
+{
+  "briefing": {
+    "id": 12,
+    "date": "2024-07-08",
+    "executive_brief": "Today's AI landscape is dominated by...",
+    "stories": [
+      {
+        "title": "OpenAI launches GPT-5",
+        "url": "https://openai.com/...",
+        "source": "OpenAI Blog",
+        "summary": "OpenAI announced...",
+        "why_it_matters": "This raises the capability ceiling...",
+        "score": 41.2
+      }
+    ],
+    "created_at": "2024-07-08T08:00:12.000Z"
+  }
+}
+```
+
+**Error responses:**
+```json
+// 401 Unauthorized (missing or wrong CRON_SECRET)
+{ "error": "Unauthorized" }
+
+// 500 Internal Server Error (pipeline failure)
+{ "error": "Pipeline failed", "detail": "Gemini API returned 429" }
+
+// 404 (no briefing in database yet)
+{ "briefing": null }
 ```
 
 ---
@@ -562,9 +661,9 @@ All 8 RSS feeds are fetched concurrently using `Promise.allSettled`. Individual 
 
 ## Roadmap
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=c9a853,1a140a,0a0805&height=60&section=header" alt="" width="100%" />
-
 Ordered by priority. Community contributions are welcome on any of these.
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=c9a853,1a140a,0a0805&height=60&section=header" alt="" width="100%" />
 
 - [ ] **Subscriber dashboard** — Web interface for managing delivery time, timezone, and preferences without re-subscribing
 - [ ] **Weekly digest mode** — Friday summary of the week's top 15 stories for subscribers who prefer lower frequency
@@ -605,6 +704,8 @@ Contributions are welcome. Read [CONTRIBUTING.md](./CONTRIBUTING.md) for the ful
 - [Vercel](https://vercel.com) — Deployment and edge infrastructure
 - [Tailwind CSS](https://tailwindcss.com) — Styling system
 - [rss-parser](https://github.com/rbren/rss-parser) — RSS feed parsing library
+- [readme-typing-svg](https://github.com/DenverCoder1/readme-typing-svg) — Animated typing SVG for GitHub READMEs
+- [capsule-render](https://github.com/kyechan99/capsule-render) — Animated wave/gradient banner SVGs for GitHub READMEs
 
 ---
 
@@ -681,6 +782,8 @@ Yes. Open `lib/newsFetcher.ts` and add a new entry to the relevant tier array. E
 **Repository:** [https://github.com/professyzenith/XanthraHorizon](https://github.com/professyzenith/XanthraHorizon)
 
 **Live:** [https://xanthrahorizon.vercel.app](https://xanthrahorizon.vercel.app)
+
+**Questions / Bugs:** [Open an issue](https://github.com/professyzenith/XanthraHorizon/issues) — responses within 5 business days.
 
 ---
 

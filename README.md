@@ -3,7 +3,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0a0805,1a140a,c9a853&height=200&text=Xanthra%20Horizon&fontAlign=50&fontColor=c9a853&fontSize=42&desc=Know%20What%20Matters%20Next.&descAlign=50&descAlignY=74&descColor=f0ece3&descSize=18&section=header" alt="Xanthra Horizon — Know What Matters Next." width="100%" />
 
 <a href="https://github.com/professyzenith/XanthraHorizon">
-  <img src="https://readme-typing-svg.demolab.com?font=Geist+Mono&size=13&duration=3000&pause=1000&color=C9A853&center=true&vCenter=true&multiline=true&height=45&lines=Daily+Intelligence+Brief+%E2%80%94+AI+Research+%26+Technology+Digest.;8+sources+%C2%B7+Auto-deduped+%C2%B7+Gemini-powered+%C2%B7+Timezone-aware+delivery." alt="Xanthra Horizon animated feature tagline" width="100%" />
+  <img src="https://readme-typing-svg.demolab.com?font=Geist+Mono&size=13&duration=3000&pause=1000&color=C9A853&center=true&vCenter=true&multiline=true&width=800&height=45&lines=Daily+Intelligence+Brief+%E2%80%94+AI+Research+%26+Technology+Digest.;8+sources+%C2%B7+Auto-deduped+%C2%B7+Gemini-powered+%C2%B7+Timezone-aware+delivery." alt="Xanthra Horizon animated feature tagline" width="100%" />
 </a>
 
 <br/><br/>

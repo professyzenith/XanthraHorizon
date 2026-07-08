@@ -22,6 +22,7 @@
 </p>
 
 <p>
+  <a href="https://github.com/professyzenith/XanthraHorizon/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/professyzenith/XanthraHorizon/actions/workflows/ci.yml/badge.svg"/></a>
   <img alt="License" src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"/>
   <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square"/>
   <img alt="TypeScript Strict" src="https://img.shields.io/badge/TypeScript-Strict-3178C6?style=flat-square&logo=typescript&logoColor=white"/>
@@ -31,7 +32,7 @@
 
 <br/>
 
-**[Live Demo](https://xanthrahorizon.vercel.app)** · **[Report a Bug](https://github.com/professyzenith/XanthraHorizon/issues)** · **[Request a Feature](https://github.com/professyzenith/XanthraHorizon/issues)**
+**[Live Demo](https://xanthrahorizon.vercel.app)** · **[Report a Bug](https://github.com/professyzenith/XanthraHorizon/issues)** · **[CHANGELOG](./CHANGELOG.md)** · **[Contributing](./CONTRIBUTING.md)**
 
 </div>
 
@@ -45,7 +46,7 @@ Xanthra Horizon solves this with a fully automated pipeline: it ingests from 8 c
 
 Everything runs on free-tier infrastructure. There is no paid service requirement.
 
----
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0a0805,1a140a,c9a853&height=60&section=header" alt="" width="100%" />
 
 ## Table of Contents
 
@@ -161,6 +162,10 @@ The cron trigger is separated from the pipeline (`/api/cron` → `/api/send-brie
 ## Live Demo
 
 **Production:** [https://xanthrahorizon.vercel.app](https://xanthrahorizon.vercel.app)
+
+<a href="https://xanthrahorizon.vercel.app">
+  <img src="docs/screenshots/demo.webp" alt="Xanthra Horizon demo — homepage scrolling through live AI briefing" width="100%" />
+</a>
 
 The homepage displays the most recent AI briefing in real time. The `LIVE` indicator in the upper-right of the preview card confirms that live database content has loaded. `PREVIEW` indicates the database has not yet been seeded by a pipeline run.
 
@@ -561,6 +566,8 @@ All 8 RSS feeds are fetched concurrently using `Promise.allSettled`. Individual 
 
 Ordered by priority. Community contributions are welcome on any of these.
 
+<img src="https://capsule-render.vercel.app/api?type=waving&color=c9a853,1a140a,0a0805&height=60&section=footer" alt="" width="100%" />
+
 - [ ] **Subscriber dashboard** — Web interface for managing delivery time, timezone, and preferences without re-subscribing
 - [ ] **Weekly digest mode** — Friday summary of the week's top 15 stories for subscribers who prefer lower frequency
 - [ ] **Topic filtering** — Let subscribers choose categories (Research / Product / Policy / Business) to include or exclude
@@ -709,6 +716,8 @@ Yes. Open `lib/newsFetcher.ts` and add a new entry to the relevant tier array. E
 ---
 
 <div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0a0805,1a140a,c9a853&height=80&section=footer" alt="" width="100%" />
 
 Built with Next.js · Supabase · Resend · Google Gemini · Vercel
 

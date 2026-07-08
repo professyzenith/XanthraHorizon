@@ -1,13 +1,9 @@
 <div align="center">
 
-<h1>Xanthra Horizon</h1>
-
-<p><strong>A self-hosted AI intelligence pipeline that fetches, deduplicates, ranks, and delivers the most important AI developments directly to your subscribers' inboxes — every day, on their schedule.</strong></p>
-
-<br/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0a0805,1a140a,c9a853&height=200&text=Xanthra%20Horizon&fontAlign=50&fontColor=c9a853&fontSize=42&desc=Know%20What%20Matters%20Next.&descAlign=50&descAlignY=74&descColor=f0ece3&descSize=18&section=header" alt="Xanthra Horizon — Know What Matters Next." width="100%" />
 
 <a href="https://github.com/professyzenith/XanthraHorizon">
-  <img src="https://readme-typing-svg.demolab.com?font=Geist+Mono&size=13&duration=3000&pause=1000&color=C9A853&center=true&vCenter=true&multiline=true&width=620&height=45&lines=Daily+Intelligence+Brief+%E2%80%94+AI+Research+%26+Technology+Digest.;8+sources+%C2%B7+Auto-deduped+%C2%B7+Gemini-powered+%C2%B7+Timezone-aware+delivery." alt="Xanthra Horizon" />
+  <img src="https://readme-typing-svg.demolab.com?font=Geist+Mono&size=13&duration=3000&pause=1000&color=C9A853&center=true&vCenter=true&multiline=true&height=45&lines=Daily+Intelligence+Brief+%E2%80%94+AI+Research+%26+Technology+Digest.;8+sources+%C2%B7+Auto-deduped+%C2%B7+Gemini-powered+%C2%B7+Timezone-aware+delivery." alt="Xanthra Horizon animated feature tagline" width="100%" />
 </a>
 
 <br/><br/>
@@ -23,6 +19,7 @@
 
 <p>
   <a href="https://github.com/professyzenith/XanthraHorizon/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/professyzenith/XanthraHorizon/actions/workflows/ci.yml/badge.svg"/></a>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.3.0-c9a853?style=flat-square"/>
   <img alt="License" src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"/>
   <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square"/>
   <img alt="TypeScript Strict" src="https://img.shields.io/badge/TypeScript-Strict-3178C6?style=flat-square&logo=typescript&logoColor=white"/>
@@ -50,6 +47,7 @@ Everything runs on free-tier infrastructure. There is no paid service requiremen
 
 ## Table of Contents
 
+- [Why This Exists](#why-this-exists)
 - [Features](#features)
 - [Architecture](#architecture)
 - [Tech Stack](#tech-stack)
@@ -557,16 +555,16 @@ All 8 RSS feeds are fetched concurrently using `Promise.allSettled`. Individual 
 - All interactive elements have accessible labels and focus states
 - Color contrast ratios meet WCAG AA standards in the dark-mode design
 - External links include `rel="noreferrer"` and open in new tabs with visible indicators
-- Motion-sensitive animations are contained to canvas elements and can be reduced by browser `prefers-reduced-motion` media query
 - Form inputs are labeled and include descriptive `placeholder` text
+- **Known limitation:** The animated header banner, typing SVG, and wave dividers in this README are externally hosted `<img>` sources. GitHub renders them as static images in environments that disable external requests, but they cannot respond to `prefers-reduced-motion` since they are not CSS or JavaScript animations — they are delivered as pre-rendered SVG files. The application UI itself uses canvas-based effects that respect `prefers-reduced-motion`.
 
 ---
 
 ## Roadmap
 
-Ordered by priority. Community contributions are welcome on any of these.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=c9a853,1a140a,0a0805&height=60&section=header" alt="" width="100%" />
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=c9a853,1a140a,0a0805&height=60&section=footer" alt="" width="100%" />
+Ordered by priority. Community contributions are welcome on any of these.
 
 - [ ] **Subscriber dashboard** — Web interface for managing delivery time, timezone, and preferences without re-subscribing
 - [ ] **Weekly digest mode** — Friday summary of the week's top 15 stories for subscribers who prefer lower frequency
@@ -582,42 +580,13 @@ Ordered by priority. Community contributions are welcome on any of these.
 
 ## Contributing
 
-Contributions are welcome. Please read this section before opening a pull request.
+Contributions are welcome. Read [CONTRIBUTING.md](./CONTRIBUTING.md) for the full development setup, branching workflow, commit convention, and code style requirements. All pull requests must pass TypeScript type checking and ESLint with zero warnings before review.
 
 **Good first issues:**
 - Adding a new high-quality RSS source to `lib/newsFetcher.ts`
 - Improving the ranking algorithm in `lib/ranker.ts`
-- Bug fixes with reproduction steps
-- Documentation improvements
-
-**Process:**
-
-```bash
-# 1. Fork the repository and clone your fork
-git clone https://github.com/YOUR_USERNAME/XanthraHorizon.git
-
-# 2. Create a feature branch
-git checkout -b feat/your-feature-name
-
-# 3. Make your changes with conventional commit messages
-git commit -m "feat: add Reuters AI source to news fetcher"
-
-# 4. Push and open a pull request against main
-git push origin feat/your-feature-name
-```
-
-**Commit convention:**
-
-| Prefix | Use |
-|---|---|
-| `feat:` | New feature |
-| `fix:` | Bug fix |
-| `refactor:` | Code change that is not a feature or fix |
-| `docs:` | Documentation only |
-| `chore:` | Build, tooling, or dependency updates |
-| `security:` | Security-related change |
-
-All pull requests must pass TypeScript compilation (`npx tsc --noEmit`) and ESLint (`npx eslint app lib components`).
+- Bug fixes with a clear reproduction case
+- Documentation corrections or additions
 
 ---
 

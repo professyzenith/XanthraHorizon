@@ -19,7 +19,7 @@
 
 <p>
   <a href="https://github.com/professyzenith/XanthraHorizon/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/professyzenith/XanthraHorizon/actions/workflows/ci.yml/badge.svg"/></a>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.3.0-c9a853?style=flat-square"/>
+  <img alt="Version" src="https://img.shields.io/github/v/release/professyzenith/XanthraHorizon?style=flat-square&color=c9a853&label=version"/>
   <img alt="License" src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"/>
   <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square"/>
   <img alt="TypeScript Strict" src="https://img.shields.io/badge/TypeScript-Strict-3178C6?style=flat-square&logo=typescript&logoColor=white"/>

@@ -61,3 +61,25 @@ CREATE POLICY "Service role full access" ON articles_seen
 -- Auto-clean articles older than 7 days (keeps table small)
 -- Run this periodically via Supabase scheduled functions or pg_cron
 -- DELETE FROM articles_seen WHERE seen_at < NOW() - INTERVAL '7 days';
+
+-- ============================================
+-- Support Tickets
+-- ============================================
+CREATE TABLE IF NOT EXISTS support_tickets (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT NOT NULL,
+  category TEXT NOT NULL DEFAULT 'other',
+  subject TEXT NOT NULL,
+  message TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'open',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_support_tickets_email ON support_tickets(email);
+CREATE INDEX IF NOT EXISTS idx_support_tickets_status ON support_tickets(status);
+CREATE INDEX IF NOT EXISTS idx_support_tickets_created ON support_tickets(created_at DESC);
+
+ALTER TABLE support_tickets ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Service role full access" ON support_tickets
+  FOR ALL USING (auth.role() = 'service_role');

@@ -38,3 +38,20 @@ export interface SubscribePayload {
   delivery_time: string;
   timezone: string;
 }
+
+export interface SupportTicket {
+  id: string;
+  email: string;
+  category: "bug" | "delivery" | "feature" | "account" | "other";
+  subject: string;
+  message: string;
+  status: "open" | "in_progress" | "resolved";
+  created_at: string;
+}
+
+export interface SupportPayload {
+  email: string;
+  category: string;
+  subject: string;
+  message: string;
+}

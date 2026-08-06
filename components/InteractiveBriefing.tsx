@@ -244,7 +244,7 @@ export default function InteractiveBriefing() {
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-amber-600 uppercase tracking-[0.1em] mb-1">
-                        Why It Matters
+                        Strategic Impact
                       </p>
                       <p className="text-[12px] text-[#9898b8] leading-relaxed">{story.why}</p>
                     </div>

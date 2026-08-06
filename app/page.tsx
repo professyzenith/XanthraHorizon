@@ -12,16 +12,16 @@ import SupportWidget       from "@/components/SupportWidget";
 
 // ─── Marquee ticker ─────────────────────────────────────────────────────────────
 const TICKER = [
-  { text: "ChatGPT adds memory — your AI now knows you",             tag: "FEATURE",  color: "#c9a853" },
-  { text: "AI matches specialist doctors in diagnosing rare disease", tag: "HEALTH",   color: "#10b981" },
-  { text: "Google unveils AI that watches your screen and helps",     tag: "PRODUCT",  color: "#0f9388" },
-  { text: "Half of Fortune 500 companies now use AI daily",           tag: "BUSINESS", color: "#d4875a" },
-  { text: "OpenAI cuts prices 80% — third reduction this year",       tag: "ECONOMY",  color: "#f43f5e" },
-  { text: "EU AI Act reshapes how 450 million people use technology", tag: "POLICY",   color: "#e8c56d" },
-  { text: "Meta releases AI that works on your phone without internet", tag: "PRODUCT", color: "#0f9388" },
-  { text: "Apple Intelligence arrives on 2 billion devices worldwide", tag: "PRODUCT", color: "#0f9388" },
-  { text: "AI-written code is now 30% of output at major companies",  tag: "WORK",    color: "#d4875a" },
-  { text: "New AI generates a full film from a text description",     tag: "CREATIVE", color: "#ec4899" },
+  { text: "Global markets rally as new trade agreements are finalized", tag: "ECONOMY", color: "#c9a853" },
+  { text: "Breakthrough in quantum computing accelerates drug discovery", tag: "TECH", color: "#10b981" },
+  { text: "Major shift in European energy policy reduces fossil reliance", tag: "POLICY", color: "#0f9388" },
+  { text: "Tech giants face new regulatory scrutiny across 12 nations", tag: "BUSINESS", color: "#d4875a" },
+  { text: "Central banks signal impending rate cuts amid cooling inflation", tag: "FINANCE", color: "#f43f5e" },
+  { text: "Geopolitical tensions disrupt global semiconductor supply chains", tag: "GEOPOLITICS", color: "#e8c56d" },
+  { text: "Renewable energy adoption surpasses historic global milestones", tag: "CLIMATE", color: "#0f9388" },
+  { text: "Artificial Intelligence reshapes the future of modern warfare", tag: "DEFENSE", color: "#d4875a" },
+  { text: "Pioneering biotech startup secures record-breaking funding round", tag: "STARTUPS", color: "#10b981" },
+  { text: "Historic demographic shifts alter global workforce dynamics", tag: "SOCIETY", color: "#c9a853" },
 ];
 
 // ─── Problem / Solution comparison ──────────────────────────────────────────────
@@ -45,12 +45,12 @@ const NEW_WAY = [
 
 // ─── Source logos ────────────────────────────────────────────────────────────────
 const SOURCES = [
-  { n: "OpenAI",     c: "#10b981" },
-  { n: "Google AI",  c: "#0f9388" },
-  { n: "Reuters",    c: "#c9a853" },
-  { n: "BBC Tech",   c: "#d4875a" },
-  { n: "TechCrunch", c: "#e8c56d" },
-  { n: "Meta AI",    c: "#f43f5e" },
+  { n: "Reuters",      c: "#c9a853" },
+  { n: "Bloomberg",    c: "#0f9388" },
+  { n: "AP News",      c: "#10b981" },
+  { n: "Wall St. Journal", c: "#d4875a" },
+  { n: "Financial Times", c: "#e8c56d" },
+  { n: "The Economist", c: "#f43f5e" },
 ];
 
 export default function HomePage() {
@@ -210,7 +210,7 @@ export default function HomePage() {
               <p className="text-[11px] text-[#52473a] mb-2">Reuters · 2h ago</p>
               <div className="h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent mb-2" />
               <p className="text-[10px] text-[#52473a] leading-relaxed line-clamp-2">
-                Why it matters: Supply chains across tech and manufacturing will face immediate restructuring.
+                Strategic impact: Supply chains across tech and manufacturing will face immediate restructuring.
               </p>
             </div>
           </AnimatedSection>
@@ -280,7 +280,7 @@ export default function HomePage() {
         <AnimatedSection className="mb-16">
           <div className="max-w-xl">
             <span className="font-mono text-[10px] text-teal-500 tracking-[0.2em] uppercase block mb-4">
-              Why It Exists
+              The Strategic Gap
             </span>
             <h2 className="text-4xl sm:text-5xl font-bold text-[#f0ece3] tracking-[-0.03em] leading-tight mb-5">
               Global intelligence is fragmented.<br />

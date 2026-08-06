@@ -37,7 +37,7 @@ const STEPS = [
     num: "04",
     title: "Synthesize",
     subtitle: "Explained clearly, in seconds",
-    desc: "Artificial intelligence reads all 7 stories and writes what you actually need: a plain-English summary of what happened, a paragraph on why it matters to you personally, and a big-picture overview of what the day means.",
+    desc: "Artificial intelligence reads all 7 stories and writes what you actually need: a plain-English summary of what happened, a paragraph on the strategic impact, and a big-picture overview of what the day means.",
     color: "#0f9388",
     glow: "rgba(15,147,136,0.35)",
     metric: "<2s",

@@ -59,10 +59,10 @@ function buildWelcomeHTML(
                 Thank you for subscribing to <strong>Xanthra Horizon</strong>. You are now plugged into the global nervous system of premium intelligence.
               </p>
               <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#555555;">
-                So what's next? Your customized daily intelligence brief is locked in for <strong>\${safeTime} (\${safeTz})</strong>. Before your first brief arrives, be sure to whitelist this email address so you never miss an update.
+                So what&apos;s next? Your customized daily intelligence brief is locked in for <strong>${safeTime} (${safeTz})</strong>. Before your first brief arrives, be sure to whitelist this email address so you never miss an update.
               </p>
               <div style="text-align:center;margin-top:32px;">
-                <a href="\${appUrl}" style="background-color:#0f9388;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:4px;font-size:16px;font-weight:600;display:inline-block;">View the Horizon</a>
+                <a href="${appUrl}" style="background-color:#0f9388;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:4px;font-size:16px;font-weight:600;display:inline-block;">View the Horizon</a>
               </div>
             </td></tr>
           </table>
@@ -71,17 +71,17 @@ function buildWelcomeHTML(
         <!-- Questions Section -->
         <tr><td style="padding:40px 30px 20px;text-align:center;">
           <h3 style="margin:0 0 8px;font-size:16px;font-weight:600;color:#333333;">Have questions?</h3>
-          <a href="\${appUrl}" style="color:#0f9388;text-decoration:none;font-weight:600;font-size:14px;">Contact our team</a>
+          <a href="${appUrl}" style="color:#0f9388;text-decoration:none;font-weight:600;font-size:14px;">Contact our team</a>
           <p style="margin:8px 0 0;font-size:14px;color:#777777;">We are standing by and ready to help.</p>
         </td></tr>
 
         <!-- Footer Section -->
         <tr><td style="padding:30px 30px 40px;text-align:center;border-top:1px solid #eaeaea;margin-top:20px;">
           <h4 style="margin:0 0 4px;font-size:14px;font-weight:700;color:#333333;">Xanthra Horizon</h4>
-          <a href="\${appUrl}" style="color:#0f9388;text-decoration:none;font-size:14px;">xanthra.space</a>
+          <a href="${appUrl}" style="color:#0f9388;text-decoration:none;font-size:14px;">xanthra.space</a>
           <p style="margin:24px 0 0;font-size:12px;color:#a0a0a0;">
             No longer want to receive these emails?<br/>
-            <a href="\${safeUnsub}" style="color:#a0a0a0;text-decoration:underline;">Unsubscribe securely</a>
+            <a href="${safeUnsub}" style="color:#a0a0a0;text-decoration:underline;">Unsubscribe securely</a>
           </p>
         </td></tr>
 

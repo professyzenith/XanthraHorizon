@@ -9,6 +9,7 @@ function makeArticle(overrides: Partial<NewsArticle> = {}): NewsArticle {
     published_at: new Date().toISOString(),
     description: "OpenAI has announced GPT-5, its most capable model yet.",
     hash: "abc123",
+    topic: "ai_tech",
     ...overrides,
   };
 }

@@ -9,6 +9,7 @@ function makeArticle(overrides: Partial<NewsArticle> = {}): NewsArticle {
     published_at: new Date().toISOString(),
     description: "A description of the article.",
     hash: "abc123",
+    topic: "ai_tech",
     ...overrides,
   };
 }

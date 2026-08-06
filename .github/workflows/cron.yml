@@ -1,0 +1,17 @@
+name: Daily Intelligence Briefing Cron
+
+on:
+  schedule:
+    # Run at 13:30 UTC every day
+    - cron: '30 13 * * *'
+  # Allow manual triggering from GitHub UI
+  workflow_dispatch:
+
+jobs:
+  trigger-cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Cron Route
+        run: |
+          curl -s -X GET "${{ secrets.APP_URL }}/api/cron" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"

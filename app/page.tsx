@@ -461,8 +461,18 @@ export default function HomePage() {
                 lifting a finger.
               </p>
 
-              <div className="max-w-md mx-auto">
-                <SubscribeForm />
+              <div className="flex justify-center">
+                <a href="#subscribe" data-hover="true"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-semibold text-[15px] text-[#1a1208] transition-all duration-200 hover:scale-[1.02]"
+                  style={{
+                    background: "linear-gradient(135deg, #c9a853 0%, #d4875a 50%, #c09040 100%)",
+                    boxShadow: "0 0 0 1px rgba(201,168,83,0.5), 0 12px 40px rgba(212,135,90,0.25)",
+                  }}>
+                  Gain Access
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </a>
               </div>
             </div>
           </div>

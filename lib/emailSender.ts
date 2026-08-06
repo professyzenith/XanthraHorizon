@@ -23,112 +23,71 @@ function buildWelcomeHTML(
   const safeTime  = htmlEscape(deliveryTime);
   const safeTz    = htmlEscape(timezone);
   const safeUnsub = htmlEscape(unsubscribeUrl);
-
-  const items = [
-    ["01", "7 Stories, Ranked by Impact", "Not a link dump. Real summaries with signal, context, and consequence."],
-    ["02", "Why It Matters — For Every Story", "Strategic significance, explained for people who need to understand — not just know."],
-    ["03", "Global AI Intelligence", "Sourced from OpenAI, Anthropic, DeepMind, Reuters — primary filings, not aggregators."],
-    ["04", "7 Minutes. Nothing Superfluous.", "Built for time-scarce professionals. Every word earns its place."],
-  ];
-
-  const itemRows = items.map(([num, title, desc]) => `
-    <tr><td style="padding:0 0 28px 0;">
-      <table role="presentation" cellpadding="0" cellspacing="0" width="100%"><tr>
-        <td width="3" bgcolor="#c9a853" style="background-color:#c9a853;font-size:0;line-height:0;">&nbsp;</td>
-        <td style="padding:2px 0 2px 20px;">
-          <p style="margin:0 0 3px;font-family:'Courier New',Courier,monospace;font-size:9px;font-weight:700;letter-spacing:0.16em;color:#c9a853;">${num}</p>
-          <p style="margin:0 0 6px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;color:#f0ece3;letter-spacing:-0.01em;">${title}</p>
-          <p style="margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,Helvetica,sans-serif;font-size:13px;color:#4a3c2c;line-height:1.72;">${desc}</p>
-        </td>
-      </tr></table>
-    </td></tr>`).join("");
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://www.xanthra.space";
 
   return `<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Welcome to Xanthra Horizon</title>
 </head>
-<body style="margin:0;padding:0;background-color:#060402;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
+<body style="margin:0;padding:0;background-color:#0f9388;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#0f9388;padding:40px 20px;">
+    <tr><td align="center">
+      <!-- Main Email Container -->
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.1);">
+        
+        <!-- Header Section -->
+        <tr><td style="padding:40px 20px 20px;text-align:center;">
+          <h1 style="margin:0;font-size:26px;font-weight:800;color:#c9a853;letter-spacing:1px;text-transform:uppercase;">Xanthra</h1>
+          <h2 style="margin:16px 0 0;font-size:22px;font-weight:600;color:#333333;">Welcome to the Horizon!</h2>
+        </td></tr>
 
-<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#060402;">
-<tr><td align="center" style="padding:52px 16px 64px;">
+        <!-- Graphic -->
+        <tr><td style="padding:0 20px 30px;text-align:center;">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="120" height="120" align="center" style="margin:0 auto;background-color:#f9fbfb;border-radius:60px;border:1px solid #eaeaea;">
+            <tr><td align="center" valign="middle" style="font-size:50px;line-height:120px;text-align:center;">🌍</td></tr>
+          </table>
+        </td></tr>
 
-  <!-- ═══ FULL GOLD-BORDERED CARD ═══ -->
-  <table role="presentation" cellpadding="0" cellspacing="0" width="580" style="max-width:580px;width:100%;border:1px solid #c9a853;">
+        <!-- Inner Content Card -->
+        <tr><td style="padding:0 30px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#ffffff;border:1px solid #eaeaea;border-radius:4px;padding:32px;">
+            <tr><td>
+              <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#555555;">
+                Thank you for subscribing to <strong>Xanthra Horizon</strong>. You are now plugged into the global nervous system of premium intelligence.
+              </p>
+              <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#555555;">
+                So what's next? Your customized daily intelligence brief is locked in for <strong>\${safeTime} (\${safeTz})</strong>. Before your first brief arrives, be sure to whitelist this email address so you never miss an update.
+              </p>
+              <div style="text-align:center;margin-top:32px;">
+                <a href="\${appUrl}" style="background-color:#0f9388;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:4px;font-size:16px;font-weight:600;display:inline-block;">View the Horizon</a>
+              </div>
+            </td></tr>
+          </table>
+        </td></tr>
 
-    <!-- BRAND HEADER -->
-    <tr><td style="background-color:#0e0c09;padding:18px 36px;border-bottom:1px solid #241d10;">
-      <table role="presentation" cellpadding="0" cellspacing="0" width="100%"><tr>
-        <td align="left"><span style="font-family:'Courier New',Courier,monospace;font-size:10px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:#c9a853;">XANTHRA HORIZON</span></td>
-        <td align="right"><span style="font-family:'Courier New',Courier,monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#241d10;">Intelligence Brief</span></td>
-      </tr></table>
-    </td></tr>
+        <!-- Questions Section -->
+        <tr><td style="padding:40px 30px 20px;text-align:center;">
+          <h3 style="margin:0 0 8px;font-size:16px;font-weight:600;color:#333333;">Have questions?</h3>
+          <a href="\${appUrl}" style="color:#0f9388;text-decoration:none;font-weight:600;font-size:14px;">Contact our team</a>
+          <p style="margin:8px 0 0;font-size:14px;color:#777777;">We are standing by and ready to help.</p>
+        </td></tr>
 
-    <!-- HERO -->
-    <tr><td style="background-color:#0a0806;padding:76px 48px 68px;text-align:center;">
-      <!-- Diamond accent -->
-      <p style="margin:0 0 24px;font-size:20px;color:#c9a853;line-height:1;">&#9670;</p>
-      <!-- Headline -->
-      <h1 style="margin:0;font-family:Georgia,'Times New Roman',TimesNewRoman,serif;font-size:68px;font-weight:700;color:#f5f0e8;letter-spacing:-0.03em;line-height:1.05;">You&apos;re In.</h1>
-      <!-- Centered gold rule -->
-      <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:28px auto 0;"><tr>
-        <td width="72" height="2" bgcolor="#c9a853" style="background-color:#c9a853;font-size:0;line-height:0;">&nbsp;</td>
-      </tr></table>
-      <!-- Subtitle -->
-      <p style="margin:24px 0 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,Helvetica,sans-serif;font-size:16px;color:#5a4e3c;line-height:1.75;">Welcome to Xanthra Horizon &mdash;<br>the intelligence brief that finds you.</p>
-    </td></tr>
+        <!-- Footer Section -->
+        <tr><td style="padding:30px 30px 40px;text-align:center;border-top:1px solid #eaeaea;margin-top:20px;">
+          <h4 style="margin:0 0 4px;font-size:14px;font-weight:700;color:#333333;">Xanthra Horizon</h4>
+          <a href="\${appUrl}" style="color:#0f9388;text-decoration:none;font-size:14px;">xanthra.space</a>
+          <p style="margin:24px 0 0;font-size:12px;color:#a0a0a0;">
+            No longer want to receive these emails?<br/>
+            <a href="\${safeUnsub}" style="color:#a0a0a0;text-decoration:underline;">Unsubscribe securely</a>
+          </p>
+        </td></tr>
 
-    <!-- SUBTITLE STRIP -->
-    <tr><td style="background-color:#0c0a07;padding:16px 36px;text-align:center;border-top:1px solid #1e1912;border-bottom:1px solid #1e1912;">
-      <p style="margin:0;font-family:'Courier New',Courier,monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#3a3020;">Subscription Confirmed &middot; First Edition Arriving Soon</p>
-    </td></tr>
-
-    <!-- SCHEDULE -->
-    <tr><td style="background-color:#080604;padding:40px 36px;">
-      <p style="margin:0 0 22px;font-family:'Courier New',Courier,monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#2a2010;">Your Dispatch Arrives At</p>
-      <table role="presentation" cellpadding="0" cellspacing="0" width="100%"><tr>
-        <td valign="bottom">
-          <p style="margin:0;font-family:Georgia,'Times New Roman',TimesNewRoman,serif;font-size:56px;font-weight:700;color:#c9a853;letter-spacing:-0.025em;line-height:1;">${safeTime}</p>
-        </td>
-        <td align="right" valign="bottom" style="padding-bottom:6px;">
-          <p style="margin:0 0 4px;font-family:'Courier New',Courier,monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#2a2010;">Time Zone</p>
-          <p style="margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,Helvetica,sans-serif;font-size:15px;font-weight:600;color:#7a6c56;">${safeTz}</p>
-        </td>
-      </tr></table>
-    </td></tr>
-
-    <!-- THICK GOLD SEPARATOR -->
-    <tr><td height="2" bgcolor="#c9a853" style="background-color:#c9a853;font-size:0;line-height:0;">&nbsp;</td></tr>
-
-    <!-- WHAT'S INSIDE -->
-    <tr><td style="background-color:#0e0c09;padding:44px 36px 16px;">
-      <p style="margin:0 0 36px;font-family:'Courier New',Courier,monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#2a2010;">Inside Every Edition</p>
-      <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-        ${itemRows}
       </table>
     </td></tr>
-
-    <!-- CLOSING DISPATCH LINE -->
-    <tr><td style="background-color:#080604;padding:24px 36px;text-align:center;border-top:1px solid #1e1912;border-bottom:1px solid #1e1912;">
-      <p style="margin:0;font-family:'Courier New',Courier,monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#3a3020;">First Dispatch &mdash; ${safeTime} &middot; ${safeTz}</p>
-    </td></tr>
-
-    <!-- FOOTER (inside the gold border frame) -->
-    <tr><td style="background-color:#0a0806;padding:24px 36px 28px;text-align:center;">
-      <p style="margin:0 0 8px;font-family:Georgia,'Times New Roman',TimesNewRoman,serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#2a2010;">Xanthra Horizon</p>
-      <p style="margin:0 0 14px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,Helvetica,sans-serif;font-size:11px;color:#1e190f;line-height:1.6;">Free forever &middot; No ads &middot; No tracking</p>
-      <a href="${safeUnsub}" style="font-family:'Courier New',Courier,monospace;font-size:9px;color:#2a2010;text-decoration:underline;letter-spacing:0.14em;text-transform:uppercase;">UNSUBSCRIBE</a>
-    </td></tr>
-
   </table>
-  <!-- ═══ END CARD ═══ -->
-
-</td></tr>
-</table>
-
 </body>
 </html>`;
 }

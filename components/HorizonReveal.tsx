@@ -287,6 +287,7 @@ export default function HorizonReveal() {
     function finish() {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", resize);
+      window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOvf;
       document.documentElement.classList.add("horizon-revealed");
       gsap.to(overlay, {
@@ -392,12 +393,12 @@ export default function HorizonReveal() {
     tl.to({}, { duration: 0.70 }, 4.35);
 
     /* ── Skip handler ─────────────────────────────────────────────────── */
-    function skip() { tlRef.current?.kill(); tlRef.current = null; finish(); }
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" || e.key === " " || e.key === "Enter") {
         e.preventDefault(); skip();
       }
     };
+    function skip() { tlRef.current?.kill(); tlRef.current = null; finish(); }
     window.addEventListener("keydown", onKey);
     let armed = false;
     const arm  = setTimeout(() => {

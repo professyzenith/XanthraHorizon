@@ -152,10 +152,9 @@ export default function SignatureSection() {
         </div>
 
         {/* Sub copy */}
-        <p className="text-lg sm:text-xl text-[#6b6b8a] max-w-xl mx-auto font-light leading-relaxed"
+        <p className="text-[#6b5f4a] font-light max-w-sm mx-auto leading-relaxed"
           style={{ opacity: visible ? 1 : 0, transition: "opacity 0.8s ease 0.7s" }}>
-          While you were living your life, Xanthra Horizon was watching the entire AI world.
-          <br />Every development ranked, explained, and waiting in your inbox.
+          While you were living your life, Xanthra Horizon was watching the entire world.
         </p>
       </div>
     </section>

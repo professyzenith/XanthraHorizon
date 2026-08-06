@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 const STEPS = [
   {
     num: "01",
-    title: "Ingest",
+    title: "1. The Ingestion Engine",
     subtitle: "Hundreds of sources, every 24 hours",
-    desc: "Every morning before you wake, our pipeline crawls the world's top AI sources — company announcements, major news outlets, research publications, and community discussions. Hundreds of articles collected before you've had your first coffee.",
+    desc: "Every morning before you wake, our pipeline crawls the world's top intelligence sources — news outlets, research publications, and geopolitical bulletins. Hundreds of articles collected before you've had your first coffee.",
+    icon: "📡",
     color: "#c9a853",
     glow: "rgba(201,168,83,0.35)",
     metric: "600+ articles",

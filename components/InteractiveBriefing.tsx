@@ -64,60 +64,60 @@ function timeAgo(dateStr: string): string {
 const DEMO_STORIES: DisplayStory[] = [
   {
     id: 1,
-    tag: "Feature",
-    tagColor: "text-violet-400 bg-violet-400/10 border-violet-400/20",
-    dot: "bg-violet-500",
-    source: "OpenAI",
-    time: "2h ago",
-    title: "ChatGPT Now Remembers Everything About You",
-    summary:
-      "OpenAI has rolled out persistent memory to ChatGPT. It now remembers your name, preferences, past topics, and personal context — automatically, across every future conversation. You can view, edit, or delete what it knows at any time.",
-    why: "AI just stopped being a search engine and started being a real personal assistant. Every conversation from now builds on the last. The more you use it, the more genuinely useful it becomes — for anyone, no technical knowledge required.",
-    url: "https://openai.com/blog",
-  },
-  {
-    id: 2,
-    tag: "Health",
-    tagColor: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
-    dot: "bg-emerald-500",
-    source: "The Lancet",
-    time: "5h ago",
-    title: "AI Matches Specialist Doctors in Diagnosing Rare Diseases",
-    summary:
-      "A peer-reviewed study finds AI can diagnose rare conditions with accuracy matching specialist physicians. Tested across 50,000 patient cases in 12 countries, the system performed at or above specialist level in 94% of scenarios.",
-    why: "This isn't science fiction — it's a published clinical study. Specialist-level medical knowledge is becoming universally accessible.",
-    url: "https://www.thelancet.com",
-  },
-  {
-    id: 3,
-    tag: "Product",
-    tagColor: "text-cyan-400 bg-cyan-400/10 border-cyan-400/20",
-    dot: "bg-cyan-500",
-    source: "Google",
-    time: "8h ago",
-    title: "Google's AI Can Now See Your Screen and Help in Real Time",
-    summary:
-      "Google unveiled Project Astra — an AI that watches what's on your screen or phone camera and responds naturally to what it sees. Ask it to explain, fix, or guide you through anything.",
-    why: "AI just became a co-pilot for everyday life. Whether you're cooking, navigating unfamiliar software, or understanding a confusing document — help is one sentence away.",
-    url: "https://deepmind.google",
-  },
-  {
-    id: 4,
-    tag: "Work",
+    tag: "Economy",
     tagColor: "text-amber-400 bg-amber-400/10 border-amber-400/20",
     dot: "bg-amber-500",
     source: "Reuters",
-    time: "11h ago",
-    title: "Half of All Companies Now Use AI for Daily Decisions",
+    time: "2h ago",
+    title: "Global Markets Shift as New Trade Agreements are Finalized",
     summary:
-      "A global survey of 10,000 businesses across 40 countries finds 51% now rely on AI tools every day for writing, analysis, customer service, hiring, and financial decisions.",
-    why: "AI literacy is becoming the new basic workplace skill — like email was in 2000. Companies using AI effectively are pulling ahead.",
+      "Major economic powers have formally ratified a comprehensive new trade framework, fundamentally altering tariffs and import quotas across technology, agriculture, and manufacturing sectors.",
+    why: "Supply chains across tech and manufacturing will face immediate restructuring. Companies heavily reliant on cross-border materials must pivot strategies within the quarter.",
     url: "https://reuters.com",
+  },
+  {
+    id: 2,
+    tag: "Geopolitics",
+    tagColor: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+    dot: "bg-emerald-500",
+    source: "Foreign Affairs",
+    time: "5h ago",
+    title: "Diplomatic Realignment in the Indo-Pacific Region",
+    summary:
+      "A surprise bilateral summit has concluded with sweeping defense and economic pacts, shifting historical alliances and creating a new strategic counter-balance in the region.",
+    why: "This realignment directly impacts global shipping lanes and maritime security, forcing multinational corporations to reassess their regional headquarters and operational risks.",
+    url: "https://foreignaffairs.com",
+  },
+  {
+    id: 3,
+    tag: "Tech",
+    tagColor: "text-cyan-400 bg-cyan-400/10 border-cyan-400/20",
+    dot: "bg-cyan-500",
+    source: "Bloomberg",
+    time: "8h ago",
+    title: "Breakthrough in Quantum Computing Architecture",
+    summary:
+      "Researchers have successfully demonstrated fault-tolerant quantum operations at scale, overcoming a critical barrier that has held back commercial viability for decades.",
+    why: "Current cryptographic standards will eventually be rendered obsolete. Financial institutions and intelligence agencies are now accelerating their transition to quantum-safe protocols.",
+    url: "https://bloomberg.com",
+  },
+  {
+    id: 4,
+    tag: "Policy",
+    tagColor: "text-amber-400 bg-amber-400/10 border-amber-400/20",
+    dot: "bg-amber-500",
+    source: "Financial Times",
+    time: "11h ago",
+    title: "Unprecedented Global Antitrust Action Against Big Tech",
+    summary:
+      "Regulators across the EU, US, and UK have simultaneously announced coordinated antitrust frameworks targeting monopolistic practices in cloud infrastructure and digital advertising.",
+    why: "This represents a synchronized regulatory offensive rather than fragmented regional actions, likely forcing major divestitures and fundamentally altering the business models of tech giants.",
+    url: "https://ft.com",
   },
 ];
 
 const DEMO_BRIEF =
-  "AI is moving from capability to daily reality — memory, healthcare, screen awareness, and the workplace are all crossing a threshold at once. Today's briefing covers four developments every person should know about.";
+  "Global markets, geopolitics, technology, and regulatory policy are experiencing synchronized shifts. Today's briefing covers four macro developments that will dictate the strategic agenda for the upcoming quarter.";
 
 // ─── Component ────────────────────────────────────────────────────────────────
 

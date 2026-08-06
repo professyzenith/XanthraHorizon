@@ -20,14 +20,16 @@ interface MetricItem {
 }
 
 const LIVE_FEEDS: FeedItem[] = [
-  { id: 1, source: "OpenAI",      label: "ChatGPT memory feature now live for all users",          type: "FEATURE",  color: "#10b981", delay: 0 },
-  { id: 2, source: "Reuters",     label: "51% of companies now use AI for daily decisions",         type: "BUSINESS", color: "#6366f1", delay: 1200 },
-  { id: 3, source: "Google",      label: "Project Astra: AI that sees your screen in real time",    type: "PRODUCT",  color: "#a78bfa", delay: 2600 },
-  { id: 4, source: "The Lancet",  label: "AI matches specialists in diagnosing rare diseases",       type: "HEALTH",   color: "#22d3ee", delay: 4000 },
-  { id: 5, source: "BBC Tech",    label: "EU AI Act comes into force across 27 countries",          type: "POLICY",   color: "#f59e0b", delay: 5200 },
-  { id: 6, source: "TechCrunch",  label: "OpenAI cuts API prices 80% — third reduction in a year", type: "ECONOMY",  color: "#f43f5e", delay: 6400 },
-  { id: 7, source: "Meta",        label: "Llama 4 released — runs on a phone, no internet needed", type: "PRODUCT",  color: "#10b981", delay: 7600 },
-  { id: 8, source: "Apple",       label: "Apple Intelligence now active on 2 billion devices",      type: "PRODUCT",  color: "#6366f1", delay: 8800 },
+  { id: 1, source: "Bloomberg",   label: "Global markets rally amid finalized trade agreements",   type: "ECONOMY",  color: "#10b981", delay: 0 },
+  { id: 2, source: "Reuters",     label: "Tech giants face unprecedented coordinated antitrust action", type: "BUSINESS", color: "#6366f1", delay: 1200 },
+  { id: 3, source: "WSJ",         label: "Central banks signal rate cuts following inflation data",  type: "FINANCE",  color: "#a78bfa", delay: 2600 },
+  { id: 4, source: "Economist",   label: "Diplomatic realignment shakes up Indo-Pacific strategy", type: "GEOPOLITICS",color: "#22d3ee", delay: 4000 },
+  { id: 5, source: "FT",          label: "Quantum computing breakthrough accelerates cryptography shift",type: "TECH",     color: "#f59e0b", delay: 5200 },
+  { id: 6, source: "AP News",     label: "Renewable energy adoption hits historic milestone globally", type: "CLIMATE",  color: "#f43f5e", delay: 6400 },
+  { id: 7, source: "Reuters",     label: "Global semiconductor supply chains face new disruptions",  type: "LOGISTICS",color: "#10b981", delay: 7600 },
+  { id: 8, source: "Bloomberg",   label: "Record-breaking startup funding revitalizes biotech sector",type: "STARTUPS", color: "#6366f1", delay: 8800 },
+  { id: 9, source: "WSJ",         label: "Demographic shifts fundamentally alter workforce dynamics",  type: "SOCIETY",  color: "#a78bfa", delay: 10000 },
+  { id: 10,source:"Economist",    label: "European energy policy pivots sharply from fossil fuels",  type: "POLICY",   color: "#22d3ee", delay: 11200 },
 ];
 
 const METRICS: MetricItem[] = [

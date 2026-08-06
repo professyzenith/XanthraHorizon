@@ -22,14 +22,14 @@ const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v
    leading dot until the signal accelerates out of view.
    ──────────────────────────────────────────────────────────────────────────── */
 const SIG_DATA = [
-  { label: "NVIDIA",        sx: 0.08,  sy: 0.16 },
-  { label: "OpenAI",        sx: 0.85,  sy: 0.10 },
-  { label: "Anthropic",     sx: 0.20,  sy: 0.29 },
-  { label: "Robotics",      sx: 0.90,  sy: 0.22 },
-  { label: "Quantum",       sx: 0.04,  sy: 0.42 },
-  { label: "AI Research",   sx: 0.76,  sy: 0.35 },
-  { label: "Breakthroughs", sx: 0.46,  sy: 0.12 },
-  { label: "Startups",      sx: 0.63,  sy: 0.46 },
+  { label: "Reuters",       sx: 0.08,  sy: 0.16 },
+  { label: "Bloomberg",     sx: 0.85,  sy: 0.10 },
+  { label: "WSJ",           sx: 0.20,  sy: 0.29 },
+  { label: "The Economist", sx: 0.90,  sy: 0.22 },
+  { label: "Financial Times", sx: 0.04,  sy: 0.42 },
+  { label: "AP News",       sx: 0.76,  sy: 0.35 },
+  { label: "Global Intel",  sx: 0.46,  sy: 0.12 },
+  { label: "Geopolitics",   sx: 0.63,  sy: 0.46 },
 ] as const;
 
 /* Start times (seconds) for each signal — slightly staggered for variety */

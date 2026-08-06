@@ -33,7 +33,7 @@ function buildWelcomeHTML(
   <title>Welcome to Xanthra Horizon</title>
 </head>
 <body style="margin:0;padding:0;background-color:#0f9388;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
-  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#0f9388;padding:40px 20px;">
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" background="${appUrl}/email-bg-pattern.png" style="background-color:#0f9388;background-image:url('${appUrl}/email-bg-pattern.png');background-repeat:repeat;padding:40px 20px;">
     <tr><td align="center">
       <!-- Main Email Container -->
       <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;background-color:#ffffff;border-radius:4px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.15);">

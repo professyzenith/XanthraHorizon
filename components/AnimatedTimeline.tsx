@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 const STEPS = [
   {
     num: "01",
-    title: "1. The Ingestion Engine",
+    title: "Ingest",
     subtitle: "Hundreds of sources, every 24 hours",
     desc: "Every morning before you wake, our system crawls the world's top intelligence sources — news outlets, research publications, and geopolitical bulletins. Hundreds of articles collected before you've had your first coffee.",
     icon: "📡",

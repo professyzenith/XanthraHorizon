@@ -37,10 +37,27 @@ export default function NetworkOrb() {
         y: (e.clientY - rect.top)  * scaleY,
       };
     }
+    
+    function onTouchMove(e: TouchEvent) {
+      if (e.touches.length > 0) {
+        const rect = canvas!.getBoundingClientRect();
+        const scaleX = W / rect.width;
+        const scaleY = H / rect.height;
+        mouse.current = {
+          x: (e.touches[0].clientX - rect.left) * scaleX,
+          y: (e.touches[0].clientY - rect.top)  * scaleY,
+        };
+      }
+    }
+
     function onMouseLeave() { mouse.current = { x: -999, y: -999 }; }
 
     canvas.addEventListener("mousemove", onMouseMove);
     canvas.addEventListener("mouseleave", onMouseLeave);
+    canvas.addEventListener("touchmove", onTouchMove, { passive: true });
+    canvas.addEventListener("touchstart", onTouchMove, { passive: true });
+    canvas.addEventListener("touchend", onMouseLeave);
+    canvas.addEventListener("touchcancel", onMouseLeave);
 
     function draw() {
       ctx!.clearRect(0, 0, W, H);
@@ -166,6 +183,10 @@ export default function NetworkOrb() {
       cancelAnimationFrame(animId);
       canvas?.removeEventListener("mousemove", onMouseMove);
       canvas?.removeEventListener("mouseleave", onMouseLeave);
+      canvas?.removeEventListener("touchmove", onTouchMove);
+      canvas?.removeEventListener("touchstart", onTouchMove);
+      canvas?.removeEventListener("touchend", onMouseLeave);
+      canvas?.removeEventListener("touchcancel", onMouseLeave);
     };
   }, []);
 

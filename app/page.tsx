@@ -26,21 +26,21 @@ const TICKER = [
 
 // ─── Problem / Solution comparison ──────────────────────────────────────────────
 const OLD_WAY = [
-  "Check Twitter and Reddit for AI news",
-  "Open 4–6 different newsletters",
-  "Watch YouTube explainer videos",
-  "Browse LinkedIn posts",
-  "Visit company blogs one by one",
-  "45 minutes later — still unsure what matters",
+  "Scour fragmented sources for Tech, Geopolitics, and Business",
+  "Endure sensationalized clickbait and SEO farms",
+  "Try to piece together the global puzzle yourself",
+  "Waste time on biased, unverified opinions",
+  "Feel overwhelmed by irrelevant noise",
+  "45 minutes later — still unsure what actually matters",
 ];
 
 const NEW_WAY = [
-  "One email at the time you choose",
-  "7 stories, ranked by actual importance",
-  "Every story explained in plain English",
-  "Know exactly what happened and why it matters",
-  "No ads, no scrolling, no noise",
-  "High signal, zero noise — takes 7 minutes to read",
+  "One personalized briefing at your exact local time",
+  "Only 100% authentic, verified sources (Reuters, BBC, AP)",
+  "Critical stories curated across your chosen topics",
+  "Actionable insights: what happened & why it matters",
+  "Zero ads, zero clickbait, zero speculation",
+  "High signal, pure intelligence — takes 5 minutes to read",
 ];
 
 // ─── Source logos ────────────────────────────────────────────────────────────────
@@ -283,13 +283,11 @@ export default function HomePage() {
               Why It Exists
             </span>
             <h2 className="text-4xl sm:text-5xl font-bold text-[#f0ece3] tracking-[-0.03em] leading-tight mb-5">
-              AI news is everywhere.<br />
-              <span className="gradient-text">None of it is for you.</span>
+              Global intelligence is fragmented.<br />
+              <span className="gradient-text">None of it is tailored for you.</span>
             </h2>
             <p className="text-base text-[#6b5f4a] font-light leading-relaxed">
-              Most people who want to follow AI end up checking 5 or 6 different
-              sources every day. It takes nearly an hour. And they still feel behind.
-              We fix that.
+              Most professionals end up checking 5 or 6 different sources across Tech, Geopolitics, and Business every day. It takes nearly an hour. And they still feel behind. We fix that.
             </p>
           </div>
         </AnimatedSection>

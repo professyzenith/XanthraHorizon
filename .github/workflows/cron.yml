@@ -2,8 +2,8 @@ name: Daily Intelligence Briefing Cron
 
 on:
   schedule:
-    # Run at 13:30 UTC every day
-    - cron: '30 13 * * *'
+    # Run at the top of every hour to check for subscribers scheduled for this hour
+    - cron: '0 * * * *'
   # Allow manual triggering from GitHub UI
   workflow_dispatch:
 

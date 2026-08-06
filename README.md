@@ -3,7 +3,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0a0805,1a140a,c9a853&height=200&text=Xanthra%20Horizon&fontAlign=50&fontColor=c9a853&fontSize=42&desc=Know%20What%20Matters%20Next.&descAlign=50&descAlignY=74&descColor=f0ece3&descSize=18&section=header" alt="Xanthra Horizon — Know What Matters Next." width="100%" />
 
 <a href="https://github.com/professyzenith/XanthraHorizon">
-  <img src="https://readme-typing-svg.demolab.com?font=Geist+Mono&size=13&duration=3000&pause=1000&color=C9A853&center=true&vCenter=true&multiline=true&width=800&height=45&lines=Daily+Intelligence+Brief+%E2%80%94+AI+Research+%26+Technology+Digest.;8+sources+%C2%B7+Auto-deduped+%C2%B7+Gemini-powered+%C2%B7+Timezone-aware+delivery." alt="Xanthra Horizon animated feature tagline" width="100%" />
+  <img src="https://readme-typing-svg.demolab.com?font=Geist+Mono&size=13&duration=3000&pause=1000&color=C9A853&center=true&vCenter=true&multiline=true&width=800&height=45&lines=Premium+Global+Intelligence+Briefing.;8+Premium+Sources+%C2%B7+Auto-deduped+%C2%B7+Gemini-powered+%C2%B7+Timezone-aware+delivery." alt="Xanthra Horizon animated feature tagline" width="100%" />
 </a>
 
 <br/><br/>
@@ -18,7 +18,6 @@
 </p>
 
 <p>
-  <a href="https://github.com/professyzenith/XanthraHorizon/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/professyzenith/XanthraHorizon/actions/workflows/ci.yml/badge.svg"/></a>
   <img alt="Version" src="https://img.shields.io/github/v/release/professyzenith/XanthraHorizon?style=flat-square&color=c9a853&label=version"/>
   <img alt="License" src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"/>
   <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square"/>
@@ -29,54 +28,43 @@
 
 <br/>
 
-**[Live Demo](https://xanthrahorizon.vercel.app)** · **[Report a Bug](https://github.com/professyzenith/XanthraHorizon/issues)** · **[CHANGELOG](./CHANGELOG.md)** · **[Contributing](./CONTRIBUTING.md)**
+**[Live Demo](https://www.xanthra.space)** · **[Report a Bug](https://github.com/professyzenith/XanthraHorizon/issues)** · **[CHANGELOG](./CHANGELOG.md)** · **[Contributing](./CONTRIBUTING.md)**
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fprofessyzenith%2FXanthraHorizon&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,RESEND_API_KEY,RESEND_FROM_EMAIL,GEMINI_API_KEY,CRON_SECRET,NEXT_PUBLIC_APP_URL&envDescription=See%20README%20%E2%86%92%20Environment%20Variables%20for%20details&project-name=xanthra-horizon&repository-name=XanthraHorizon)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fprofessyzenith%2FXanthraHorizon&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,RESEND_API_KEY,RESEND_FROM_EMAIL,GEMINI_API_KEY,CRON_SECRET,NEXT_PUBLIC_APP_URL,GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET,NEXTAUTH_SECRET,NEXTAUTH_URL&envDescription=See%20README%20%E2%86%92%20Environment%20Variables%20for%20details&project-name=xanthra-horizon&repository-name=XanthraHorizon)
 
 </div>
 
 ---
 
-## Why This Exists
+## The Strategic Gap
 
-> **Stop reading 12 tabs of AI news. Get one email.**
+> **Stop reading 12 tabs of news. Get one perfectly crafted email.**
 
-The AI landscape produces dozens of significant developments every day across research labs, product releases, and policy decisions. Following it requires constant monitoring of multiple sources — and without curation, the signal drowns in noise.
+The world moves incredibly fast. Geopolitics, global markets, technology, and regulatory policies are experiencing synchronized shifts every single day. Following it all requires constant monitoring of multiple premium sources — and without aggressive curation, the signal completely drowns in the noise.
 
-Xanthra Horizon solves this with a fully automated pipeline: it ingests from 8 curated sources across three quality tiers, removes duplicate coverage using Jaccard similarity and URL hashing, scores articles by source authority, recency, and AI keyword density, then feeds the top seven stories to Google Gemini for concise summarization and impact analysis. The resulting digest is stored and delivered to each subscriber at exactly the time they selected, converted to their local timezone.
+I built **Xanthra Horizon** to solve this. It's a fully automated, elite-tier intelligence pipeline. 
 
-Everything runs on free-tier infrastructure. There is no paid service requirement.
+Instead of you hunting for news, Xanthra Horizon wakes up every hour, checks if it's your preferred delivery time, and then independently crawls the world's top premium sources (Bloomberg, Reuters, AP News, Wall Street Journal). It removes duplicate coverage using mathematical similarity algorithms, scores the articles by source authority and recency, and then feeds the absolute top seven global stories to Google Gemini for concise summarization and **Strategic Impact** analysis.
+
+The resulting digest feels like a $10,000/year premium intelligence brief, delivered to your inbox for exactly $0. 
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0a0805,1a140a,c9a853&height=60&section=header" alt="" width="100%" />
 
 ## Table of Contents
 
 - [Quick Start](#quick-start)
-- [Why This Exists](#why-this-exists)
-- [Features](#features)
+- [Features That Matter](#features-that-matter)
 - [Architecture](#architecture)
 - [Tech Stack](#tech-stack)
-- [Screenshots](#screenshots)
-- [Live Demo](#live-demo)
+- [Zero Infrastructure Cost](#zero-infrastructure-cost)
 - [Installation](#installation)
 - [Environment Variables](#environment-variables)
 - [Local Development](#local-development)
 - [Production Deployment](#production-deployment)
-- [Folder Structure](#folder-structure)
 - [Pipeline Workflow](#pipeline-workflow)
-- [API Reference](#api-reference)
 - [Database Schema](#database-schema)
-- [Unsubscribe Flow](#unsubscribe-flow)
-- [News Sources](#news-sources)
-- [Performance](#performance)
-- [Security](#security)
-- [Accessibility](#accessibility)
-- [Roadmap](#roadmap)
+- [Security & Spam Protection](#security--spam-protection)
 - [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
-- [FAQ](#faq)
-- [Contact](#contact)
 
 ---
 
@@ -105,24 +93,19 @@ curl -X POST http://localhost:3000/api/send-briefing \
   -H "Authorization: Bearer YOUR_CRON_SECRET"
 ```
 
-Or deploy to Vercel in one click (all env vars pre-populated in the form):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fprofessyzenith%2FXanthraHorizon&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,RESEND_API_KEY,RESEND_FROM_EMAIL,GEMINI_API_KEY,CRON_SECRET,NEXT_PUBLIC_APP_URL&envDescription=See%20README%20%E2%86%92%20Environment%20Variables%20for%20details&project-name=xanthra-horizon&repository-name=XanthraHorizon)
-
 ---
 
-## Features
+## Features That Matter
 
-| Feature | Description |
+| Feature | What it actually does |
 |---|---|
-| **8 Curated Sources** | Three-tier source hierarchy: lab blogs (OpenAI, Anthropic, DeepMind), tech media (VentureBeat, TechCrunch, MIT Tech Review), and aggregators (Google News AI + LLM feeds) |
-| **Smart Deduplication** | Jaccard coefficient similarity across titles plus SHA-256 URL hashing — no story appears twice within a session or across days |
-| **Relevance Ranking** | Composite score from source tier weight, recency decay curve, and AI keyword density |
-| **Gemini Summarization** | Each of the top seven stories receives a concise summary and a "Why It Matters" analysis generated by Google Gemini 2.0 Flash |
-| **Timezone-Aware Delivery** | Subscribers choose their delivery time once. The pipeline runs hourly and matches each subscriber's local time within a ±5-minute window |
-| **Live Website Display** | The homepage displays the most recent briefing fetched from the database in real time — transitions from a static preview to live content once data loads |
-| **HMAC-Signed Unsubscribe** | Every email contains a one-click unsubscribe URL signed with HMAC-SHA256. No login required. CAN-SPAM and GDPR-aware |
-| **Zero Infrastructure Cost** | Supabase free tier · Resend 3,000 emails/month free · Gemini 1,500 requests/day free · Vercel Hobby |
+| **Premium Sourcing** | Crawls high-signal sources like Reuters, Bloomberg, AP News, and WSJ. No low-effort blogs. |
+| **Smart Deduplication** | Uses Jaccard coefficient similarity plus URL hashing. You will never see the same story twice across different days. |
+| **Gemini AI Synthesis** | Each of the top seven stories gets a concise summary and a dedicated "Strategic Impact" analysis generated by Gemini. |
+| **Timezone-Aware Delivery** | You pick the exact time you want your email (e.g., 7:00 AM IST). The system wakes up hourly, checks who needs an email, and sends it exactly when requested. |
+| **Google Auth Spam Protection** | Bots ruin mailing lists. Xanthra Horizon uses Google Sign-In for subscribers, ensuring 100% verified human emails. |
+| **Cost-Optimized Cron** | The pipeline runs every hour, but safely aborts *before* calling the AI if no users are scheduled for that hour. This saves massive API costs. |
+| **HMAC-Signed Unsubscribe** | One-click unsubscribe URLs signed with HMAC-SHA256. No login required, highly secure. |
 
 ---
 
@@ -133,659 +116,137 @@ flowchart TD
     CRON([Vercel Cron\nhourly]) --> CRONAPI[GET /api/cron]
     CRONAPI --> PIPELINE[POST /api/send-briefing]
 
+    subgraph PRECHECK ["Cost Optimization"]
+        PIPELINE --> CHECK[Check DB for subscribers scheduled this hour]
+        CHECK -->|None scheduled| ABORT[Abort safely. $0 API cost.]
+        CHECK -->|Subscribers found| FETCH
+    end
+
     subgraph FETCH ["Data Collection"]
-        PIPELINE --> T1[Tier 1 — Lab Blogs\nOpenAI · Anthropic · DeepMind\n7-day window]
-        PIPELINE --> T2[Tier 2 — Tech Media\nVentureBeat · TechCrunch · MIT\n48-hour window]
-        PIPELINE --> T3[Tier 3 — Aggregators\nGoogle News AI · LLM\n48-hour window]
+        FETCH --> T1[Premium Tier\nBloomberg · Reuters · WSJ]
+        FETCH --> T2[Media Tier\nEconomist · FT]
     end
 
     subgraph PROCESS ["Processing Pipeline"]
-        T1 & T2 & T3 --> DEDUP[Deduplication\nJaccard Similarity + URL Hash]
+        T1 & T2 --> DEDUP[Deduplication\nJaccard Similarity + URL Hash]
         DEDUP --> CROSSDAY[Cross-Day Filter\narticles_seen table]
-        CROSSDAY --> RANK[Ranking\nRecency · Source Score · Keywords]
-        RANK --> GEMINI[Gemini 2.0 Flash\nSummary + Why It Matters]
+        CROSSDAY --> RANK[Ranking\nRecency · Source Score]
+        RANK --> GEMINI[Gemini 2.0 Flash\nSummary + Strategic Impact]
     end
 
     subgraph PERSIST ["Persistence"]
-        GEMINI --> BRIEFINGDB[(briefings table\nLatest digest stored)]
-        GEMINI --> SEENDB[(articles_seen table\nHashes stored — 7-day TTL)]
+        GEMINI --> BRIEFINGDB[(briefings table)]
+        GEMINI --> SEENDB[(articles_seen table)]
     end
 
     subgraph DELIVER ["Delivery"]
-        BRIEFINGDB --> WEBSITE[Homepage\nLive briefing display]
-        GEMINI --> MATCH[Supabase\nMatch subscriber delivery times ±5min]
-        MATCH --> RESEND[Resend\nHTML Email per Subscriber]
+        GEMINI --> RESEND[Resend\nHTML Email per Subscriber]
     end
 ```
-
-The cron trigger is separated from the pipeline (`/api/cron` → `/api/send-briefing`) so the pipeline can also be invoked directly for testing and administrative use.
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology | Version | Rationale |
-|---|---|---|---|
-| Framework | Next.js App Router | 16.x | API routes, server components, and SSR in a single project |
-| Language | TypeScript | 5.x strict | End-to-end type safety across the pipeline and UI |
-| Styling | Tailwind CSS | 3.4 | Zero-runtime utility CSS; consistent dark-mode theming |
-| Database | Supabase (PostgreSQL) | — | Row Level Security, free tier, real-time subscriptions available |
-| Email | Resend | 3.x | Reliable transactional email; 3,000 messages/month on free tier |
-| AI | Google Gemini 2.0 Flash | v1beta | 1,500 free requests/day; fast inference for daily summarization |
-| Hosting | Vercel Hobby | — | Zero-config Next.js deployment; integrated cron scheduling |
-| Linting | ESLint | 9.x (flat config) | Modern flat configuration with Next.js core-web-vitals ruleset |
+I built this with modern, scalable tools that are a joy to work with:
+
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript (Strict Mode)
+- **Styling:** Tailwind CSS (Dark Mode, Glassmorphism, Micro-animations)
+- **Database:** Supabase (PostgreSQL with Row Level Security)
+- **Email:** Resend (React-based HTML templates)
+- **AI:** Google Gemini 2.0 Flash
+- **Auth:** NextAuth (Google Provider)
+- **Hosting:** Vercel
 
 ---
 
-## Screenshots
+## Zero Infrastructure Cost
 
-> **Homepage — Hero Section**
-
-![Xanthra Horizon Homepage](docs/screenshots/homepage.png)
-
-> **Live Briefing Feed — News Ticker & Story Cards**
-
-![Briefing Section](docs/screenshots/briefing-section.png)
-
-> **Mobile View**
-
-![Mobile View](docs/screenshots/mobile.png)
-
-> **Email Digest**
-> The daily HTML email sent via Resend. Format: executive brief at top, 7 story cards each with title, source, summary, and a "Why It Matters" callout. See `lib/emailSender.ts` for the full template.
-
----
-
-## Live Demo
-
-**Production:** [https://xanthrahorizon.vercel.app](https://xanthrahorizon.vercel.app)
-
-<a href="https://xanthrahorizon.vercel.app">
-  <img src="docs/screenshots/demo.webp" alt="Xanthra Horizon demo — homepage scrolling through live AI briefing" width="100%" />
-</a>
-
-The homepage displays the most recent AI briefing in real time. The `LIVE` indicator in the upper-right of the preview card confirms that live database content has loaded. `PREVIEW` indicates the database has not yet been seeded by a pipeline run.
-
----
-
-## Installation
-
-### Prerequisites
-
-- **Node.js** 18 or later
-- **npm** 9 or later
-- [Supabase](https://supabase.com) account (free)
-- [Resend](https://resend.com) account (free)
-- [Google AI Studio](https://aistudio.google.com) API key (free)
-
-### Clone and Install
-
-```bash
-git clone https://github.com/professyzenith/XanthraHorizon.git
-cd XanthraHorizon
-npm install
-```
-
-### Initialize the Database
-
-1. Open your Supabase project → **SQL Editor**
-2. Run the contents of `supabase/schema.sql`
-
-This creates the `subscribers`, `articles_seen`, and `briefings` tables with Row Level Security policies applied.
-
-### Zero Infrastructure Cost
+Running a daily AI platform usually gets expensive quickly. I engineered this to run entirely on free tiers. 
 
 | Service | Free Tier Limit | Usage in This Project |
 |---|---|---|
-| **Supabase** | 500 MB database, 50,000 rows, 2 GB bandwidth | 3 small tables, grows at ~1 row/day |
-| **Resend** | 3,000 emails/month, 100/day | 1 email per subscriber per day |
-| **Google Gemini** | 1,500 requests/day (Flash) | 1 request per pipeline run |
-| **Vercel Hobby** | 100 GB bandwidth, unlimited deployments | Static site + API routes |
+| **Supabase** | 500 MB database | 3 small tables, grows at ~1 row/day |
+| **Resend** | 3,000 emails/month | 1 email per subscriber per day |
+| **Google Gemini** | 1,500 requests/day | Max 24 requests per day (1 per hour) |
+| **Vercel** | Unlimited deployments | Static site + hourly cron |
 
-At 100 subscribers sending 1 email/day: **100 emails/day → 3,000/month** — exactly at the Resend free ceiling. Beyond that, upgrade Resend ($20/month for 50,000 emails).
+**How the AI cost stays at $0:** Even if 1,000 people subscribe for a 7:00 PM delivery, the system makes **exactly one** API call to Gemini at 7:00 PM. It then takes that single AI-generated briefing and emails it to all 1,000 users. It scales infinitely without multiplying your AI costs.
+
+---
+
+## Installation & Deployment
+
+### 1. Database Setup (Supabase)
+1. Create a free Supabase project.
+2. Go to the SQL Editor and paste the contents of `supabase/schema.sql`.
+3. This creates the `subscribers`, `articles_seen`, and `briefings` tables with all the necessary Row Level Security (RLS) policies.
+
+### 2. Google OAuth Setup (For Spam Protection)
+1. Go to Google Cloud Console and create a new project.
+2. Go to APIs & Services -> Credentials -> Create OAuth client ID (Web application).
+3. Add your callback URL: `https://your-domain.com/api/auth/callback/google`
+4. Copy the Client ID and Client Secret.
+
+### 3. Vercel Deployment
+Deploying to Vercel is the easiest way to run this because it natively supports the hourly cron job configured in `vercel.json`.
+
+1. Push your repository to GitHub.
+2. Import the project in Vercel.
+3. Add the environment variables below.
+4. Hit Deploy!
 
 ---
 
 ## Environment Variables
 
-Copy the example file and fill in all values before starting the server.
+Copy `.env.example` to `.env.local` and fill these in:
 
-```bash
-cp .env.example .env.local
-```
-
-| Variable | Required | Description |
-|---|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | Yes | Supabase project URL — safe to expose client-side |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Supabase anon key — safe to expose client-side |
-| `SUPABASE_SERVICE_ROLE_KEY` | Yes | Service role key — **server-only, never expose publicly** |
-| `RESEND_API_KEY` | Yes | Resend API key for email delivery |
-| `RESEND_FROM_EMAIL` | Yes | Verified sender address in your Resend account |
-| `GEMINI_API_KEY` | Yes | Google Gemini API key from AI Studio |
-| `CRON_SECRET` | Yes | Random 32-character string protecting the pipeline endpoint |
-| `NEXT_PUBLIC_APP_URL` | Yes | Full URL of your deployment — **must match exactly**, used to generate unsubscribe links. Use `http://localhost:3000` locally. |
-
-```env
-# Supabase
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
-
-# Resend
-RESEND_API_KEY=re_your_key
-RESEND_FROM_EMAIL=hello@yourdomain.com
-
-# Gemini
-GEMINI_API_KEY=your-gemini-key
-
-# Security
-CRON_SECRET=your-random-32-char-string
-
-# App
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
-
----
-
-## Local Development
-
-```bash
-npm run dev
-```
-
-Verify your environment is configured correctly:
-
-```bash
-curl http://localhost:3000/api/status \
-  -H "Authorization: Bearer YOUR_CRON_SECRET"
-```
-
-A successful response confirms all required environment keys are present and non-placeholder.
-
-**Dry-run the pipeline without sending emails:**
-
-```bash
-# Skip AI call — returns ranked headlines only (fastest)
-curl "http://localhost:3000/api/test-pipeline?skip_ai=1" \
-  -H "Authorization: Bearer YOUR_CRON_SECRET"
-
-# Full pipeline including Gemini summarization
-curl "http://localhost:3000/api/test-pipeline" \
-  -H "Authorization: Bearer YOUR_CRON_SECRET"
-```
-
----
-
-## Production Deployment
-
-### Vercel (Recommended)
-
-1. Push your repository to GitHub
-2. Import the project at [vercel.com/new](https://vercel.com/new)
-3. Add all environment variables under **Settings → Environment Variables**
-4. Set `NEXT_PUBLIC_APP_URL` to your Vercel deployment URL
-5. Deploy
-
-The `vercel.json` in this repository configures the cron schedule automatically. On **Vercel Pro**, the hourly cron runs natively. On **Vercel Hobby**, use [cron-job.org](https://cron-job.org) (free) to POST to `/api/send-briefing` every hour with the `Authorization: Bearer YOUR_CRON_SECRET` header.
-
-### Function Timeouts
-
-The pipeline and test routes are configured with a 60-second maximum duration in `vercel.json`:
-
-```json
-{
-  "functions": {
-    "app/api/send-briefing/route.ts": { "maxDuration": 60 },
-    "app/api/test-pipeline/route.ts": { "maxDuration": 60 }
-  }
-}
-```
-
-If your Gemini calls consistently approach this limit, consider switching to Gemini Flash's streaming endpoint or reducing the number of stories summarized per run.
-
----
-
-## Folder Structure
-
-```
-xanthra-horizon/
-│
-├── app/
-│   ├── api/
-│   │   ├── cron/                 GET  /api/cron               Vercel cron trigger
-│   │   ├── send-briefing/        POST /api/send-briefing      Full pipeline (auth required)
-│   │   ├── latest-briefing/      GET  /api/latest-briefing    Latest briefing (public, cached)
-│   │   ├── subscribe/            POST /api/subscribe           Subscriber registration
-│   │   ├── unsubscribe/          GET  /api/unsubscribe         HMAC-verified unsubscribe
-│   │   ├── unsubscribe-by-email/ GET  /api/unsubscribe-by-email Direct email unsubscribe
-│   │   ├── test-pipeline/        GET  /api/test-pipeline       Dry-run pipeline (auth required)
-│   │   └── status/               GET  /api/status              Environment health check (auth required)
-│   │
-│   ├── privacy/                  Privacy Policy page
-│   ├── tos/                      Terms of Service page
-│   ├── unsubscribe/              Unsubscribe confirmation UI
-│   ├── globals.css
-│   ├── layout.tsx                Root layout, metadata, fonts
-│   ├── page.tsx                  Landing page
-│   └── sitemap.ts                Sitemap generation
-│
-├── components/
-│   ├── InteractiveBriefing.tsx   Live briefing display (fetches /api/latest-briefing)
-│   ├── SubscribeForm.tsx         Subscription form with time/timezone picker
-│   ├── CommandCenter.tsx         Admin control interface
-│   ├── AnimatedTimeline.tsx      Timeline UI component
-│   ├── FloatingParticles.tsx     Background canvas animation
-│   ├── HorizonReveal.tsx         Scroll-reveal animation wrapper
-│   ├── NetworkOrb.tsx            Animated network visualization
-│   ├── SignatureSection.tsx      Footer signature block
-│   └── StaggerChildren.tsx       Staggered animation utility
-│
-├── lib/
-│   ├── newsFetcher.ts            8-source RSS ingestion pipeline
-│   ├── deduplicator.ts           Jaccard similarity + SHA-256 URL hash dedup
-│   ├── ranker.ts                 Article scoring (source tier, recency, keywords)
-│   ├── summarizer.ts             Google Gemini 2.0 Flash integration
-│   ├── emailSender.ts            Resend HTML email — welcome + briefing templates
-│   ├── unsubscribeToken.ts       HMAC-SHA256 signed token generation and verification
-│   └── supabase.ts               Anon client (browser) + Admin client (server)
-│
-├── supabase/
-│   └── schema.sql                Full database schema with RLS policies
-│
-├── types/
-│   └── index.ts                  Shared TypeScript interfaces
-│
-├── public/
-│   └── robots.txt
-│
-├── .env.example                  Environment variable template
-├── eslint.config.mjs             ESLint v9 flat configuration
-├── next.config.js                Security headers + Next.js configuration
-├── vercel.json                   Cron schedule + function timeouts
-└── tsconfig.json                 TypeScript strict configuration
-```
-
----
-
-## Pipeline Workflow
-
-Each hourly cron invocation executes the following steps:
-
-```
-1. FETCH
-   └── Parallel RSS ingestion from 8 sources across 3 tiers
-       Tier 1 (7-day window): OpenAI Blog, Anthropic, DeepMind
-       Tier 2 (48h window):   VentureBeat, TechCrunch, MIT Tech Review
-       Tier 3 (48h window):   Google News AI, Google News LLM
-
-2. DEDUPLICATE (within-batch)
-   └── Jaccard coefficient on title n-grams (threshold: 0.6)
-   └── SHA-256 URL hash exact match
-
-3. CROSS-DAY DEDUPLICATE
-   └── Query articles_seen table for hashes already delivered
-   └── Fallback to full batch if fewer than 5 articles remain
-
-4. RANK
-   └── Composite score: source_tier_weight × recency_decay × keyword_density
-   └── Select top 7 articles
-
-5. SUMMARIZE
-   └── Gemini 2.0 Flash generates summary + "Why It Matters" per story
-   └── Executive brief generated for the full digest
-
-6. PERSIST
-   └── Insert briefing into briefings table (date, executive_brief, stories[])
-   └── Upsert top-7 hashes into articles_seen (prevents re-delivery)
-
-7. DELIVER
-   └── Query subscribers WHERE is_active = true
-   └── Filter by delivery_time ±5 minutes against subscriber's local timezone
-   └── Send HTML email via Resend to each matched subscriber
-```
-
----
-
-## API Reference
-
-All endpoints return JSON. Authentication uses `Authorization: Bearer <CRON_SECRET>` where required.
-
-### Public Endpoints
-
-| Endpoint | Method | Description |
-|---|---|---|
-| `POST /api/subscribe` | `POST` | Register a subscriber. Body: `{ email, delivery_time, timezone }` |
-| `GET /api/unsubscribe` | `GET` | Deactivate a subscriber. Params: `id`, `token` (HMAC-signed) |
-| `GET /api/latest-briefing` | `GET` | Return the most recent briefing from the database. Cached 5 min at the edge. |
-
-### Protected Endpoints
-
-All require `Authorization: Bearer <CRON_SECRET>`.
-
-| Endpoint | Method | Description |
-|---|---|---|
-| `GET /api/cron` | `GET` | Vercel cron entry point — calls `/api/send-briefing` |
-| `POST /api/send-briefing` | `POST` | Run the full pipeline: fetch → summarize → persist → email |
-| `GET /api/test-pipeline` | `GET` | Dry-run pipeline with optional `?skip_ai=1`. No emails sent, no DB writes. |
-| `GET /api/status` | `GET` | Reports which environment variables are configured and subscriber count. |
-
-### Request & Response Examples
-
-**Subscribe:**
-```bash
-curl -X POST https://xanthrahorizon.vercel.app/api/subscribe \
-  -H "Content-Type: application/json" \
-  -d '{"email":"you@example.com","delivery_time":"08:00","timezone":"Asia/Kolkata"}'
-```
-```json
-{ "success": true }
-```
-
-**Trigger pipeline manually:**
-```bash
-curl -X POST https://xanthrahorizon.vercel.app/api/send-briefing \
-  -H "Authorization: Bearer YOUR_CRON_SECRET"
-```
-```json
-{
-  "success": true,
-  "articlesProcessed": 43,
-  "storiesSelected": 7,
-  "emailsSent": 2,
-  "briefingSaved": true
-}
-```
-
-**Fetch latest briefing:**
-```bash
-curl https://xanthrahorizon.vercel.app/api/latest-briefing
-```
-```json
-{
-  "briefing": {
-    "id": 12,
-    "date": "2024-07-08",
-    "executive_brief": "Today's AI landscape is dominated by...",
-    "stories": [
-      {
-        "title": "OpenAI launches GPT-5",
-        "url": "https://openai.com/...",
-        "source": "OpenAI Blog",
-        "summary": "OpenAI announced...",
-        "why_it_matters": "This raises the capability ceiling...",
-        "score": 41.2
-      }
-    ],
-    "created_at": "2024-07-08T08:00:12.000Z"
-  }
-}
-```
-
-**Error responses:**
-```json
-// 401 Unauthorized (missing or wrong CRON_SECRET)
-{ "error": "Unauthorized" }
-
-// 500 Internal Server Error (pipeline failure)
-{ "error": "Pipeline failed", "detail": "Gemini API returned 429" }
-
-// 404 (no briefing in database yet)
-{ "briefing": null }
-```
-
----
-
-## Database Schema
-
-### `subscribers`
-
-| Column | Type | Description |
-|---|---|---|
-| `id` | `uuid` | Primary key, auto-generated |
-| `email` | `text` | Subscriber email address (unique) |
-| `delivery_time` | `text` | Preferred delivery time in `HH:MM` 24-hour format |
-| `timezone` | `text` | IANA timezone string (e.g. `Asia/Kolkata`) |
-| `is_active` | `boolean` | False after unsubscribe |
-| `created_at` | `timestamptz` | Registration timestamp |
-
-### `articles_seen`
-
-| Column | Type | Description |
-|---|---|---|
-| `hash` | `text` | SHA-256 of the article URL (unique, primary key) |
-| `title` | `text` | Article headline |
-| `url` | `text` | Original article URL |
-| `source` | `text` | Source name |
-| `created_at` | `timestamptz` | When first seen — used for 7-day TTL cleanup |
-
-### `briefings`
-
-| Column | Type | Description |
-|---|---|---|
-| `id` | `bigint` | Auto-increment primary key |
-| `date` | `text` | Briefing date string |
-| `executive_brief` | `text` | One-paragraph overview generated by Gemini |
-| `stories` | `jsonb` | Array of `RankedStory` objects (title, url, source, summary, why_it_matters) |
-| `created_at` | `timestamptz` | Pipeline run timestamp — ordered descending to serve latest |
-
-**Row Level Security:** All tables have RLS enabled. `subscribers` and `articles_seen` are server-only (service role key required). `briefings` allows public SELECT for homepage display.
-
----
-
-## Unsubscribe Flow
-
-Every delivery email contains an unsubscribe link of the form:
-
-```
-https://yourdomain.com/unsubscribe?id={subscriber_uuid}&token={hmac_signature}
-```
-
-The token is an HMAC-SHA256 signature of the subscriber ID using `CRON_SECRET` as the key. On click:
-
-1. `/api/unsubscribe` receives `id` and `token`
-2. The server recomputes the expected HMAC and compares using timing-safe equality
-3. If valid, `is_active` is set to `false` in the `subscribers` table
-4. The user is redirected to the `/unsubscribe` confirmation page
-
-Tokens are not time-limited by default. No database state is required to validate them — verification is purely cryptographic.
-
----
-
-## News Sources
-
-| Source | Tier | Freshness Window | Coverage |
-|---|---|---|---|
-| OpenAI Blog | Primary | 7 days | Model releases, product announcements |
-| Anthropic Blog | Primary | 7 days | Safety research, Claude updates |
-| Google DeepMind | Primary | 7 days | Research publications, product releases |
-| VentureBeat AI | Media | 48 hours | Startup funding, enterprise AI |
-| TechCrunch AI | Media | 48 hours | Product launches, acquisitions |
-| MIT Technology Review | Media | 48 hours | Research analysis, policy coverage |
-| Google News — AI | Aggregator | 48 hours | Broad AI landscape |
-| Google News — LLM | Aggregator | 48 hours | Large language model developments |
-
-Tier 1 sources use a 7-day ingestion window because official lab blogs publish on weekly cadences. Tier 2 and 3 sources use 48-hour windows to maintain freshness and minimize stale content in the ranked pool.
-
----
-
-## Performance
-
-**API Response Caching**
-
-`GET /api/latest-briefing` is served with:
-
-```
-Cache-Control: public, s-maxage=300, stale-while-revalidate=600
-```
-
-This instructs Vercel's CDN to cache the briefing for 5 minutes and serve stale content for up to 10 minutes while revalidating in the background. The homepage never blocks on a database round-trip for returning visitors.
-
-**Homepage Strategy**
-
-`InteractiveBriefing` renders static demo content immediately on mount (zero layout shift), then fetches live data from `/api/latest-briefing` in a background `useEffect`. Once the API responds, the component swaps to real content without re-mounting. The LIVE/PREVIEW indicator in the header communicates content status to the user.
-
-**Pipeline Parallelism**
-
-All 8 RSS feeds are fetched concurrently using `Promise.allSettled`. Individual source failures do not block the pipeline — they are logged and the remaining sources continue.
-
----
-
-## Security
-
-| Control | Implementation |
+| Variable | Description |
 |---|---|
-| **Pipeline authentication** | All pipeline endpoints require `Authorization: Bearer <CRON_SECRET>` — a 32-character secret stored as an environment variable |
-| **HMAC unsubscribe tokens** | Unsubscribe URLs are signed with HMAC-SHA256. Forged or tampered tokens are rejected |
-| **Row Level Security** | RLS is enabled on all Supabase tables. The service role key is server-only and never exposed to the browser |
-| **Content Security Policy** | Strict CSP header set in `next.config.js` — restricts script, style, font, image, and connection sources |
-| **HSTS** | `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload` |
-| **X-Frame-Options** | `DENY` — prevents clickjacking |
-| **Referrer Policy** | `strict-origin-when-cross-origin` |
-| **Permissions Policy** | Camera, microphone, geolocation, and payment APIs explicitly disabled |
-| **No debug endpoints in production** | Test and status endpoints are protected by the same `CRON_SECRET`. The `/api/test-email` endpoint was removed from the production codebase |
-| **Supabase function search path** | The `update_updated_at` trigger function is defined with `SET search_path = ''` to prevent schema injection. Execute permissions are revoked from `public`, `anon`, and `authenticated` roles |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Service role key — **server-only, never expose publicly** |
+| `RESEND_API_KEY` | Resend API key for email delivery |
+| `RESEND_FROM_EMAIL` | Verified sender address in your Resend account |
+| `GEMINI_API_KEY` | Google Gemini API key |
+| `CRON_SECRET` | A random 32-character string you invent to protect your pipeline endpoint |
+| `NEXT_PUBLIC_APP_URL` | Your website URL (e.g. `https://www.xanthra.space`) |
+| `GOOGLE_CLIENT_ID` | From Google Cloud Console |
+| `GOOGLE_CLIENT_SECRET` | From Google Cloud Console |
+| `NEXTAUTH_SECRET` | A random password to encrypt user sessions |
+| `NEXTAUTH_URL` | Your website URL (e.g. `https://www.xanthra.space`) |
 
 ---
 
-## Accessibility
+## Security & Spam Protection
 
-- Semantic HTML5 elements throughout (`main`, `section`, `article`, `nav`, `header`, `footer`)
-- Single `<h1>` per page with a clear heading hierarchy
-- All interactive elements have accessible labels and focus states
-- Color contrast ratios meet WCAG AA standards in the dark-mode design
-- External links include `rel="noreferrer"` and open in new tabs with visible indicators
-- Form inputs are labeled and include descriptive `placeholder` text
-- **Known limitation:** The animated header banner, typing SVG, and wave dividers in this README are externally hosted `<img>` sources. GitHub renders them as static images in environments that disable external requests, but they cannot respond to `prefers-reduced-motion` since they are not CSS or JavaScript animations — they are delivered as pre-rendered SVG files. The application UI itself uses canvas-based effects that respect `prefers-reduced-motion`.
+Mailing lists are massive targets for bots. If you leave a simple email input field open to the internet, bots will fill your database with thousands of fake emails, which will ruin your sender reputation on Resend and get your account banned.
 
----
+**How we stop it:**
+Xanthra Horizon completely drops the traditional email input field. Instead, users must click **"Continue with Google"**. The backend uses NextAuth to verify the user is a real human with a real Google account. Once verified, the subscription is processed. 
 
-## Roadmap
+This means **100% zero spam**. Every email in your Supabase database is guaranteed to be a real person.
 
-Ordered by priority. Community contributions are welcome on any of these.
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=c9a853,1a140a,0a0805&height=60&section=header" alt="" width="100%" />
-
-- [ ] **Subscriber dashboard** — Web interface for managing delivery time, timezone, and preferences without re-subscribing
-- [ ] **Weekly digest mode** — Friday summary of the week's top 15 stories for subscribers who prefer lower frequency
-- [ ] **Topic filtering** — Let subscribers choose categories (Research / Product / Policy / Business) to include or exclude
-- [ ] **RSS output** — Machine-readable RSS feed of each Xanthra Horizon edition
-- [ ] **GitHub Actions cron** — Alternative to Vercel cron for full Hobby plan compatibility without external services
-- [ ] **Open Graph per edition** — Auto-generated OG image for each daily briefing (shareable on social)
-- [ ] **7-day article cleanup job** — Automated cron to purge `articles_seen` rows older than 7 days
-- [ ] **Multi-language support** — Localized briefings using Gemini's multilingual output
-- [ ] **Engagement tracking** — Optional click-through tracking for individual story links
+Other security measures:
+- All pipeline endpoints require `Authorization: Bearer <CRON_SECRET>`.
+- Unsubscribe URLs are cryptographically signed with HMAC-SHA256. Forged tokens are instantly rejected.
+- Row Level Security (RLS) is enabled on all Supabase tables.
 
 ---
 
 ## Contributing
 
-Contributions are welcome. Read [CONTRIBUTING.md](./CONTRIBUTING.md) for the full development setup, branching workflow, commit convention, and code style requirements. All pull requests must pass TypeScript type checking and ESLint with zero warnings before review.
-
-**Good first issues:**
-- Adding a new high-quality RSS source to `lib/newsFetcher.ts`
-- Improving the ranking algorithm in `lib/ranker.ts`
-- Bug fixes with a clear reproduction case
-- Documentation corrections or additions
+This project is open-source and contributions are always welcome. Whether you want to add new premium RSS sources, improve the deduplication math, or tweak the UI, feel free to open a pull request!
 
 ---
 
-## License
+## Contact & Credits
 
-[MIT](./LICENSE) — You are free to use, fork, modify, and deploy this project for any purpose.
+Built by **[@professyzenith](https://github.com/professyzenith)**.
 
----
-
-## Acknowledgements
-
-- [Next.js](https://nextjs.org) — The React framework this project is built on
-- [Supabase](https://supabase.com) — Open source Firebase alternative that powers the database
-- [Resend](https://resend.com) — Modern email infrastructure for developers
-- [Google Gemini](https://aistudio.google.com) — AI summarization backbone
-- [Vercel](https://vercel.com) — Deployment and edge infrastructure
-- [Tailwind CSS](https://tailwindcss.com) — Styling system
-- [rss-parser](https://github.com/rbren/rss-parser) — RSS feed parsing library
-- [readme-typing-svg](https://github.com/DenverCoder1/readme-typing-svg) — Animated typing SVG for GitHub READMEs
-- [capsule-render](https://github.com/kyechan99/capsule-render) — Animated wave/gradient banner SVGs for GitHub READMEs
-
----
-
-## FAQ
-
-<details>
-<summary><strong>Why is email going to spam?</strong></summary>
-
-The default sender address `onboarding@resend.dev` is a shared Resend sandbox domain. All email from this address is likely to land in spam. To fix this:
-
-1. Register a domain and add it to your Resend account under **Domains**
-2. Add the required DNS records (DKIM, SPF, DMARC)
-3. Update `RESEND_FROM_EMAIL` to an address on your verified domain
-
-Until a custom domain is configured, ask subscribers to mark the email as "Not Spam" or add your sender address to their contacts.
-
-</details>
-
-<details>
-<summary><strong>How do I trigger the pipeline manually?</strong></summary>
-
-```bash
-curl -X POST https://xanthrahorizon.vercel.app/api/send-briefing \
-  -H "Authorization: Bearer YOUR_CRON_SECRET"
-```
-
-This runs the full pipeline and saves the briefing to the database, but only sends emails to subscribers whose delivery time matches the current time (±5 minutes).
-
-To run a dry-run with no emails and no database writes:
-
-```bash
-curl "https://xanthrahorizon.vercel.app/api/test-pipeline?skip_ai=1" \
-  -H "Authorization: Bearer YOUR_CRON_SECRET"
-```
-
-</details>
-
-<details>
-<summary><strong>What happens if Gemini is unavailable?</strong></summary>
-
-The summarizer (`lib/summarizer.ts`) throws if the Gemini API key is missing or if the API returns a non-200 response. The pipeline will fail at step 5 and return a 500 error. No emails are sent and no database writes occur. The previous briefing remains displayed on the homepage.
-
-To make the pipeline resilient to AI failures, consider adding a fallback that returns raw headlines without summaries.
-
-</details>
-
-<details>
-<summary><strong>How does the timezone matching work?</strong></summary>
-
-Each subscriber stores their preferred delivery time as `HH:MM` in 24-hour format and their IANA timezone string (e.g. `America/New_York`). When the pipeline runs, it uses `Intl.DateTimeFormat` to convert the current UTC time into each subscriber's local time and checks whether it falls within a ±5-minute window of their preferred delivery time. Subscribers outside this window are skipped until the cron runs again in the next hour.
-
-</details>
-
-<details>
-<summary><strong>Why does the homepage show "PREVIEW" instead of "LIVE"?</strong></summary>
-
-The `briefings` table is empty until the pipeline runs for the first time. Once you trigger `/api/send-briefing` or the hourly cron executes, the briefing is saved to the database and the homepage will switch to "LIVE" automatically on the next page load.
-
-</details>
-
-<details>
-<summary><strong>Can I add more news sources?</strong></summary>
-
-Yes. Open `lib/newsFetcher.ts` and add a new entry to the relevant tier array. Each source requires an RSS feed URL and a freshness window in hours. The deduplication and ranking pipeline handles the rest automatically.
-
-</details>
-
----
-
-## Contact
-
-**GitHub:** [@professyzenith](https://github.com/professyzenith)
-
-**Repository:** [https://github.com/professyzenith/XanthraHorizon](https://github.com/professyzenith/XanthraHorizon)
-
-**Live:** [https://xanthrahorizon.vercel.app](https://xanthrahorizon.vercel.app)
-
-**Questions / Bugs:** [Open an issue](https://github.com/professyzenith/XanthraHorizon/issues) — responses within 5 business days.
-
----
+If you find a bug or have a feature request, [open an issue](https://github.com/professyzenith/XanthraHorizon/issues).
 
 <div align="center">
 

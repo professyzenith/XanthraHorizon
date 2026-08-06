@@ -19,8 +19,52 @@ export async function POST(req: NextRequest) {
   try {
     console.log("[Xanthra Horizon] Starting Daily Intelligence Brief pipeline...");
 
-    // Step 1: Fetch news from all sources (common pool — personalization filters later per subscriber)
-    const rawArticles = await fetchNewsByTopics(); // all topics
+    // Step 1: Find subscribers whose local delivery time matches now (within 5 min window)
+    const now = new Date();
+
+    const { data: subscribers, error: subError } = await supabaseAdmin
+      .from("subscribers")
+      .select("*")
+      .eq("is_active", true);
+
+    if (subError || !subscribers) {
+      console.error("Failed to fetch subscribers:", subError);
+      return NextResponse.json({ error: "Failed to fetch subscribers" }, { status: 500 });
+    }
+
+    const targetSubscribers = subscribers.filter((sub) => {
+      try {
+        const formatter = new Intl.DateTimeFormat("en", {
+          timeZone: sub.timezone,
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        });
+
+        const parts = formatter.formatToParts(now);
+        const localHour   = parseInt(parts.find((p) => p.type === "hour")?.value   ?? "0");
+        const localMinute = parseInt(parts.find((p) => p.type === "minute")?.value ?? "0");
+
+        const [subH, subM] = sub.delivery_time.split(":").map(Number);
+        const diffMinutes  = Math.abs(subH * 60 + subM - (localHour * 60 + localMinute));
+
+        return diffMinutes <= 5;
+      } catch {
+        return false;
+      }
+    });
+
+    console.log(`Found ${targetSubscribers.length} subscribers scheduled for this hour`);
+
+    if (targetSubscribers.length === 0) {
+      return NextResponse.json({
+        success: true,
+        message: "No subscribers scheduled for this hour. Skipping AI generation to save costs.",
+      });
+    }
+
+    // Step 2: Fetch news from all sources
+    const rawArticles = await fetchNewsByTopics();
     console.log(`Fetched ${rawArticles.length} raw articles`);
 
     if (rawArticles.length === 0) {
@@ -102,46 +146,8 @@ export async function POST(req: NextRequest) {
       });
 
 
-    // Step 5: Find subscribers whose local delivery time matches now (within 5 min window)
-    const now = new Date();
-
-    // Get all active subscribers
-    const { data: subscribers, error } = await supabaseAdmin
-      .from("subscribers")
-      .select("*")
-      .eq("is_active", true);
-
-    if (error || !subscribers) {
-      console.error("Failed to fetch subscribers:", error);
-      return NextResponse.json({ error: "Failed to fetch subscribers" }, { status: 500 });
-    }
-
-    // Filter subscribers whose local time matches now (within 5 minutes)
-    const targetSubscribers = subscribers.filter((sub) => {
-      try {
-        const formatter = new Intl.DateTimeFormat("en", {
-          timeZone: sub.timezone,
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false,
-        });
-
-        const parts = formatter.formatToParts(now);
-        const localHour   = parseInt(parts.find((p) => p.type === "hour")?.value   ?? "0");
-        const localMinute = parseInt(parts.find((p) => p.type === "minute")?.value ?? "0");
-
-        const [subH, subM] = sub.delivery_time.split(":").map(Number);
-        const diffMinutes  = Math.abs(subH * 60 + subM - (localHour * 60 + localMinute));
-
-        return diffMinutes <= 5;
-      } catch {
-        return false;
-      }
-    });
-
-    console.log(`Sending to ${targetSubscribers.length} subscribers`);
-
     // Step 6: Send emails
+    console.log(`Sending emails to ${targetSubscribers.length} subscribers...`);
     const results = await Promise.allSettled(
       targetSubscribers.map((sub) =>
         sendBriefingEmail(sub.email, briefing, sub.id)

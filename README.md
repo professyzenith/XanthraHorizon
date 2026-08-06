@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=transparent&color=C9A853&height=150&section=header&text=Xanthra%20Horizon&fontSize=60&fontColor=C9A853&desc=Know%20What%20Matters%20Next.&descSize=20&descColor=888888" alt="Xanthra Horizon — Know What Matters Next." width="100%" />
+<img src="docs/banner.svg" alt="Xanthra Horizon — Premium Global Intelligence" width="100%" />
 
 <a href="https://github.com/professyzenith/XanthraHorizon">
   <img src="https://readme-typing-svg.demolab.com?font=Geist+Mono&size=13&duration=3000&pause=1000&color=C9A853&center=true&vCenter=true&multiline=true&width=800&height=45&lines=Premium+Global+Intelligence+Briefing.;8+Premium+Sources+%C2%B7+Auto-deduped+%C2%B7+Gemini-powered+%C2%B7+Timezone-aware+delivery." alt="Xanthra Horizon animated feature tagline" width="100%" />

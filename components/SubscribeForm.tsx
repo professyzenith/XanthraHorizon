@@ -59,6 +59,9 @@ const TOPICS: { id: Topic; label: string }[] = [
   { id: "health",      label: "Health"       },
 ];
 
+// Only these topic IDs are currently live
+const LIVE_TOPICS: Set<Topic> = new Set(["ai_tech", "geopolitics"]);
+
 function fmt(t: string) {
   const [h, m] = t.split(":").map(Number);
   const ap = h >= 12 ? "PM" : "AM";
@@ -74,8 +77,15 @@ export default function SubscribeForm() {
   const [topics, setTopics] = useState<Topic[]>(["ai_tech"]);
   const [state, setState] = useState<State>("idle");
   const [msg, setMsg] = useState("");
+  const [comingSoon, setComingSoon] = useState(false);
+
+  function showComingSoon() {
+    setComingSoon(true);
+    setTimeout(() => setComingSoon(false), 2200);
+  }
 
   function toggleTopic(id: Topic) {
+    if (!LIVE_TOPICS.has(id)) { showComingSoon(); return; }
     setTopics(prev =>
       prev.includes(id)
         ? prev.length > 1 ? prev.filter(t => t !== id) : prev // must keep at least 1
@@ -137,7 +147,27 @@ export default function SubscribeForm() {
         className="w-full px-4 py-3.5 bg-[#0c0a08] border border-[#221e19] rounded-xl text-[#f0ece3] placeholder-[#2a2318] text-sm focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-all disabled:opacity-50 hover:border-[#2a2318]"
       />
 
-      {/* Topic Selector */}
+      {/* Coming Soon Toast */}
+      {comingSoon && (
+        <div
+          className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-5 py-3 rounded-full text-sm font-medium"
+          style={{
+            background: "rgba(20,16,10,0.95)",
+            border: "1px solid rgba(201,168,83,0.3)",
+            color: "#c9a853",
+            backdropFilter: "blur(12px)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+            animation: "fadeInDown 0.25s ease",
+          }}
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Coming soon — stay tuned!
+        </div>
+      )}
+
+      {/* Topic Selector */}}
       <div>
         <p className="text-[11px] text-[#52473a] uppercase tracking-widest mb-2 font-medium">
           Choose your topics
@@ -145,14 +175,22 @@ export default function SubscribeForm() {
         <div className="flex flex-wrap gap-2">
           {TOPICS.map(t => {
             const active = topics.includes(t.id);
+            const locked = !LIVE_TOPICS.has(t.id);
             return (
               <button
                 key={t.id}
                 type="button"
                 onClick={() => toggleTopic(t.id)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium transition-all duration-200 border"
+                className="relative flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium transition-all duration-200 border"
                 style={
-                  active
+                  locked
+                    ? {
+                        background: "transparent",
+                        borderColor: "#1a1714",
+                        color: "#302a22",
+                        cursor: "pointer",
+                      }
+                    : active
                     ? {
                         background: "rgba(201,168,83,0.15)",
                         borderColor: "rgba(201,168,83,0.5)",
@@ -167,6 +205,14 @@ export default function SubscribeForm() {
               >
                 {TopicIcons[t.id]}
                 {t.label}
+                {locked && (
+                  <span
+                    className="ml-0.5 text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-full"
+                    style={{ background: "rgba(201,168,83,0.08)", color: "#3a3020", border: "1px solid #1e1b17" }}
+                  >
+                    Soon
+                  </span>
+                )}
               </button>
             );
           })}

@@ -141,7 +141,7 @@ export default function HomePage() {
 
             <AnimatedSection delay={140}>
               <p className="text-[17px] text-[#6b5f4a] leading-[1.7] max-w-[480px] mb-12 font-light">
-                Stay ahead of the world&apos;s most important AI developments.
+                Stay ahead of the world&apos;s most important developments.
                 Receive your Daily Intelligence Brief — the news, breakthroughs,
                 and trends that actually matter.
               </p>
@@ -205,12 +205,12 @@ export default function HomePage() {
                 <span className="text-[9px] font-mono text-emerald-400/70 tracking-widest uppercase">Story #1 Today</span>
               </div>
               <p className="text-[13px] text-[#f0ece3] font-semibold leading-snug mb-1.5">
-                ChatGPT now remembers everything about you
+                Global markets shift as new trade agreements finalize
               </p>
-              <p className="text-[11px] text-[#52473a] mb-2">OpenAI · 2h ago</p>
+              <p className="text-[11px] text-[#52473a] mb-2">Reuters · 2h ago</p>
               <div className="h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent mb-2" />
               <p className="text-[10px] text-[#52473a] leading-relaxed line-clamp-2">
-                Why it matters: AI just became a true personal assistant, not just a search tool.
+                Why it matters: Supply chains across tech and manufacturing will face immediate restructuring.
               </p>
             </div>
           </AnimatedSection>

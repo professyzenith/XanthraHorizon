@@ -167,7 +167,7 @@ export default function SubscribeForm() {
         </div>
       )}
 
-      {/* Topic Selector */}}
+      {/* Topic Selector */}
       <div>
         <p className="text-[11px] text-[#52473a] uppercase tracking-widest mb-2 font-medium">
           Choose your topics

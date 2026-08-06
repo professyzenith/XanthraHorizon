@@ -38,7 +38,9 @@ function buildWelcomeHTML(deliveryTime, timezone, unsubscribeUrl) {
 
         <!-- Graphic / Illustration Area -->
         <tr><td style="padding:20px 20px 0;text-align:center;">
-          <img src="${appUrl}/welcome-illustration.png" alt="Welcome to Xanthra Horizon" width="280" style="display:block;margin:0 auto;max-width:100%;height:auto;" />
+          <a href="${appUrl}" target="_blank" style="text-decoration:none;display:inline-block;">
+            <img src="${appUrl}/welcome-illustration.png" alt="Welcome to Xanthra Horizon" width="280" style="display:block;margin:0 auto;max-width:100%;height:auto;border:none;outline:none;" />
+          </a>
         </td></tr>
 
         <!-- Inner Content Card -->

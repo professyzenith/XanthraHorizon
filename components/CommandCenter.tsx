@@ -246,7 +246,7 @@ export default function CommandCenter() {
           <div className="p-5 flex flex-col gap-4">
             <div className="flex items-center gap-2 mb-1">
               <span className="font-mono text-[10px] text-[#52473a] tracking-widest uppercase">
-                Pipeline Metrics
+                System Metrics
               </span>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-1 gap-3">
@@ -260,7 +260,7 @@ export default function CommandCenter() {
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
                 <span className="font-mono text-[10px] text-[#10b981] tracking-widest">
-                  PIPELINE READY
+                  SYSTEM READY
                 </span>
               </div>
               <div className="space-y-1">

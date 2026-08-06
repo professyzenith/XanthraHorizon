@@ -336,7 +336,7 @@ export default function SupportWidget() {
               </div>
               <h3 className="text-lg font-bold text-[#f0ece3] mb-2">Ticket Submitted</h3>
               <p className="text-[13px] text-[#6b5f4a] leading-relaxed mb-6">
-                We&apos;ve received your message and will get back to you within 24 hours.
+                We&apos;ll review your issue and get back to you via email. Please check your inbox for updates.
               </p>
               <button
                 onClick={() => { setStep("closed"); reset(); }}

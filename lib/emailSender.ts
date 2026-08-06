@@ -280,7 +280,7 @@ export async function sendBriefingEmail(
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
   const token = signUnsubscribeToken(subscriberId);
   const unsubscribeUrl = `${appUrl}/unsubscribe?id=${subscriberId}&token=${token}`;
-  const fromEmail = process.env.RESEND_FROM_EMAIL ?? "hello@xanthrahorizon.com";
+  const fromEmail = process.env.RESEND_FROM_EMAIL ?? "hello@xanthra.space";
 
   // ⚠️  IMPORTANT: onboarding@resend.dev is a Resend sandbox address.
   // It can ONLY send to the email address registered on your Resend account.

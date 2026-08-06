@@ -40,7 +40,7 @@ const NEW_WAY = [
   "Every story explained in plain English",
   "Know exactly what happened and why it matters",
   "No ads, no scrolling, no noise",
-  "Free forever — takes 7 minutes to read",
+  "High signal, zero noise — takes 7 minutes to read",
 ];
 
 // ─── Source logos ────────────────────────────────────────────────────────────────
@@ -81,7 +81,7 @@ export default function HomePage() {
         </div>
         <span className="hidden sm:block text-[#1a1712] text-[10px]">·</span>
         <span className="hidden sm:block text-[11px] text-[#3a3020]">
-          Free forever · No credit card · Unsubscribe anytime
+          Secure delivery · Zero noise · Unsubscribe anytime
         </span>
       </div>
 
@@ -103,7 +103,7 @@ export default function HomePage() {
         <a href="#subscribe" data-hover="true"
           className="relative group flex items-center gap-1.5 text-xs font-medium text-[#8a8070] hover:text-[#f0ece3] transition-all px-5 py-2.5 rounded-full border border-[#1e1b17] hover:border-amber-500/40 bg-[#080604]/70 backdrop-blur-sm">
           <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse-soft" />
-          Start reading free
+          Initialize briefing
           <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
@@ -122,7 +122,7 @@ export default function HomePage() {
               <div className="hero-entrance hero-entrance-d3 inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-amber-500/15 bg-amber-500/5 w-fit mb-10 badge-glow">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse-soft" />
                 <span className="text-[11px] font-medium tracking-widest text-amber-300/70 uppercase">
-                  Free · Daily · For Everyone
+                  Curated · Daily · Essential
                 </span>
               </div>
             </AnimatedSection>
@@ -142,7 +142,7 @@ export default function HomePage() {
             <AnimatedSection delay={140}>
               <p className="text-[17px] text-[#6b5f4a] leading-[1.7] max-w-[480px] mb-12 font-light">
                 Stay ahead of the world&apos;s most important AI developments.
-                Receive your free Daily Intelligence Brief — the news, breakthroughs,
+                Receive your Daily Intelligence Brief — the news, breakthroughs,
                 and trends that actually matter.
               </p>
             </AnimatedSection>
@@ -152,7 +152,7 @@ export default function HomePage() {
                 {[
                   { val: "600+", label: "Sources scanned" },
                   { val: "7",    label: "Stories per day" },
-                  { val: "∞",    label: "Free forever"    },
+                  { val: "24/7",    label: "Global Coverage"    },
                 ].map((s) => (
                   <div key={s.label} className="flex flex-col gap-1">
                     <span className="text-3xl font-bold text-[#f0ece3] tracking-tight counter-glow">{s.val}</span>
@@ -170,7 +170,7 @@ export default function HomePage() {
                   background: "linear-gradient(135deg, #c9a853 0%, #d4875a 50%, #c09040 100%)",
                   boxShadow: "0 0 0 1px rgba(201,168,83,0.5), 0 12px 40px rgba(212,135,90,0.25)",
                 }}>
-                Get My Free Edition
+                Gain Access
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
@@ -448,7 +448,7 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/15 bg-amber-500/5 mb-8">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse-soft" />
                 <span className="text-[11px] font-medium text-amber-300/70 tracking-widest uppercase">
-                  Free forever · No card needed · Cancel anytime
+                  Secure delivery · Zero spam · Unsubscribe anytime
                 </span>
               </div>
 

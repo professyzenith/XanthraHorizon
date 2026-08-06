@@ -143,16 +143,13 @@ export default function SubscribeForm() {
           </>
         ) : (
           <>
-            Join Xanthra Horizon — It&apos;s Free
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
+            Gain Access ➔
           </>
         )}
       </MagneticButton>
 
       <p className="text-center text-xs text-[#52473a]">
-        Free forever · No spam · Unsubscribe anytime
+        Secure delivery · Zero spam · Unsubscribe anytime
       </p>
     </form>
   );

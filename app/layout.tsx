@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   ),
   title: "Xanthra Horizon — Know What Matters Next.",
   description:
-    "Xanthra Horizon is your free Daily Intelligence Brief — AI news, breakthroughs, and research that actually matters, curated and delivered at exactly the time you choose.",
+    "Xanthra Horizon is your Daily Intelligence Brief — AI news, breakthroughs, and research that actually matters, curated and delivered at exactly the time you choose.",
   keywords: "Xanthra Horizon, AI Research & Intelligence Digest, Daily Intelligence Brief, AI news, artificial intelligence, AI updates, stay informed about AI",
   openGraph: {
     title: "Xanthra Horizon — Know What Matters Next.",
-    description: "Your free Daily Intelligence Brief. AI breakthroughs, research, and trends — curated, ranked, and delivered to your inbox at the time you choose.",
+    description: "Your Daily Intelligence Brief. AI breakthroughs, research, and trends — curated, ranked, and delivered to your inbox at the time you choose.",
     type: "website",
     url: "/",
     images: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Xanthra Horizon — Know What Matters Next.",
-    description: "Your free Daily Intelligence Brief. AI breakthroughs, research, and trends — curated, ranked, and delivered to your inbox at the time you choose.",
+    description: "Your Daily Intelligence Brief. AI breakthroughs, research, and trends — curated, ranked, and delivered to your inbox at the time you choose.",
     images: ["/og-image.png"],
   },
   alternates: {

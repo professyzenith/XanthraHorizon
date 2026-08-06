@@ -25,14 +25,38 @@ const TIMES = [
   "22:00","23:00",
 ];
 
-const TOPICS: { id: Topic; label: string; icon: string }[] = [
-  { id: "ai_tech",     label: "AI & Tech",     icon: "⚡" },
-  { id: "geopolitics", label: "Geopolitics",   icon: "🌍" },
-  { id: "politics",    label: "Politics",      icon: "🏛" },
-  { id: "business",    label: "Business",      icon: "📈" },
-  { id: "science",     label: "Science",       icon: "🔬" },
-  { id: "sports",      label: "Sports",        icon: "🏆" },
-  { id: "health",      label: "Health",        icon: "🩺" },
+const TopicIcons: Record<Topic, JSX.Element> = {
+  ai_tech: (
+    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+  ),
+  geopolitics: (
+    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+  ),
+  politics: (
+    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
+  ),
+  business: (
+    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+  ),
+  science: (
+    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+  ),
+  sports: (
+    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 8v8m-8-8v8M6 20h12M6 4h12M4 12h16"/></svg>
+  ),
+  health: (
+    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+  ),
+};
+
+const TOPICS: { id: Topic; label: string }[] = [
+  { id: "ai_tech",     label: "AI & Tech"    },
+  { id: "geopolitics", label: "Geopolitics"  },
+  { id: "politics",    label: "Politics"     },
+  { id: "business",    label: "Business"     },
+  { id: "science",     label: "Science"      },
+  { id: "sports",      label: "Sports"       },
+  { id: "health",      label: "Health"       },
 ];
 
 function fmt(t: string) {
@@ -141,7 +165,7 @@ export default function SubscribeForm() {
                       }
                 }
               >
-                <span className="text-[13px]">{t.icon}</span>
+                {TopicIcons[t.id]}
                 {t.label}
               </button>
             );

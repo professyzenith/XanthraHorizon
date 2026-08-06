@@ -1,8 +1,18 @@
+export type Topic =
+  | "ai_tech"
+  | "geopolitics"
+  | "politics"
+  | "business"
+  | "science"
+  | "sports"
+  | "health";
+
 export interface Subscriber {
   id: string;
   email: string;
   delivery_time: string; // "HH:MM" format
   timezone: string; // IANA timezone e.g. "Asia/Kolkata"
+  topics: Topic[];
   is_active: boolean;
   created_at: string;
 }
@@ -14,6 +24,7 @@ export interface NewsArticle {
   published_at: string;
   description: string;
   hash: string;
+  topic: Topic; // which category this article belongs to
 }
 
 export interface RankedStory {
@@ -25,6 +36,7 @@ export interface RankedStory {
   summary: string;
   why_it_matters: string;
   score: number;
+  topic: Topic;
 }
 
 export interface BriefingData {
@@ -37,6 +49,7 @@ export interface SubscribePayload {
   email: string;
   delivery_time: string;
   timezone: string;
+  topics: Topic[];
 }
 
 export interface SupportTicket {
@@ -51,7 +64,7 @@ export interface SupportTicket {
 
 export interface SupportPayload {
   email: string;
-  category: string;
+  category: SupportTicket["category"];
   subject: string;
   message: string;
 }

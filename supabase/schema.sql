@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS subscribers (
   email TEXT NOT NULL UNIQUE,
   delivery_time TEXT NOT NULL DEFAULT '10:00',   -- "HH:MM" in user's local time
   timezone TEXT NOT NULL DEFAULT 'Asia/Kolkata', -- IANA timezone string
+  topics TEXT[] NOT NULL DEFAULT ARRAY['ai_tech'], -- user's chosen topic categories
   is_active BOOLEAN NOT NULL DEFAULT TRUE,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()

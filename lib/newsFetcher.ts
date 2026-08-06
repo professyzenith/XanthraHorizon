@@ -1,77 +1,93 @@
-import { NewsArticle } from "@/types";
+import { NewsArticle, Topic } from "@/types";
 import crypto from "crypto";
 
 /**
- * RSS Sources split into two tiers:
+ * AUTHENTIC SOURCES ONLY — each source is a verified, globally trusted outlet.
+ * No opinion blogs, no SEO aggregators. Every source here has:
+ *  - Editorial standards & fact-checking processes
+ *  - Recognized journalistic credibility
  *
- * TIER_1 (official AI lab blogs) — post weekly or less, use a 7-day window.
- *   High credibility (+10 score boost). Never filtered out if they have content.
+ * Sources are tagged by topic so we can filter per subscriber preference.
  *
- * TIER_2 (news aggregators) — post daily, use a 48h window.
- *   Good credibility (+3 score boost). High volume, high freshness.
+ * Tier 1 (official/primary): 7-day window — low volume but high credibility
+ * Tier 2 (news orgs):        48h window  — daily news cycle
  */
-const TIER_1_SOURCES = [
-  {
-    name: "OpenAI Blog",
-    url:  "https://openai.com/blog/rss.xml",
-  },
-  {
-    name: "Anthropic Blog",
-    url:  "https://www.anthropic.com/rss.xml",
-  },
-  {
-    name: "Google DeepMind",
-    url:  "https://deepmind.google/blog/rss.xml",
-  },
-];
 
-const TIER_2_SOURCES = [
-  /* ── North America ─────────────────────────────────────────────────────── */
-  {
-    name: "Google News - AI",
-    url:  "https://news.google.com/rss/search?q=artificial+intelligence+AI+machine+learning&hl=en-US&gl=US&ceid=US:en",
-  },
-  {
-    name: "Google News - LLM",
-    url:  "https://news.google.com/rss/search?q=ChatGPT+Claude+Gemini+LLM+language+model&hl=en-US&gl=US&ceid=US:en",
-  },
-  {
-    name: "VentureBeat AI",
-    url:  "https://venturebeat.com/category/ai/feed/",
-  },
-  {
-    name: "TechCrunch AI",
-    url:  "https://techcrunch.com/category/artificial-intelligence/feed/",
-  },
-  {
-    name: "MIT Tech Review",
-    url:  "https://www.technologyreview.com/feed/",
-  },
+interface Source {
+  name: string;
+  url: string;
+  topic: Topic;
+  tier: 1 | 2;
+}
 
-  /* ── India ──────────────────────────────────────────────────────────────
-     Backs the INDIA node on the GlobalSyncPrelude map animation.            */
-  {
-    name: "Google News - India AI",
-    url:  "https://news.google.com/rss/search?q=artificial+intelligence+AI+machine+learning+India&hl=en-IN&gl=IN&ceid=IN:en",
-  },
-  {
-    name: "Analytics Vidhya",
-    url:  "https://www.analyticsvidhya.com/blog/feed/",
-  },
+const SOURCES: Source[] = [
+  /* ══════════════════════════════════════════════════════════
+     AI & TECHNOLOGY
+     Sources: Official AI lab blogs + top-tier tech journalism
+     ══════════════════════════════════════════════════════════ */
+  { name: "OpenAI Blog",           url: "https://openai.com/blog/rss.xml",                                                                                                 topic: "ai_tech", tier: 1 },
+  { name: "Anthropic Blog",        url: "https://www.anthropic.com/rss.xml",                                                                                               topic: "ai_tech", tier: 1 },
+  { name: "Google DeepMind",       url: "https://deepmind.google/blog/rss.xml",                                                                                            topic: "ai_tech", tier: 1 },
+  { name: "MIT Technology Review", url: "https://www.technologyreview.com/feed/",                                                                                          topic: "ai_tech", tier: 2 },
+  { name: "VentureBeat AI",        url: "https://venturebeat.com/category/ai/feed/",                                                                                       topic: "ai_tech", tier: 2 },
+  { name: "TechCrunch AI",         url: "https://techcrunch.com/category/artificial-intelligence/feed/",                                                                   topic: "ai_tech", tier: 2 },
+  { name: "Wired Technology",      url: "https://www.wired.com/feed/category/science/latest/rss",                                                                          topic: "ai_tech", tier: 2 },
+  { name: "The Verge Tech",        url: "https://www.theverge.com/rss/index.xml",                                                                                          topic: "ai_tech", tier: 2 },
 
-  /* ── East Asia + S.E. Asia ──────────────────────────────────────────────
-     Backs the EAST ASIA and S.E. ASIA nodes on the map.                     */
-  {
-    name: "Google News - Asia AI",
-    url:  "https://news.google.com/rss/search?q=artificial+intelligence+AI+China+Japan+Korea+Singapore+tech&hl=en&gl=SG&ceid=SG:en",
-  },
+  /* ══════════════════════════════════════════════════════════
+     GEOPOLITICS & WORLD NEWS
+     Sources: Reuters, AP, BBC — the gold standard for wire news
+     ══════════════════════════════════════════════════════════ */
+  { name: "Reuters World",         url: "https://feeds.reuters.com/reuters/worldNews",                                                                                      topic: "geopolitics", tier: 2 },
+  { name: "BBC World",             url: "http://feeds.bbci.co.uk/news/world/rss.xml",                                                                                      topic: "geopolitics", tier: 2 },
+  { name: "AP News World",         url: "https://apnews.com/rss/world-news",                                                                                               topic: "geopolitics", tier: 2 },
+  { name: "Al Jazeera",            url: "https://www.aljazeera.com/xml/rss/all.xml",                                                                                       topic: "geopolitics", tier: 2 },
+  { name: "The Guardian World",    url: "https://www.theguardian.com/world/rss",                                                                                            topic: "geopolitics", tier: 2 },
 
-  /* ── Middle East ────────────────────────────────────────────────────────
-     Backs the MIDDLE EAST node on the map (UAE, Saudi, Gulf AI push).       */
-  {
-    name: "Google News - Middle East AI",
-    url:  "https://news.google.com/rss/search?q=artificial+intelligence+AI+UAE+Saudi+Arabia+Middle+East+tech&hl=en&gl=AE&ceid=AE:en",
-  },
+  /* ══════════════════════════════════════════════════════════
+     POLITICS
+     Sources: Established political journalism & wire services
+     ══════════════════════════════════════════════════════════ */
+  { name: "Reuters Politics",      url: "https://feeds.reuters.com/Reuters/PoliticsNews",                                                                                  topic: "politics", tier: 2 },
+  { name: "BBC Politics",          url: "http://feeds.bbci.co.uk/news/politics/rss.xml",                                                                                   topic: "politics", tier: 2 },
+  { name: "AP Politics",           url: "https://apnews.com/rss/politics",                                                                                                 topic: "politics", tier: 2 },
+  { name: "The Guardian Politics", url: "https://www.theguardian.com/politics/rss",                                                                                        topic: "politics", tier: 2 },
+
+  /* ══════════════════════════════════════════════════════════
+     BUSINESS & FINANCE
+     Sources: Reuters, Bloomberg-level financial reporting
+     ══════════════════════════════════════════════════════════ */
+  { name: "Reuters Business",      url: "https://feeds.reuters.com/reuters/businessNews",                                                                                   topic: "business", tier: 2 },
+  { name: "BBC Business",          url: "http://feeds.bbci.co.uk/news/business/rss.xml",                                                                                   topic: "business", tier: 2 },
+  { name: "Financial Times",       url: "https://www.ft.com/rss/home",                                                                                                     topic: "business", tier: 1 },
+  { name: "The Economist",         url: "https://www.economist.com/finance-and-economics/rss.xml",                                                                         topic: "business", tier: 1 },
+
+  /* ══════════════════════════════════════════════════════════
+     SCIENCE
+     Sources: Nature, Science, peer-reviewed & science journalism
+     ══════════════════════════════════════════════════════════ */
+  { name: "Nature News",           url: "https://www.nature.com/nature.rss",                                                                                               topic: "science", tier: 1 },
+  { name: "Science AAAS",          url: "https://www.science.org/rss/news_current.xml",                                                                                    topic: "science", tier: 1 },
+  { name: "BBC Science",           url: "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml",                                                                    topic: "science", tier: 2 },
+  { name: "Scientific American",   url: "https://www.scientificamerican.com/platform/syndication/rss/",                                                                    topic: "science", tier: 2 },
+
+  /* ══════════════════════════════════════════════════════════
+     SPORTS
+     Sources: ESPN, BBC Sport — established sports journalism
+     ══════════════════════════════════════════════════════════ */
+  { name: "ESPN Top Stories",      url: "https://www.espn.com/espn/rss/news",                                                                                              topic: "sports", tier: 2 },
+  { name: "BBC Sport",             url: "http://feeds.bbci.co.uk/sport/rss.xml?edition=uk",                                                                                topic: "sports", tier: 2 },
+  { name: "Reuters Sports",        url: "https://feeds.reuters.com/reuters/sportsNews",                                                                                    topic: "sports", tier: 2 },
+  { name: "AP Sports",             url: "https://apnews.com/rss/sports",                                                                                                   topic: "sports", tier: 2 },
+
+  /* ══════════════════════════════════════════════════════════
+     HEALTH
+     Sources: WHO, CDC, medical journalism from trusted outlets
+     ══════════════════════════════════════════════════════════ */
+  { name: "WHO News",              url: "https://www.who.int/rss-feeds/news-english.xml",                                                                                  topic: "health", tier: 1 },
+  { name: "BBC Health",            url: "http://feeds.bbci.co.uk/news/health/rss.xml",                                                                                     topic: "health", tier: 2 },
+  { name: "Reuters Health",        url: "https://feeds.reuters.com/reuters/healthNews",                                                                                    topic: "health", tier: 2 },
+  { name: "The Lancet",            url: "https://www.thelancet.com/rssfeed/lancet_online.xml",                                                                             topic: "health", tier: 1 },
 ];
 
 // Generate a unique hash for deduplication
@@ -82,28 +98,25 @@ function generateHash(title: string, url: string): string {
     .digest("hex");
 }
 
-// Fix common RSS encoding artifacts: Windows-1252 smart quotes/dashes
-// rendered as garbled UTF-8 sequences in some feeds
+// Fix common RSS encoding artifacts
 function cleanText(s: string): string {
   return s
-    .replace(/\u00e2\u0080\u0099/g, "\u2019") // â€™ -> right single quote
-    .replace(/\u00e2\u0080\u009c/g, "\u201c") // â€œ -> left double quote
-    .replace(/\u00e2\u0080\u009d/g, "\u201d") // â€  -> right double quote
-    .replace(/\u00e2\u0080\u0094/g, "\u2014") // â€" -> em dash
-    .replace(/\u00e2\u0080\u0093/g, "\u2013") // â€" -> en dash
-    .replace(/\u00e2\u0080\u00a6/g, "\u2026") // â€¦ -> ellipsis
-    .replace(/[\uFFFD]/g, "")                 // drop replacement char
+    .replace(/\u00e2\u0080\u0099/g, "\u2019")
+    .replace(/\u00e2\u0080\u009c/g, "\u201c")
+    .replace(/\u00e2\u0080\u009d/g, "\u201d")
+    .replace(/\u00e2\u0080\u0094/g, "\u2014")
+    .replace(/\u00e2\u0080\u0093/g, "\u2013")
+    .replace(/\u00e2\u0080\u00a6/g, "\u2026")
+    .replace(/[\uFFFD]/g, "")
     .trim();
 }
 
 // Parse a single RSS feed and return articles
-async function fetchRSSFeed(
-  source: { name: string; url: string }
-): Promise<NewsArticle[]> {
+async function fetchRSSFeed(source: Source): Promise<NewsArticle[]> {
   try {
     const response = await fetch(source.url, {
-      headers: { "User-Agent": "Xanthra-Horizon/1.0" },
-      signal: AbortSignal.timeout(10000), // 10 second timeout
+      headers: { "User-Agent": "XanthraHorizon/2.0 (+https://xanthrahorizon.vercel.app)" },
+      signal: AbortSignal.timeout(10000),
     });
 
     if (!response.ok) return [];
@@ -111,7 +124,6 @@ async function fetchRSSFeed(
     const text = await response.text();
     const articles: NewsArticle[] = [];
 
-    // Extract items using regex (avoids heavy XML parser dependency)
     const itemRegex    = /<item>([\s\S]*?)<\/item>/g;
     const titleRegex   = /<title><!\[CDATA\[(.*?)\]\]>|<title>(.*?)<\/title>/;
     const linkRegex    = /<link>(.*?)<\/link>|<guid[^>]*>(https?:\/\/[^<]+)<\/guid>/;
@@ -136,7 +148,6 @@ async function fetchRSSFeed(
 
       const title = cleanText(rawTitle);
 
-      // Strip HTML tags then fix encoding
       const description = cleanText(
         rawDesc
           .replace(/<[^>]+>/g, " ")
@@ -151,7 +162,6 @@ async function fetchRSSFeed(
           .slice(0, 500)
       );
 
-      // Parse date safely
       const parsedDate  = new Date(pubDate);
       const publishedAt = isNaN(parsedDate.getTime())
         ? new Date().toISOString()
@@ -164,6 +174,7 @@ async function fetchRSSFeed(
         published_at: publishedAt,
         description,
         hash: generateHash(title, url),
+        topic: source.topic,
       });
     }
 
@@ -174,50 +185,45 @@ async function fetchRSSFeed(
   }
 }
 
-// Main function: fetch from all sources with tier-aware time windows
-export async function fetchAllAINews(): Promise<NewsArticle[]> {
+/**
+ * Fetch news for a specific set of topics.
+ * If topics is empty or undefined, fetch ALL topics.
+ */
+export async function fetchNewsByTopics(topics?: Topic[]): Promise<NewsArticle[]> {
   const cutoff7d  = new Date(Date.now() - 7  * 24 * 60 * 60 * 1000);
   const cutoff48h = new Date(Date.now() - 48 * 60 * 60 * 1000);
 
-  // Fetch both tiers in parallel
-  const [tier1Results, tier2Results] = await Promise.all([
-    Promise.allSettled(TIER_1_SOURCES.map((s) => fetchRSSFeed(s))),
-    Promise.allSettled(TIER_2_SOURCES.map((s) => fetchRSSFeed(s))),
-  ]);
+  // Filter sources to only those matching the requested topics
+  const activeSources = topics && topics.length > 0
+    ? SOURCES.filter(s => topics.includes(s.topic))
+    : SOURCES;
+
+  const results = await Promise.allSettled(activeSources.map(s => fetchRSSFeed(s)));
 
   const allArticles: NewsArticle[] = [];
 
-  // Tier 1: 7-day window — keep recent official blog posts even if old
-  for (const result of tier1Results) {
-    if (result.status === "fulfilled") {
-      const filtered = result.value.filter(
-        (a) => new Date(a.published_at) > cutoff7d
-      );
-      allArticles.push(...filtered);
-    }
-  }
+  results.forEach((result, i) => {
+    if (result.status !== "fulfilled") return;
+    const source = activeSources[i];
+    const cutoff = source.tier === 1 ? cutoff7d : cutoff48h;
+    const filtered = result.value.filter(a => new Date(a.published_at) > cutoff);
+    allArticles.push(...filtered);
+  });
 
-  // Tier 2: 48h window — only very recent news aggregator articles
-  for (const result of tier2Results) {
-    if (result.status === "fulfilled") {
-      const filtered = result.value.filter(
-        (a) => new Date(a.published_at) > cutoff48h
-      );
-      allArticles.push(...filtered);
-    }
-  }
-
-  // Safety net: if we still have fewer than 5 articles total,
-  // fall back to all unfiltered articles from all sources
+  // Safety net fallback
   if (allArticles.length < 5) {
     console.warn("Too few articles after filtering — using unfiltered fallback");
-    const allResults = [...tier1Results, ...tier2Results];
     const fallback: NewsArticle[] = [];
-    for (const result of allResults) {
-      if (result.status === "fulfilled") fallback.push(...result.value);
-    }
+    results.forEach(r => {
+      if (r.status === "fulfilled") fallback.push(...r.value);
+    });
     return fallback;
   }
 
   return allArticles;
+}
+
+// Legacy export for backward compatibility with test-pipeline and send-briefing
+export async function fetchAllAINews(): Promise<NewsArticle[]> {
+  return fetchNewsByTopics();
 }

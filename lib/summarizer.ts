@@ -86,32 +86,35 @@ Description: ${stripHtml(s.description) || "No description available."}`
     )
     .join("\n\n");
 
-  const prompt = `You are an expert AI analyst writing for Xanthra Horizon, a premium daily intelligence edition read by anyone curious about AI — students, professionals, founders, executives, and everyday people who want to stay informed without information overload.
+  const prompt = `You are a senior editor at a world-class intelligence briefing service called Xanthra Horizon. You write for a globally curious audience — professionals, students, founders, and everyday people who want to understand what matters in the world today.
 
-Analyze these ${top.length} AI news stories and return ONLY a valid JSON object. No markdown, no code blocks, just raw JSON.
+Analyze these ${top.length} news stories (which may span AI & technology, geopolitics, politics, business, science, sports, and health) and return ONLY a valid JSON object. No markdown, no code blocks, just raw JSON.
 
 Stories:
 ${storiesText}
 
 Return this exact JSON structure:
 {
-  "executive_brief": "2-3 sentence big-picture summary of today's most important AI developments",
+  "executive_brief": "2-3 sentence big-picture synthesis of today's most important developments across all topics",
   "stories": [
     {
       "index": 1,
       "summary": "2-sentence factual summary of what happened",
-      "why_it_matters": "1-2 sentence insight on the business/technical significance for AI builders"
+      "why_it_matters": "1-2 sentence insight on why this matters to a globally informed reader"
     }
   ]
 }
 
 Rules:
-- executive_brief should synthesize trends, not just list stories
-- summaries should be precise, not fluffy
-- why_it_matters should give real insight for technical professionals
-- Use confident, direct language — no hedging`;
+- Only include verified facts from the story itself — NEVER add speculation or unconfirmed claims
+- executive_brief should synthesize themes across all topics in a compelling, smart way
+- summaries should be precise, factual, and direct — no filler words
+- why_it_matters should give genuine insight on real-world impact
+- Use confident, authoritative language — no hedging, no "it could be said that"
+- Treat every topic equally — sports, health, and geopolitics are as important as AI`;
 
-  let executive_brief = "Today's AI landscape shows continued rapid development across models, tools, and research.";
+  let executive_brief = "Today's intelligence brief covers key developments across global news, technology, and world events.";
+
   // Use a positional array instead of an index-keyed map so that Gemini
   // returning 0-based indices, reordered items, or omitting "index" entirely
   // never causes every lookup to miss and fall through to the HTML fallback.
@@ -146,15 +149,14 @@ Rules:
     source: s.source,
     published_at: s.published_at,
     description: s.description,
-    // Use positional lookup; fall back to a clean-text excerpt (HTML stripped)
-    // so raw RSS markup never appears in the email even when Gemini fails.
     summary:
       summaries[i]?.summary ||
       stripHtml(s.description).slice(0, 200) + "…",
     why_it_matters:
       summaries[i]?.why_it_matters ||
-      "This development contributes to the rapidly evolving AI ecosystem.",
+      "This development is worth tracking as part of the global news landscape.",
     score: s.score,
+    topic: s.topic,
   }));
 
   return {

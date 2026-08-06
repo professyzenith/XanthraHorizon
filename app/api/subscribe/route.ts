@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const body: SubscribePayload = await req.json();
-    const { email, delivery_time, timezone } = body;
+    const { email, delivery_time, timezone, topics } = body;
 
     // Validate presence
     if (!email || !delivery_time || !timezone) {
@@ -53,6 +53,12 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Validate topics
+    const VALID_TOPICS = ["ai_tech", "geopolitics", "politics", "business", "science", "sports", "health"];
+    const cleanTopics = Array.isArray(topics) && topics.length > 0
+      ? topics.filter((t: string) => VALID_TOPICS.includes(t))
+      : ["ai_tech"]; // default to AI if none selected
 
     // Validate lengths
     if (email.length > 254 || timezone.length > 64 || delivery_time.length > 5) {
@@ -98,7 +104,7 @@ export async function POST(req: NextRequest) {
     const { error: upsertError } = await supabaseAdmin
       .from("subscribers")
       .upsert(
-        { email: normalizedEmail, delivery_time, timezone, is_active: true },
+        { email: normalizedEmail, delivery_time, timezone, topics: cleanTopics, is_active: true },
         { onConflict: "email" }
       );
 

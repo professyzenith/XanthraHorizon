@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
-import { fetchAllAINews } from "@/lib/newsFetcher";
+import { fetchNewsByTopics } from "@/lib/newsFetcher";
 import { deduplicateArticles } from "@/lib/deduplicator";
 import { rankArticles } from "@/lib/ranker";
 import { generateBriefing } from "@/lib/summarizer";
@@ -19,8 +19,8 @@ export async function POST(req: NextRequest) {
   try {
     console.log("[Xanthra Horizon] Starting Daily Intelligence Brief pipeline...");
 
-    // Step 1: Fetch news from all sources
-    const rawArticles = await fetchAllAINews();
+    // Step 1: Fetch news from all sources (common pool — personalization filters later per subscriber)
+    const rawArticles = await fetchNewsByTopics(); // all topics
     console.log(`Fetched ${rawArticles.length} raw articles`);
 
     if (rawArticles.length === 0) {

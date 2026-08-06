@@ -1,6 +1,7 @@
 "use client";
 import { useState, FormEvent } from "react";
 import MagneticButton from "./MagneticButton";
+import { Topic } from "@/types";
 
 const TIMEZONES = [
   { label: "India (IST)", value: "Asia/Kolkata" },
@@ -24,6 +25,16 @@ const TIMES = [
   "22:00","23:00",
 ];
 
+const TOPICS: { id: Topic; label: string; icon: string }[] = [
+  { id: "ai_tech",     label: "AI & Tech",     icon: "⚡" },
+  { id: "geopolitics", label: "Geopolitics",   icon: "🌍" },
+  { id: "politics",    label: "Politics",      icon: "🏛" },
+  { id: "business",    label: "Business",      icon: "📈" },
+  { id: "science",     label: "Science",       icon: "🔬" },
+  { id: "sports",      label: "Sports",        icon: "🏆" },
+  { id: "health",      label: "Health",        icon: "🩺" },
+];
+
 function fmt(t: string) {
   const [h, m] = t.split(":").map(Number);
   const ap = h >= 12 ? "PM" : "AM";
@@ -36,8 +47,17 @@ export default function SubscribeForm() {
   const [email, setEmail] = useState("");
   const [time, setTime] = useState("10:00");
   const [tz, setTz] = useState("Asia/Kolkata");
+  const [topics, setTopics] = useState<Topic[]>(["ai_tech"]);
   const [state, setState] = useState<State>("idle");
   const [msg, setMsg] = useState("");
+
+  function toggleTopic(id: Topic) {
+    setTopics(prev =>
+      prev.includes(id)
+        ? prev.length > 1 ? prev.filter(t => t !== id) : prev // must keep at least 1
+        : [...prev, id]
+    );
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -47,7 +67,7 @@ export default function SubscribeForm() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim(), delivery_time: time, timezone: tz }),
+        body: JSON.stringify({ email: email.trim(), delivery_time: time, timezone: tz, topics }),
       });
       const data = await res.json();
       if (!res.ok || data.error) {
@@ -92,6 +112,42 @@ export default function SubscribeForm() {
         disabled={state === "loading"}
         className="w-full px-4 py-3.5 bg-[#0c0a08] border border-[#221e19] rounded-xl text-[#f0ece3] placeholder-[#2a2318] text-sm focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-all disabled:opacity-50 hover:border-[#2a2318]"
       />
+
+      {/* Topic Selector */}
+      <div>
+        <p className="text-[11px] text-[#52473a] uppercase tracking-widest mb-2 font-medium">
+          Choose your topics
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {TOPICS.map(t => {
+            const active = topics.includes(t.id);
+            return (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => toggleTopic(t.id)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium transition-all duration-200 border"
+                style={
+                  active
+                    ? {
+                        background: "rgba(201,168,83,0.15)",
+                        borderColor: "rgba(201,168,83,0.5)",
+                        color: "#c9a853",
+                      }
+                    : {
+                        background: "transparent",
+                        borderColor: "#1e1b17",
+                        color: "#52473a",
+                      }
+                }
+              >
+                <span className="text-[13px]">{t.icon}</span>
+                {t.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
 
       {/* Time + Timezone */}
       <div className="grid grid-cols-2 gap-3">

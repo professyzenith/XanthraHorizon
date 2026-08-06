@@ -80,7 +80,9 @@ export default function HorizonReveal() {
     const signals: Signal[] = SIG_DATA.map(d => ({ ...d, progress: 0, opacity: 0 }));
 
     /* Star field — sparse, barely there */
-    const stars = Array.from({ length: 170 }, () => ({
+    const isMobile = window.innerWidth < 768;
+    const starCount = isMobile ? 40 : 170;
+    const stars = Array.from({ length: starCount }, () => ({
       x:  Math.random(),
       y:  Math.random() * 0.60,
       r:  0.1 + Math.random() * 0.5,

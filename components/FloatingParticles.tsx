@@ -46,7 +46,9 @@ export default function FloatingParticles() {
     }
 
     // seed initial particles scattered across screen
-    for (let i = 0; i < 55; i++) {
+    const isMobile = window.innerWidth < 768;
+    const initialCount = isMobile ? 20 : 55;
+    for (let i = 0; i < initialCount; i++) {
       const p = spawn();
       p.y = Math.random() * window.innerHeight;
       p.alpha = Math.random() * 0.5;
@@ -58,7 +60,8 @@ export default function FloatingParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Occasionally spawn new
-      if (Math.random() < 0.18) particles.push(spawn());
+      const spawnRate = isMobile ? 0.05 : 0.18;
+      if (Math.random() < spawnRate) particles.push(spawn());
 
       particles = particles.filter((p) => {
         p.x += p.vx;
@@ -79,14 +82,16 @@ export default function FloatingParticles() {
         ctx.fillStyle = p.color + p.alpha + ")";
         ctx.fill();
 
-        // soft glow
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
-        g.addColorStop(0, p.color + (p.alpha * 0.3) + ")");
-        g.addColorStop(1, p.color + "0)");
-        ctx.fillStyle = g;
-        ctx.fill();
+        // soft glow - skip on mobile to save GPU/battery
+        if (!isMobile) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+          const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
+          g.addColorStop(0, p.color + (p.alpha * 0.3) + ")");
+          g.addColorStop(1, p.color + "0)");
+          ctx.fillStyle = g;
+          ctx.fill();
+        }
 
         return true;
       });

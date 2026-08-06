@@ -1,5 +1,6 @@
 "use client";
 import { useState, FormEvent } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import MagneticButton from "./MagneticButton";
 import { Topic } from "@/types";
 
@@ -70,14 +71,43 @@ function fmt(t: string) {
 
 type State = "idle" | "loading" | "success" | "error";
 
+// ─── Google Sign-In Button ────────────────────────────────────────────────────
+function GoogleSignInButton({ loading }: { loading: boolean }) {
+  return (
+    <button
+      type="button"
+      onClick={() => signIn("google")}
+      disabled={loading}
+      className="w-full flex items-center justify-center gap-3 py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+      style={{
+        background: "#fff",
+        color: "#1a1a1a",
+        boxShadow: "0 0 0 1px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.12)",
+      }}
+    >
+      {/* Google Logo SVG */}
+      <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+        <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
+        <path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+        <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+      </svg>
+      {loading ? "Signing in…" : "Continue with Google"}
+    </button>
+  );
+}
+
+// ─── Main Component ────────────────────────────────────────────────────────────
 export default function SubscribeForm() {
-  const [email, setEmail] = useState("");
+  const { data: session, status } = useSession();
   const [time, setTime] = useState("10:00");
   const [tz, setTz] = useState("Asia/Kolkata");
   const [topics, setTopics] = useState<Topic[]>(["ai_tech"]);
   const [state, setState] = useState<State>("idle");
   const [msg, setMsg] = useState("");
   const [comingSoon, setComingSoon] = useState(false);
+
+  const isAuthLoading = status === "loading";
 
   function showComingSoon() {
     setComingSoon(true);
@@ -88,20 +118,26 @@ export default function SubscribeForm() {
     if (!LIVE_TOPICS.has(id)) { showComingSoon(); return; }
     setTopics(prev =>
       prev.includes(id)
-        ? prev.length > 1 ? prev.filter(t => t !== id) : prev // must keep at least 1
+        ? prev.length > 1 ? prev.filter(t => t !== id) : prev
         : [...prev, id]
     );
   }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (!session?.user?.email) return;
     setState("loading");
     setMsg("");
     try {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim(), delivery_time: time, timezone: tz, topics }),
+        body: JSON.stringify({
+          email: session.user.email,
+          delivery_time: time,
+          timezone: tz,
+          topics,
+        }),
       });
       const data = await res.json();
       if (!res.ok || data.error) {
@@ -111,13 +147,13 @@ export default function SubscribeForm() {
       }
       setState("success");
       setMsg(data.message ?? "You're subscribed!");
-      setEmail("");
     } catch {
       setState("error");
       setMsg("Network error. Please check your connection.");
     }
   }
 
+  // ── Success Screen ────────────────────────────────────────────────────────
   if (state === "success") {
     return (
       <div className="text-center py-6">
@@ -134,18 +170,65 @@ export default function SubscribeForm() {
 
   const selectClass = "w-full px-3.5 py-3 bg-[#0c0a08] border border-[#221e19] rounded-xl text-[#c4b89a] text-sm focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-all appearance-none cursor-pointer hover:border-[#2a2318]";
 
+  // ── Step 1: Not signed in — show Google button ────────────────────────────
+  if (!session) {
+    return (
+      <div className="space-y-4">
+        {/* Coming Soon Toast */}
+        {comingSoon && (
+          <div
+            className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-5 py-3 rounded-full text-sm font-medium"
+            style={{
+              background: "rgba(20,16,10,0.95)",
+              border: "1px solid rgba(201,168,83,0.3)",
+              color: "#c9a853",
+              backdropFilter: "blur(12px)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+            }}
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Coming soon — stay tuned!
+          </div>
+        )}
+
+        <p className="text-center text-xs text-[#52473a] mb-1">
+          Sign in with Google to subscribe. No passwords needed.
+        </p>
+        <GoogleSignInButton loading={isAuthLoading} />
+        <p className="text-center text-xs text-[#52473a]">
+          Secure delivery · Zero spam · Unsubscribe anytime
+        </p>
+      </div>
+    );
+  }
+
+  // ── Step 2: Signed in — show the preferences form ────────────────────────
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
-      {/* Email */}
-      <input
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="you@company.com"
-        disabled={state === "loading"}
-        className="w-full px-4 py-3.5 bg-[#0c0a08] border border-[#221e19] rounded-xl text-[#f0ece3] placeholder-[#2a2318] text-sm focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-all disabled:opacity-50 hover:border-[#2a2318]"
-      />
+
+      {/* Signed-in user badge */}
+      <div
+        className="flex items-center gap-3 px-4 py-3 rounded-xl"
+        style={{ background: "rgba(16,185,129,0.06)", border: "1px solid rgba(16,185,129,0.2)" }}
+      >
+        {session.user?.image && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={session.user.image} alt="avatar" className="w-7 h-7 rounded-full" referrerPolicy="no-referrer" />
+        )}
+        <div className="flex-1 min-w-0">
+          <p className="text-[12px] text-emerald-400 font-semibold">Verified with Google ✓</p>
+          <p className="text-[11px] text-[#8a8070] truncate">{session.user?.email}</p>
+        </div>
+        <button
+          type="button"
+          onClick={() => signOut()}
+          className="text-[10px] text-[#52473a] hover:text-[#8a8070] transition-colors"
+        >
+          Switch
+        </button>
+      </div>
 
       {/* Coming Soon Toast */}
       {comingSoon && (
@@ -157,7 +240,6 @@ export default function SubscribeForm() {
             color: "#c9a853",
             backdropFilter: "blur(12px)",
             boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
-            animation: "fadeInDown 0.25s ease",
           }}
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -184,23 +266,10 @@ export default function SubscribeForm() {
                 className="relative flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium transition-all duration-200 border"
                 style={
                   locked
-                    ? {
-                        background: "transparent",
-                        borderColor: "#1a1714",
-                        color: "#302a22",
-                        cursor: "pointer",
-                      }
+                    ? { background: "transparent", borderColor: "#1a1714", color: "#302a22", cursor: "pointer" }
                     : active
-                    ? {
-                        background: "rgba(201,168,83,0.15)",
-                        borderColor: "rgba(201,168,83,0.5)",
-                        color: "#c9a853",
-                      }
-                    : {
-                        background: "transparent",
-                        borderColor: "#1e1b17",
-                        color: "#52473a",
-                      }
+                    ? { background: "rgba(201,168,83,0.15)", borderColor: "rgba(201,168,83,0.5)", color: "#c9a853" }
+                    : { background: "transparent", borderColor: "#1e1b17", color: "#52473a" }
                 }
               >
                 {TopicIcons[t.id]}
@@ -268,9 +337,7 @@ export default function SubscribeForm() {
             Subscribing…
           </>
         ) : (
-          <>
-            Gain Access ➔
-          </>
+          <>Gain Access ➔</>
         )}
       </MagneticButton>
 

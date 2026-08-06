@@ -46,7 +46,7 @@ I built **Xanthra Horizon** to solve this. It's a fully automated, elite-tier in
 
 Instead of you hunting for news, Xanthra Horizon wakes up every hour, checks if it's your preferred delivery time, and then independently crawls the world's top premium sources (Bloomberg, Reuters, AP News, Wall Street Journal). It removes duplicate coverage using mathematical similarity algorithms, scores the articles by source authority and recency, and then feeds the absolute top seven global stories to Google Gemini for concise summarization and **Strategic Impact** analysis.
 
-The resulting digest feels like a $10,000/year premium intelligence brief, delivered to your inbox for exactly $0. 
+The result is a meticulously curated, high-signal intelligence brief that cuts through the noise—delivered directly to your inbox for exactly $0.
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0a0805,1a140a,c9a853&height=60&section=header" alt="" width="100%" />
 

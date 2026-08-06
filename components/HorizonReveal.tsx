@@ -58,14 +58,14 @@ export default function HorizonReveal() {
     /* ── Accessibility & Session fast-exit ─────────────────────────────── */
     if (
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      sessionStorage.getItem("horizon_intro_played")
+      localStorage.getItem("horizon_intro_played")
     ) {
       document.documentElement.classList.add("horizon-revealed");
       if (overlayRef.current) overlayRef.current.style.display = "none";
       return;
     }
     
-    sessionStorage.setItem("horizon_intro_played", "true");
+    localStorage.setItem("horizon_intro_played", "true");
 
     const overlay = overlayRef.current!;
     const cv      = canvasRef.current!;

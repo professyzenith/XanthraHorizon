@@ -75,9 +75,9 @@ export async function POST(req: NextRequest) {
         const [subH, subM] = sub.delivery_time.split(":").map(Number);
         const diffMinutes  = Math.abs(subH * 60 + subM - (localHour * 60 + localMinute));
 
-        // GitHub Actions cron can be delayed by 5-10 minutes. 
-        // 15-minute window prevents skips while avoiding overlapping with the next 30-min cron run.
-        return diffMinutes <= 15;
+        // GitHub Actions cron can be delayed by 10-25 minutes under high load. 
+        // 30-minute window ensures we don't skip an email even if the cron runner is severely delayed.
+        return diffMinutes <= 30;
       } catch {
         return false;
       }

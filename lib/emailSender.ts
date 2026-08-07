@@ -134,9 +134,9 @@ function buildEmailHTML(briefing: BriefingData, unsubscribeUrl: string): string 
     <div style="margin-bottom:24px;padding:24px;background:#0e0c0a;border:1px solid #1e1b17;border-radius:14px;">
 
       <!-- Story header -->
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-        <span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:linear-gradient(135deg,#c9a853,#d4875a);border-radius:6px;color:#1a1208;font-size:11px;font-weight:700;font-family:monospace;flex-shrink:0;">${i + 1}</span>
-        <span style="background:#1a1712;color:#c9a853;font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;letter-spacing:0.06em;font-family:monospace;border:1px solid #2a2318;">${htmlEscape(story.source)}</span>
+      <div style="margin-bottom:14px;">
+        <span style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:linear-gradient(135deg,#c9a853,#d4875a);border-radius:6px;color:#1a1208;font-size:11px;font-weight:700;font-family:monospace;vertical-align:middle;margin-right:10px;">${i + 1}</span>
+        <span style="display:inline-block;background:#1a1712;color:#c9a853;font-size:10px;font-weight:600;padding:4px 9px;border-radius:20px;letter-spacing:0.06em;font-family:monospace;border:1px solid #2a2318;vertical-align:middle;">${htmlEscape(story.source)}</span>
       </div>
 
       <!-- Story title -->

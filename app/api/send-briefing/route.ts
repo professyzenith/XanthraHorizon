@@ -110,79 +110,70 @@ export async function POST(req: NextRequest) {
       crossDayFiltered = unique;
     }
 
-    // Step 3: Rank
-    const ranked = rankArticles(crossDayFiltered);
-
-    // Step 4: Generate AI briefing (summaries + why it matters)
-    const briefing = await generateBriefing(ranked, 7);
-    console.log("[Xanthra Horizon] Daily Intelligence Brief generated successfully");
-
-    // Step 4b: Persist the top 7 story hashes so they won't appear tomorrow
-    const topHashes = briefing.stories.map((s) => ({
-      hash:   ranked.find((r) => r.title === s.title)?.hash ?? "",
-      title:  s.title,
-      url:    s.url,
-      source: s.source,
-    })).filter((r) => r.hash);
-
-    if (topHashes.length > 0) {
-      await supabaseAdmin
-        .from("articles_seen")
-        .upsert(topHashes, { onConflict: "hash", ignoreDuplicates: true })
-        .then(({ error }) => {
-          if (error) console.warn("[send-briefing] articles_seen upsert error:", error.message);
-        });
+    // Group subscribers by their unique topics
+    const groups = new Map<string, typeof targetSubscribers>();
+    for (const sub of targetSubscribers) {
+      const topicKey = JSON.stringify([...(sub.topics || [])].sort());
+      if (!groups.has(topicKey)) groups.set(topicKey, []);
+      groups.get(topicKey)?.push(sub);
     }
 
-    // Step 4c: Persist the briefing itself so the website can display it
-    await supabaseAdmin
-      .from("briefings")
-      .insert({
-        date:            briefing.date,
-        executive_brief: briefing.executive_brief,
-        stories:         briefing.stories,
-      })
-      .then(({ error }) => {
-        if (error) console.warn("[send-briefing] briefings insert error:", error.message);
-        else       console.log("[send-briefing] Briefing persisted to DB");
-      });
+    const allFailures: any[] = [];
+    let totalSent = 0;
+    let totalFailed = 0;
 
+    for (const [topicKey, subscribersInGroup] of groups) {
+      const topics = JSON.parse(topicKey);
+      const groupArticles = crossDayFiltered.filter((a) => 
+        topics.length === 0 || topics.includes(a.topic)
+      );
 
-    // Step 6: Send emails
-    console.log(`Sending emails to ${targetSubscribers.length} subscribers...`);
-    const results = await Promise.allSettled(
-      targetSubscribers.map((sub) =>
-        sendBriefingEmail(sub.email, briefing, sub.id)
-      )
-    );
+      // Step 3: Rank
+      const ranked = rankArticles(groupArticles);
 
-    const sent = results.filter(
-      (r) => r.status === "fulfilled" && r.value.success
-    ).length;
-    const failed = results.length - sent;
+      // Step 4: Generate AI briefing (summaries + why it matters)
+      const briefing = await generateBriefing(ranked, 7);
+      console.log(`[Xanthra Horizon] Briefing generated for topics: ${topicKey}`);
 
-    // Collect per-failure details so the response is immediately actionable
-    const failures = results
-      .map((r, i) => ({
-        subscriber: targetSubscribers[i].email.replace(/(.{3}).*(@.*)/, "$1***$2"), // redact most of email
-        error: r.status === "rejected"
-          ? String(r.reason)
-          : r.status === "fulfilled" && !r.value.success
-            ? r.value.error
-            : null,
-      }))
-      .filter((f) => f.error !== null);
+      // Step 4b: Persist the top 7 story hashes
+      const topHashes = briefing.stories.map((s) => ({
+        hash:   ranked.find((r) => r.title === s.title)?.hash ?? "",
+        title:  s.title,
+        url:    s.url,
+        source: s.source,
+      })).filter((r) => r.hash);
+
+      if (topHashes.length > 0) {
+        await supabaseAdmin
+          .from("articles_seen")
+          .upsert(topHashes, { onConflict: "hash", ignoreDuplicates: true });
+      }
+
+      // Step 6: Send emails
+      const results = await Promise.allSettled(
+        subscribersInGroup.map((sub) =>
+          sendBriefingEmail(sub.email, briefing, sub.id)
+        )
+      );
+
+      totalSent += results.filter((r) => r.status === "fulfilled" && r.value.success).length;
+      totalFailed += results.filter((r) => r.status === "rejected" || (r.status === "fulfilled" && !r.value.success)).length;
+
+      allFailures.push(...results
+        .map((r, i) => ({
+          subscriber: subscribersInGroup[i].email.replace(/(.{3}).*(@.*)/, "$1***$2"),
+          error: r.status === "rejected" ? String(r.reason) : (r.status === "fulfilled" && !r.value.success ? r.value.error : null),
+        }))
+        .filter((f) => f.error !== null));
+    }
 
     return NextResponse.json({
       success: true,
       articles_fetched: rawArticles.length,
-      articles_after_dedup: unique.length,
-      articles_after_cross_day_dedup: crossDayFiltered.length,
-      stories_in_briefing: briefing.stories.length,
       subscribers_targeted: targetSubscribers.length,
-      emails_sent: sent,
-      emails_failed: failed,
-      ...(failures.length > 0 && { failures }),
+      emails_sent: totalSent,
+      emails_failed: totalFailed,
+      ...(allFailures.length > 0 && { failures: allFailures }),
     });
   } catch (err) {
     console.error("[Xanthra Horizon] Pipeline error:", err);

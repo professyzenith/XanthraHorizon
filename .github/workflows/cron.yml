@@ -13,5 +13,5 @@ jobs:
     steps:
       - name: Trigger Daily Intelligence Briefing
         run: |
-          curl -s -X POST "${{ secrets.APP_URL }}/api/send-briefing" \
+          curl -s -L --fail -X POST "${{ secrets.APP_URL }}/api/send-briefing" \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"

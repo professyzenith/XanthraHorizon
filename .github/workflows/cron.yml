@@ -2,8 +2,8 @@ name: Daily Intelligence Briefing Cron
 
 on:
   schedule:
-    # Run at the top of every hour to check for subscribers scheduled for this hour
-    - cron: '0 * * * *'
+    # Run every 30 minutes to catch timezones with 30-min offsets (like India IST)
+    - cron: '0,30 * * * *'
   # Allow manual triggering from GitHub UI
   workflow_dispatch:
 
@@ -11,7 +11,7 @@ jobs:
   trigger-cron:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Vercel Cron Route
+      - name: Trigger Daily Intelligence Briefing
         run: |
-          curl -s -X GET "${{ secrets.APP_URL }}/api/cron" \
+          curl -s -X POST "${{ secrets.APP_URL }}/api/send-briefing" \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"

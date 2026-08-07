@@ -6,6 +6,33 @@ import { rankArticles } from "@/lib/ranker";
 import { generateBriefing } from "@/lib/summarizer";
 import { sendBriefingEmail } from "@/lib/emailSender";
 
+// ─────────────────────────────────────────────────────────────────────────────
+// DAILY INTELLIGENCE BRIEF — PIPELINE ORCHESTRATOR
+//
+// This is the engine room of Xanthra Horizon. One POST request triggers a
+// full 6-stage pipeline that transforms raw RSS feeds into a personalized,
+// AI-generated intelligence briefing delivered to each subscriber's inbox.
+//
+// Pipeline stages:
+//   1. Subscriber resolution  — who should receive a briefing right now?
+//   2. Topic grouping         — group by unique topic combos to avoid
+//                               redundant Gemini calls (cost optimization)
+//   3. News ingestion         — fetch only the sources relevant to each group
+//   4. Deduplication          — two-pass: URL hash + Jaccard title similarity
+//   5. Ranking                — composite score (recency × source × keywords)
+//   6. AI summarization       — one Gemini call per unique topic group
+//   7. Delivery               — parallel email dispatch via Resend
+//
+// The key design insight: subscribers who chose the same topics share a
+// single Gemini call and a single news fetch. 100 "AI & Tech" subscribers
+// generate exactly the same API cost as 1 "AI & Tech" subscriber.
+// Personalization scales for free.
+//
+// Called by: GitHub Actions cron (every 30 minutes, all 24 hours)
+// Protected by: Bearer token (CRON_SECRET)
+// ─────────────────────────────────────────────────────────────────────────────
+
+
 export async function POST(req: NextRequest) {
   // Verify cron secret to prevent unauthorized calls
   const authHeader = req.headers.get("authorization");

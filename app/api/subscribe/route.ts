@@ -3,6 +3,30 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { SubscribePayload } from "@/types";
 import { sendWelcomeEmail } from "@/lib/emailSender";
 
+// ─────────────────────────────────────────────────────────────────────────────
+// SUBSCRIBE API
+//
+// The entry point for every new subscriber. Intentionally opinionated:
+//
+//   • Google OAuth only — no passwords. We are not in the business of
+//     storing credentials. Google handles authentication; we handle delivery.
+//
+//   • Upsert semantics — subscribing twice updates preferences rather than
+//     throwing an error. This is the right UX: "I changed my mind, give me
+//     a different time" should just work, not fail with a duplicate key error.
+//
+//   • Welcome email fires synchronously — we await it before returning 200.
+//     If we fire-and-forget, the Vercel function terminates before Resend
+//     processes the request and the user never gets their welcome email.
+//     A slightly slower response is a better trade-off than a silent failure.
+//
+//   • In-memory rate limiting — 5 requests per IP per 10 minutes. Serverless
+//     instances don't share memory, so this isn't perfect at scale. But it
+//     stops the most common abuse patterns (accidental loops, form re-submits)
+//     without adding a Redis dependency for a problem this small.
+// ─────────────────────────────────────────────────────────────────────────────
+
+
 // ── In-memory rate limiter ─────────────────────────────────────────────────
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes

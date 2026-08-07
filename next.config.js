@@ -38,8 +38,8 @@ const nextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              // Allow images from GitHub (crew avatars in readme don't affect the app)
-              "img-src 'self' data: blob:",
+              // Allow images from Google (user profile pictures) and data URIs
+              "img-src 'self' data: blob: https://lh3.googleusercontent.com https://lh4.googleusercontent.com https://lh5.googleusercontent.com https://lh6.googleusercontent.com",
               // API calls only to self + Supabase
               "connect-src 'self' https://*.supabase.co",
               "frame-ancestors 'none'",
@@ -48,6 +48,27 @@ const nextConfig = {
         ],
       },
     ];
+  },
+  // Allow Google profile picture images
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lh4.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lh5.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lh6.googleusercontent.com",
+      },
+    ],
   },
 };
 

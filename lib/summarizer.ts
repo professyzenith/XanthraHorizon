@@ -113,7 +113,7 @@ Rules:
 - Use confident, authoritative language — no hedging, no "it could be said that"
 - Treat every topic equally — sports, health, and geopolitics are as important as AI`;
 
-  let executive_brief = "Today's intelligence brief covers key developments across global news, technology, and world events.";
+  let executive_brief = "A complex day across the global intelligence landscape — stories span technology, geopolitics, and markets, with implications that extend well beyond their headlines.";
 
   // Use a positional array instead of an index-keyed map so that Gemini
   // returning 0-based indices, reordered items, or omitting "index" entirely
@@ -154,7 +154,7 @@ Rules:
       stripHtml(s.description).slice(0, 200) + "…",
     why_it_matters:
       summaries[i]?.why_it_matters ||
-      "This development is worth tracking as part of the global news landscape.",
+      "This story carries meaningful implications for the broader landscape — watch how it develops over the next 24–48 hours.",
     score: s.score,
     topic: s.topic,
   }));
